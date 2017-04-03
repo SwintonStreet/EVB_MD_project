@@ -18,6 +18,7 @@ class keyWord
     int         intValue;
     double      douValue;
     bool        booValue;
+    char        Type;
 
     public:
 
@@ -36,6 +37,7 @@ class keyWord
     bool         getBoo();
     std::string  getName();
     bool         getOk();
+    const char&  getType() {return Type;};
     bool         getDef() {return isDefault;};
 
     void copyKeyWord(keyWord);

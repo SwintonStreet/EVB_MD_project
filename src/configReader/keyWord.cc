@@ -14,6 +14,7 @@ keyWord::keyWord(std::string inName, int inInt)
     intValue  = inInt;
     isOk      = keyWordsList::isInKeyWordList(inName,
                                               dummyKwD);
+    Type      = 'I';
     isDefault = false;
 }
 
@@ -24,6 +25,7 @@ keyWord::keyWord(std::string inName, double inDou)
     douValue = inDou;
     isOk     = keyWordsList::isInKeyWordList(inName,
                                              dummyKwD);
+    Type      = 'D';
     isDefault = false;
 }
 
@@ -33,6 +35,7 @@ keyWord::keyWord(std::string inName, bool inBoo)
     booValue  = inBoo;
     isOk      = keyWordsList::isInKeyWordList(inName,
                                               dummyKwD);
+    Type      = 'B';
     isDefault = false;
 }
 
@@ -44,13 +47,16 @@ keyWord::keyWord(keyWordDefault kwD)
     {
         case BOOL:
             booValue = kwD.boolValue;
+            Type     = 'B';
             break;
         case INT:
             intValue = kwD.intValue;
+            Type     = 'I';
             break;
         case DOUBLE:
-            break;
             douValue = kwD.doubleValue;
+            Type     = 'D';
+            break;
         default:
             isDefault = false;
             break;

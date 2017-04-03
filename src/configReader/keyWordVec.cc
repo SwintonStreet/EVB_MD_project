@@ -59,3 +59,34 @@ unsigned int keyWordVec::size()
 {
     return kWM.size();
 }
+
+void keyWordVec::print(std::ofstream& out)
+{
+    out << "================================" << std::endl
+        << "=  printing put configuration  =" << std::endl
+        << "================================" << std::endl;
+    for (auto& kw : kWM)
+    {
+        const char type = kw.second.getType();
+        out << "==== Key word ===="             << std::endl
+            << "Name : " << kw.second.getName() << std::endl;
+        switch (type)
+        {
+            case 'I':
+                out << "Type : Integer"                << std::endl
+                    << "Value: " << kw.second.getInt() << std::endl;
+                break;
+            case 'D':
+                out << "Type : Double"                 << std::endl
+                    << "Value: " << kw.second.getDou() << std::endl;
+                break;
+            case 'B':
+                out << "Type : Boolean"                << std::endl
+                    << "Value: " << kw.second.getBoo() << std::endl;
+                break;
+        }
+    }
+    out << "================================" << std::endl
+        << "================================" << std::endl
+        << "================================" << std::endl;
+}

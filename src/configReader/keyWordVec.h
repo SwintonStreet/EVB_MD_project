@@ -3,6 +3,7 @@
 
 #include "map"
 #include "string"
+#include "fstream"
 
 class keyWord;
 
@@ -23,6 +24,8 @@ class keyWordVec
         bool isOk();
 
         unsigned int size();
+
+        void print(std::ofstream& out);
 };
 
 #endif // KEYWORDVEC_H

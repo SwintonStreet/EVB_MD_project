@@ -13,7 +13,7 @@
 
 int main ()
 {
-    std:: cout << "Hello world!!" << std::endl;
+    std::cout << "Hello world!!" << std::endl;
     keyWordVec kwVec;
 
     // main output fileName
@@ -25,6 +25,7 @@ int main ()
     test1.defaultReader(kwVec);
 
     std::cout << "finished!!" << kwVec.size() << std::endl;
+    kwVec.print(mainOutputFile);
 
     keyWord test = keyWord();
     test.setKeyWord(kwVec,"KEY1");

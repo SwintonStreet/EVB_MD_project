@@ -1,0 +1,15 @@
+#!/bin/bash
+#
+
+makeRoute="/home/jake/C++Project"
+
+alias cdd="cd $makeRoute"
+alias mk="cd $makeRoute && wait && make && wait && cd -"
+alias md="cd $makeRoute && wait && make debug && wait && cd -"
+alias mc="cd $makeRoute && wait && make clean && wait && cd -"
+alias mcc="cd $makeRoute && wait && make cleaner && wait && cd -"
+alias mm="mc && wait && mk"
+
+alias R="cd $makeRoute/bin && ./main && wait && cd -"
+alias B="cd $makeRoute/bin"
+alias C="cd $makeRoute"

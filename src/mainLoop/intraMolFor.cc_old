@@ -1,0 +1,32 @@
+
+#include "intraMolFor.h"
+
+intraMolFor::intraMolFor()
+{
+}
+
+void intraMolFor::calcForSys(sys& inSys)
+{
+    std::vector<std::vector<molecule>>* mols;
+    mols = inSys.getMols();
+
+    for (unsigned int i =0; i< mols->size(); i++)
+    {
+        for (unsigned int j =0; j< (*mols)[i].size(); i++)
+        {
+            calcForMol((*mols)[i][j]);
+        }
+    }
+}
+
+
+
+void intraMolFor::calcForMol(molecule& inMol)
+{
+    std::vector<twoBonds_t>* twoBonds;
+    twoBonds = inMol.getAll2Bond();
+
+    for(unsigned int i=0; i<twoBonds->size(); i++)
+    {
+    }
+}

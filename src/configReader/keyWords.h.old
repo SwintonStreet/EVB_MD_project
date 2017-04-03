@@ -1,0 +1,16 @@
+
+
+#include "iostream"
+#include "keyWord.h"
+
+class keyWords
+{
+    // list of keywords
+    static keyWord* keyWordList;
+
+    // the default values
+
+    public:
+
+    keyWords();
+};

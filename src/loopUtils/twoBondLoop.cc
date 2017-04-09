@@ -19,7 +19,7 @@ double twoBondLoop::calcEngForTwoBond(
 
 void twoBondLoop::calcEngForSysTwoBond(sys& inSys)
 {
-    std::vector<std::vector<molecule>> vecVecMol =
+    std::vector<std::vector<molecule>>& vecVecMol =
                                 inSys.getMols();
     double totalEnergy = 0;
 

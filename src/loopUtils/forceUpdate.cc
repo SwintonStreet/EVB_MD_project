@@ -4,7 +4,8 @@
 void forceUpdate::forcUpdate(sys& inSys)
 {
     double totalEnergy = 0;
-    int i = 0, j = 0;
+    int i = 0,
+        j = 0;
 
     for (auto vecMol : inSys.getMols())
     {

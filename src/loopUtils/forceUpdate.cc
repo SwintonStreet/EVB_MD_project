@@ -13,15 +13,15 @@ void forceUpdate::forcUpdate(sys& inSys)
         {
             // calculate bonds
             totalEnergy += twoBondLoop::
-                           calcEngForTwoBond(
-                              mol.getAll2Bond(),
-                              mol.getAtoms());
+                               calcEngForTwoBond(
+                                  mol.getAll2Bond(),
+                                  mol.getAtoms());
 
             // calculate intermolcular forces
-            interMolForc(inSys,mol,++j,i);
+            interMolForc(inSys,mol,j++,i);
         }
         j = 0;
-        i++;
+        ++i;
     }
 }
 
@@ -37,7 +37,6 @@ void forceUpdate::resetForce(sys& inSys)
             }
         }
     }
-
 }
 
 void forceUpdate::interMolForc(sys&       inSys,
@@ -54,6 +53,4 @@ void forceUpdate::interMolForc(sys&       inSys,
             // do stuff
         }
     }
-
-
 }

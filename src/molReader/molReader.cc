@@ -109,11 +109,15 @@ molecule molReader::readSingleMol(std::ifstream& inStream)
 
     // copy the atoms in
     for (int i=0; i< numOfAtoms;i++)
-    { outMolecule.setAtom(i,tempAtoms[i]); }
+    {
+        outMolecule.setAtom(i,tempAtoms[i]);
+    }
 
     // copy the 2 atom bonds in
     for (int i=0; i< numOfTwoAtomBonds; i++)
-    { outMolecule.get2Bond(i) = temp2Bonds[i]; }
+    {
+        outMolecule.get2Bond(i) = temp2Bonds[i];
+    }
 
     // delete used pointers;
     delete[] tempAtoms;

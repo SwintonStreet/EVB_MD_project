@@ -4,6 +4,7 @@
 #define ATOM_H
 
 #include "string"
+#include "iostream"
 
 
 struct energyForce_t
@@ -15,9 +16,12 @@ struct threeVec_t
 {
     double x, y, z;
 
-    friend threeVec_t operator*(const double& a, const threeVec_t b)
+    friend threeVec_t operator*(const double&    factor,
+                                const threeVec_t b)
     {
-        return {b.x*a,b.y*a,b.z*a};
+        return {factor * b.x,
+                factor * b.y,
+                factor * b.z};
     }
 
     threeVec_t operator+(const threeVec_t b)
@@ -29,13 +33,20 @@ struct threeVec_t
     {
         return {x-b.x,y-b.y,z-b.z};
     }
+
+    friend std::ostream& operator<< (std::ostream&     inStream,
+                                     const threeVec_t& vec)
+    {
+        inStream << vec.x << "," << vec.y << "," << vec.z;
+        return inStream;
+    }
 };
 
 class atom 
 {
     
-    threeVec_t pos, vel, forc;
-    double mass;
+    threeVec_t  pos, vel, forc;
+    double      mass;
     std::string name;
 
     public:
@@ -70,20 +81,30 @@ class atom
     void printAtomPos(std::ostream&);
     
     // gets the position,velocity,force
-    threeVec_t getPos () const {return pos;};
-    threeVec_t getVel () const {return vel;};
-    threeVec_t getForc() const {return forc;};
+    threeVec_t getPos () const noexcept {return pos;};
+    threeVec_t getVel () const noexcept {return vel;};
+    threeVec_t getForc() const noexcept {return forc;};
 
     // reset force
     void resetForce() { forc = {0,0,0}; };
 
     // get name
-    std::string getName() const {return name;};
-    double      getMass() const {return mass;};
+    std::string getName() const noexcept {return name;};
+    double      getMass() const noexcept {return mass;};
 
     // calculate distance between atom and another atom
     double distance(atom&);
     threeVec_t abVec(atom&);
+
+    friend std::ostream& operator<< (std::ostream& oStream,
+                                     atom          a)
+    {
+        oStream << "The atoms name is: " << a.name <<
+                   " X:" << a.pos.x <<
+                   " Y:" << a.pos.y <<
+                   " Z:" << a.pos.z << "\n";
+        return oStream;
+    }
 };
 
 #endif // ATOM_H

@@ -54,9 +54,9 @@ void molecule::printMolPos(std::ostream& inStream)
     inStream << "The molecules name is " 
              << mName << "\n";
 
-    for (int i=0; i<mSize; i++)
+    for (const atom& at : atoms)
     {
-        atoms[i].printAtomPos(inStream);
+        inStream << at;
     }
 }
 

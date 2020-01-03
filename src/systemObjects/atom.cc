@@ -1,7 +1,6 @@
 // every bit of information relating to a atom
 
 #include "atom.h"
-#include "iostream"
 #include "cmath"
 
 void atom::cp3Array(threeVec_t A, threeVec_t& B)
@@ -41,16 +40,14 @@ atom::atom(const atom& inAtom)
 }
 
 
-atom::atom( threeVec_t    inPos ,
-            threeVec_t    inVel ,
-            threeVec_t    inForc,
-            std::string   inName)
+atom::atom( threeVec_t  inPos,
+            threeVec_t  inVel,
+            threeVec_t  inForc,
+            std::string inName) : name {inName}
 {
     setPos( inPos );
     setVel( inVel );
     setForc(inForc);
-
-    name = inName;
 }
 
 
@@ -63,16 +60,13 @@ atom::atom(std::string inName,
 
 void atom::printAtom(std::ostream& inStream)
 {
-    inStream
-    << "===============================" << std::endl
-    << "The name of the atom is " << name
-    << std::endl << "The position is " <<
-    pos.x << ","  << pos.y << ","  << pos.z
-    << std::endl  << "The velocity is " <<
-    vel.x << ","  << vel.y<< ","   << vel.z
-    << std::endl << "The force is " <<
-    forc.x << "," << forc.y << "," << forc.z << std::endl
-    << "===============================" << std::endl;
+    inStream <<
+    "===============================\n" <<
+    "The name of the atom is " << name <<
+    "The position is " << pos  << '\n' <<
+    "The velocity is " << vel  << '\n' <<
+    "The force is "    << forc << '\n' <<
+    "===============================\n";
 
 }
 
@@ -87,14 +81,10 @@ void atom::printAtomPos(std::ostream& inStream)
 
 double atom::distance (atom& inAtom)
 {
-    double dis = 0;
-
-    dis = std::sqrt(
+    return std::sqrt(
             std::pow((pos.x - inAtom.getPos().x),2) +
             std::pow((pos.y - inAtom.getPos().y),2) +
             std::pow((pos.z - inAtom.getPos().z),2));
-
-    return dis;
 }
 
 threeVec_t atom::abVec(atom& inAtom)

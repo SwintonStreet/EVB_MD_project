@@ -1,5 +1,5 @@
 CC=g++
-CFLAGS=-Wall -Wextra -std=c++11
+CFLAGS=-Wall -Wextra -Wshadow -Werror -std=c++17
 LDFLAGS=
 #SOURCES=atom.cc           \
 #        atomConfig.cc     \

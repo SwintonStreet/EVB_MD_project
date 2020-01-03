@@ -3,15 +3,24 @@
 
 #include "iostream"
 #include "sys.h"
+#include <string>
 
 class evb_system
 {
-    static sys*      systems;
+    sys       systems;
     // number of systems
-    static const int size;
+    const int size;
+
+    std::string name;
 
 
     public:
 
-    evb_system(int, sys*, char*);
+    evb_system(const int   inSize,
+               sys&        inSys,
+               std::string inName) :
+        systems{inSys},
+        size{inSize},
+        name{inName}
+    {}
 };

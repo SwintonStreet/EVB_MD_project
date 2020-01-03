@@ -107,16 +107,16 @@ bool keyWord::getOk()
 }
 
 void keyWord::setKeyWord(keyWordVec&        kwv,
-                         const std::string& name,
+                         const std::string& keyName,
                          bool               mandatory)
 {
     keyWord        retKw = keyWord();
     keyWordDefault kwD   = keyWordDefault();
 
-    if (kwv.containsKeyWord(name,retKw))
+    if (kwv.containsKeyWord(keyName,retKw))
     {
     }
-    else if (keyWordsList::isInKeyWordList(name,kwD))
+    else if (keyWordsList::isInKeyWordList(keyName,kwD))
     {
         retKw = keyWord(kwD);
     }
@@ -125,7 +125,7 @@ void keyWord::setKeyWord(keyWordVec&        kwv,
         // if the look up is mandatory and the field hasn't
         // been found then throw an error!!!
         std::cerr << "Failed to find mandatory field : " <<
-                     name  <<
+                     keyName  <<
                      "\n";
         exit(EXIT_FAILURE);
     }

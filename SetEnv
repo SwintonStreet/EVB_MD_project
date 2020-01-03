@@ -4,8 +4,8 @@
 makeRoute="/home/jake/C++Project"
 
 alias cdd="cd $makeRoute"
-alias mk="cd $makeRoute && wait && make && wait && cd -"
-alias md="cd $makeRoute && wait && make debug && wait && cd -"
+alias mk="cd $makeRoute && wait && make -j 8 && wait && cd -"
+alias md="cd $makeRoute && wait && make debug -j 8 && wait && cd -"
 alias mc="cd $makeRoute && wait && make clean && wait && cd -"
 alias mcc="cd $makeRoute && wait && make cleaner && wait && cd -"
 alias mm="mc && wait && mk"

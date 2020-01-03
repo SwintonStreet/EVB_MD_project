@@ -51,6 +51,7 @@ void forceUpdate::interMolForc(sys&       inSys,
         for (int j = molNum; j < static_cast<int>(molVec[i].size()); ++j)
         {
             // do stuff
+            (void) inMol;
         }
     }
 }

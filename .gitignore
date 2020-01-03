@@ -1,6 +1,9 @@
 # ignore objects
 *.o
 
+# ignore the object directory
+obj/
+
 # ignore all bin executables
 bin/
 

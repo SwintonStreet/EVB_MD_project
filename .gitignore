@@ -1,0 +1,8 @@
+# ignore objects
+*.o
+
+# ignore all bin executables
+bin/
+
+# ignore all vim swap files
+*.sw*

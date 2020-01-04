@@ -26,12 +26,16 @@ struct threeVec_t
 
     threeVec_t operator+(const threeVec_t b)
     {
-        return {x+b.x,y+b.y,z+b.z};
+        return {x+b.x,
+                y+b.y,
+                z+b.z};
     }
 
     threeVec_t operator-(const threeVec_t b)
     {
-        return {x-b.x,y-b.y,z-b.z};
+        return {x-b.x,
+                y-b.y,
+                z-b.z};
     }
 
     friend std::ostream& operator<< (std::ostream&     inStream,
@@ -39,6 +43,20 @@ struct threeVec_t
     {
         inStream << vec.x << "," << vec.y << "," << vec.z;
         return inStream;
+    }
+
+    void reset() noexcept
+    {
+        x = 0.0;
+        y = 0.0;
+        z = 0.0;
+    }
+
+    void set(const threeVec_t& inVec) noexcept
+    {
+        x = inVec.x;
+        y = inVec.y;
+        z = inVec.z;
     }
 };
 
@@ -50,9 +68,6 @@ class atom
     std::string name;
 
     public:
-
-    // Copy a 3 lenth array
-    void cp3Array(threeVec_t, threeVec_t&);
 
     // Empty constructor
     atom();
@@ -72,13 +87,12 @@ class atom
 
 
     // sets the position,velocity,force
-    void setPos (threeVec_t);
-    void setVel (threeVec_t);
-    void setForc(threeVec_t);
+    void setPos (const threeVec_t& inPos)  {pos.set(inPos);};
+    void setVel (const threeVec_t& inVel)  {vel.set(inVel);};
+    void setForc(const threeVec_t& inForc) {forc.set(inForc);};
 
     // print atom information
     void printAtom(std::ostream&);
-    void printAtomPos(std::ostream&);
     
     // gets the position,velocity,force
     threeVec_t getPos () const noexcept {return pos;};
@@ -86,7 +100,7 @@ class atom
     threeVec_t getForc() const noexcept {return forc;};
 
     // reset force
-    void resetForce() { forc = {0,0,0}; };
+    void resetForce() noexcept { forc.reset(); };
 
     // get name
     std::string getName() const noexcept {return name;};

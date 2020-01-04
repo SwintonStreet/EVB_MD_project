@@ -3,28 +3,6 @@
 #include "atom.h"
 #include "cmath"
 
-void atom::cp3Array(threeVec_t A, threeVec_t& B)
-{
-    B.x = A.x; B.y = A.y; B.z = A.z;
-}
-
-void atom::setPos(threeVec_t inPos)
-{
-    cp3Array(inPos, pos);
-}
-
-void atom::setVel(threeVec_t inVel)
-{
-    cp3Array(inVel, vel);
-}
-
-void atom::setForc(threeVec_t inForc)
-{
-    cp3Array(inForc, forc);
-}
-
-
-
 atom::atom ()
 {
 }
@@ -69,15 +47,6 @@ void atom::printAtom(std::ostream& inStream)
     "===============================\n";
 
 }
-
-void atom::printAtomPos(std::ostream& inStream)
-{
-    inStream << "The atoms name is: " << name <<
-                 " X:" << pos.x <<
-                 " Y:" << pos.y <<
-                 " Z:" << pos.z << "\n";
-}
-
 
 double atom::distance (atom& inAtom)
 {

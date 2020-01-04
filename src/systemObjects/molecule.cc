@@ -24,7 +24,6 @@ molecule::molecule(const molecule& inMol)
 {
     atoms    = std::vector<atom>(inMol.atoms.size());
     twoBonds = std::vector<twoBonds_t>(inMol.twoBonds.size());
-    atom& getAtom(int);
 
     std::copy(inMol.twoBonds.begin(), inMol.twoBonds.end(), twoBonds.begin());
     std::copy(inMol.atoms.begin(), inMol.atoms.end(), atoms.begin());

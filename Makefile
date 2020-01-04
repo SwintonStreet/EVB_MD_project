@@ -53,7 +53,8 @@ objectsDone:
 	@echo "=================================="
 
 $(EXECUTABLE): $(OBJECTS) objectsDone
-	$(CC) $(CFLAGS) $(INCLUDE) -o $(EXECUTABLE) $(OBJECTS)
+	$(CC) $(CFLAGS) $(OBJECTS) \
+    -o $(EXECUTABLE)
 	@echo "Compulation finished!"
 
 #Pull in dependency info for *existing* .o files

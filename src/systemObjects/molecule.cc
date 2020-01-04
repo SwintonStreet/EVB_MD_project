@@ -22,11 +22,8 @@ molecule::molecule(const molecule& inMol)
                  :mSize(inMol.mSize),
                   mName(inMol.mName)
 {
-    atoms    = std::vector<atom>(inMol.atoms.size());
-    twoBonds = std::vector<twoBonds_t>(inMol.twoBonds.size());
-
-    std::copy(inMol.twoBonds.begin(), inMol.twoBonds.end(), twoBonds.begin());
-    std::copy(inMol.atoms.begin(), inMol.atoms.end(), atoms.begin());
+    atoms    = std::vector<atom>(inMol.atoms);
+    twoBonds = std::vector<twoBonds_t>(inMol.twoBonds);
 }
 
 atom& molecule::getAtom(int atomNumber)

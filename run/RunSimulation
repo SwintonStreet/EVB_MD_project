@@ -7,7 +7,7 @@
 cp ../res/SYS_* ./
 
 # run simulation
-../bin/main
+../bin/EVB_MD
 
 # remove resources -> only leave the run output
 rm SYS_*

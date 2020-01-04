@@ -1,20 +1,8 @@
 CC=g++
 CFLAGS=-Wall -Wextra -Wshadow -Werror -std=c++17
 LDFLAGS=
-#SOURCES=atom.cc           \
-#        atomConfig.cc     \
-#        molecule.cc       \
-#        sys.cc            \
-#        evb_system.cc     \
-#        keyWord.cc        \
-#        keyWords.cc       \
-#        keyWordReader.cc  \
-#        main.cc
 
-
-
-
-TARGET     := main
+TARGET     := EVB_MD
 DEPEXT     := d
 OBJEXT     := o
 SRCEXT     := cc

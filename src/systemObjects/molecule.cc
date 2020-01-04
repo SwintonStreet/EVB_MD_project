@@ -51,8 +51,7 @@ twoBonds_t& molecule::get2Bond(int bondNumber)
 
 void molecule::printMolPos(std::ostream& inStream)
 {
-    inStream << "The molecules name is " 
-             << mName << "\n";
+    inStream << "The molecules name is " << mName << "\n";
 
     for (const atom& at : atoms)
     {

@@ -108,7 +108,7 @@ class atom
 
     // calculate distance between atom and another atom
     double distance  (const atom&) const;
-    threeVec_t abVec (const atom&) const;
+    threeVec_t abVec (const atom&) const noexcept;
 
     friend std::ostream& operator<< (std::ostream& oStream,
                                      atom          a)

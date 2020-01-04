@@ -48,17 +48,21 @@ void atom::printAtom(std::ostream& inStream)
 
 }
 
-double atom::distance(const atom& inAtom) const
+double atom::distance(const atom& bAtom) const
 {
+    const threeVec_t& ab = abVec(bAtom);
+
     return std::sqrt(
-            std::pow((pos.x - inAtom.getPos().x),2) +
-            std::pow((pos.y - inAtom.getPos().y),2) +
-            std::pow((pos.z - inAtom.getPos().z),2));
+            std::pow(ab.x,2) +
+            std::pow(ab.y,2) +
+            std::pow(ab.z,2));
 }
 
-threeVec_t atom::abVec(const atom& inAtom) const
+threeVec_t atom::abVec(const atom& bAtom) const noexcept
 {
-    return {pos.x - inAtom.getPos().x,
-            pos.y - inAtom.getPos().y,
-            pos.z - inAtom.getPos().z};
+    const threeVec_t& bPos = bAtom.getPos();
+
+    return {pos.x - bPos.x,
+            pos.y - bPos.y,
+            pos.z - bPos.z};
 }

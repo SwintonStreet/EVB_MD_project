@@ -7,6 +7,7 @@
 #include "string"
 #include "vector"
 #include "twoAtomBonds.h"
+#include "atom.h"
 
 class atom;
 
@@ -22,9 +23,11 @@ class molecule
     public:
 
 
-    molecule(std::string, int, int);
-    molecule(const molecule&);
-    molecule();
+    molecule(std::string& inName,
+             int          numAtoms,
+             int          num2Bonds);
+    molecule(const molecule& inMol);
+    molecule(): mSize{0}, mName{""} {};
     
     // destructor
     //~molecule();
@@ -37,15 +40,26 @@ class molecule
     std::string getName() const {return mName;};
     int         getSize() const {return mSize;};
 
-    void        setAtom(int, const atom&);
-    atom&       getAtom(int);
-    std::vector<atom>& getAtoms() {return atoms;};
+    void setAtom(int         atomNumber,
+                 const atom& newAtom);
 
-    void printMolPos(std::ostream&);
+    [[nodiscard]] atom& getAtom(int atomNumber) {return atoms[atomNumber];};
+    [[nodiscard]] std::vector<atom>& getAtoms() {return atoms;};
+
     void resetForces();
 
+    friend std::ostream& operator<< (std::ostream& oStream,
+                                     molecule      mol)
+    {
+        oStream << "The molecules name is " << mol.mName << "\n";
 
+        for (const atom& at : mol.atoms)
+        {
+            oStream << at;
+        }
 
+        return oStream;
+    }
 };
 
 #endif // MOLECULE_H

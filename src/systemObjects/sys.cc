@@ -50,11 +50,11 @@ void sys::resetAllForces()
 
 void sys::printSysPos(std::ostream& inStream)
 {
-    for(auto molVec : molecules)
+    for(const auto& molVec : molecules)
     {
-        for(auto mol : molVec)
+        for(const auto& mol : molVec)
         {
-            mol.printMolPos(inStream);
+            inStream << mol;
         }
     }
 }

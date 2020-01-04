@@ -1,7 +1,5 @@
-
 #include "molecule.h"
 #include "atom.h"
-
 
 molecule::molecule(std::string inName,
                    int         inASize,

@@ -4,14 +4,11 @@
 #define MOLECULE_H
 
 #include "iostream"
-#include "atomConfig.h"
 #include "string"
-#include "atom.h"
 #include "vector"
 #include "twoAtomBonds.h"
 
-//class atom;
-
+class atom;
 
 class molecule
 {

@@ -1,0 +1,13 @@
+#!/bin/bash
+#
+
+# script to run a test simulation
+
+# copy test resources into directory
+cp ../res/* ./
+
+# run simulation
+../bin/main
+
+# remove resources -> only leave the run output
+rm SYS_*

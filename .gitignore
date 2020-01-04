@@ -12,3 +12,6 @@ bin/
 
 # ignore any .ignore files
 *.ignore
+
+# ignore any run outputs
+run/Run

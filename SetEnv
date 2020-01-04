@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 
-makeRoute="/home/jake/C++Project"
+makeRoute=$(pwd)
 
 alias cdd="cd $makeRoute"
 alias mk="cd $makeRoute && wait && make -j 8 && wait && cd -"

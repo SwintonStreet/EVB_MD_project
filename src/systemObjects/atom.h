@@ -107,8 +107,8 @@ class atom
     double      getMass() const noexcept {return mass;};
 
     // calculate distance between atom and another atom
-    double distance(atom&);
-    threeVec_t abVec(atom&);
+    double distance  (const atom&) const;
+    threeVec_t abVec (const atom&) const;
 
     friend std::ostream& operator<< (std::ostream& oStream,
                                      atom          a)

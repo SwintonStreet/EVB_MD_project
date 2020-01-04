@@ -48,7 +48,7 @@ void atom::printAtom(std::ostream& inStream)
 
 }
 
-double atom::distance (atom& inAtom)
+double atom::distance(const atom& inAtom) const
 {
     return std::sqrt(
             std::pow((pos.x - inAtom.getPos().x),2) +
@@ -56,7 +56,7 @@ double atom::distance (atom& inAtom)
             std::pow((pos.z - inAtom.getPos().z),2));
 }
 
-threeVec_t atom::abVec(atom& inAtom)
+threeVec_t atom::abVec(const atom& inAtom) const
 {
     return {pos.x - inAtom.getPos().x,
             pos.y - inAtom.getPos().y,

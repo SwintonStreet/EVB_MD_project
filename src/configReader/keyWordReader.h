@@ -17,8 +17,8 @@
 
 class keyWordReader
 {
-    const char* fileName        = "SYS_CONFIG";
-    const char* defaultFileName = "SYS_DEFAULT";
+    constexpr static const char* fileName        = "SYS_CONFIG";
+    constexpr static const char* defaultFileName = "SYS_DEFAULT";
 
     public:
 

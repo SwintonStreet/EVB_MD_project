@@ -120,9 +120,9 @@ bool molReader::readAtom(std::string inStream,
                          int&        inNumOfAtoms) const
 {
     std::istringstream iss(inStream);
-    std::string        name       = "",
-                       word       = "",
-                       numOfAtoms = "";
+    std::string        name,
+                       word,
+                       numOfAtoms;
 
     iss >> name;
     iss >> word;
@@ -134,6 +134,7 @@ bool molReader::readAtom(std::string inStream,
     std::string errText =   "Argument is invalid\n"
                             "The molecule is \"" +  molName + "\"\n" +
                             "Atom number is " + std::to_string(atomNum) + "\n";
+
     inMass = readlib::readDOU(word,errText);
 
     inAtom = atom(name,inMass);

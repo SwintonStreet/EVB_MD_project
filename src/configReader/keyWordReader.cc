@@ -36,7 +36,6 @@ bool keyWordReader::defaultReader(keyWordVec&  kwv)
                     iss >> word;
                     iValue = readlib::readINT(word,
                                               "Invalid config item:" + name + "\n");
-                    iValue = std::stoi(word);
                     kwv.addKeyWord(keyWord(name,iValue),true);
                     break;
 

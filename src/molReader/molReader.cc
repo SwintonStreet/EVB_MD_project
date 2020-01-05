@@ -1,9 +1,8 @@
 
 #include "molReader.h"
-
-molReader::molReader()
-{
-}
+#include "atom.h"
+#include "twoAtomBonds.h"
+#include <vector>
 
 /*
 *
@@ -11,9 +10,9 @@ molReader::molReader()
 *
 */
 
-std::vector<molecule> molReader::MolConfReader()
+[[nodiscard]] std::vector<molecule> molReader::MolConfReader() const
 {
-    std::ifstream molFile(molReader::defaultFileName);
+    std::ifstream molFile(defaultFileName);
     std::string   line;
     std::vector<molecule> outMolecule;
 
@@ -38,7 +37,7 @@ std::vector<molecule> molReader::MolConfReader()
 *
 */
 
-molecule molReader::readSingleMol(std::ifstream& inStream)
+[[nodiscard]] molecule molReader::readSingleMol(std::ifstream& inStream) const
 {
     bool readOk = true;
     std::string name,line;
@@ -50,7 +49,7 @@ molecule molReader::readSingleMol(std::ifstream& inStream)
     int tempNum = 1;
 
     //molecule outMolecule = molecule(name,numOfAtoms);
-    atom* tempAtoms = new atom[numOfAtoms];
+    std::vector<atom> tempAtoms(numOfAtoms);
 
     //get the atoms
     for (int i=0; i<numOfAtoms && readOk; i++)
@@ -87,7 +86,7 @@ molecule molReader::readSingleMol(std::ifstream& inStream)
     int numOfTwoAtomBonds = readlib::readINT( numOf2ABonds, numOf2ABondsErr );
 
     // allocate 2 bonds poitner
-    twoBonds_t* temp2Bonds = new twoBonds_t[numOfTwoAtomBonds];
+    std::vector<twoBonds_t> temp2Bonds(numOfTwoAtomBonds);
 
     //  get the 2 Atom Bonds
     for (int i=0; i<numOfTwoAtomBonds && readOk; i++)
@@ -102,28 +101,10 @@ molecule molReader::readSingleMol(std::ifstream& inStream)
                             i);
     }
 
-    // creating the molecule object
-    molecule outMolecule = molecule(name,
-                                    numOfAtoms,
-                                    numOfTwoAtomBonds);
-
-    // copy the atoms in
-    for (int i=0; i< numOfAtoms;i++)
-    {
-        outMolecule.setAtom(i,tempAtoms[i]);
-    }
-
-    // copy the 2 atom bonds in
-    for (int i=0; i< numOfTwoAtomBonds; i++)
-    {
-        outMolecule.get2Bond(i) = temp2Bonds[i];
-    }
-
-    // delete used pointers;
-    delete[] tempAtoms;
-    delete[] temp2Bonds;
-
-    return outMolecule;
+    // create and return the molecule
+    return molecule(std::move(name),
+                    std::move(tempAtoms),
+                    std::move(temp2Bonds));
 }
 
 /*
@@ -136,7 +117,7 @@ bool molReader::readAtom(std::string inStream,
                          atom&       inAtom,
                          std::string molName,
                          int         atomNum,
-                         int&        inNumOfAtoms)
+                         int&        inNumOfAtoms) const
 {
     std::istringstream iss(inStream);
     std::string        name       = "",
@@ -178,7 +159,7 @@ bool molReader::readAtom(std::string inStream,
 bool molReader::read2ABond(std::string&   inStream,
                            twoBonds_t&    inBond,
                            std::string    molName,
-                           int            bondNum)
+                           int            bondNum) const
 {
 
     std::istringstream iss(inStream);

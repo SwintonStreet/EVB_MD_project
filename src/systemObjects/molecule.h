@@ -23,9 +23,9 @@ class molecule
     public:
 
 
-    molecule(std::string& inName,
-             int          numAtoms,
-             int          num2Bonds);
+    molecule(std::string&&             inName,
+             std::vector<atom>&&       numAtoms,
+             std::vector<twoBonds_t>&& num2Bonds);
     molecule(const molecule& inMol);
     molecule(): mSize{0}, mName{""} {};
     

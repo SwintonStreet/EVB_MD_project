@@ -1,12 +1,22 @@
 #include "molecule.h"
 
-molecule::molecule(std::string& inName,
-                   int          inASize,
-                   int          in2BSize)
-                  :mSize{inASize},
+//molecule::molecule(std::string& inName,
+//                   int          inASize,
+//                   int          in2BSize)
+//                  :mSize{inASize},
+//                   mName{inName},
+//                   atoms(inASize),
+//                   twoBonds(in2BSize)
+//{
+//}
+
+molecule::molecule(std::string&&             inName,
+                   std::vector<atom>&&       inAtoms,
+                   std::vector<twoBonds_t>&& in2Bonds)
+                  :mSize{static_cast<int>(inAtoms.size())},
                    mName{inName},
-                   atoms(inASize),
-                   twoBonds(in2BSize)
+                   atoms(inAtoms),
+                   twoBonds(in2Bonds)
 {
 }
 

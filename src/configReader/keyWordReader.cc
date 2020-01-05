@@ -8,22 +8,22 @@ keyWordReader::keyWordReader()
 
 //template<typename keyWord>
 
-bool keyWordReader::defaultReader(keyWordVec&  kwv)
+bool keyWordReader::defaultReader(keyWordVec&  kwv) const
 {
-
-    std::string line;
-    bool isOk = true;
-
     std::ifstream defFile(keyWordReader::defaultFileName);
-    std::string word, name;
+    std::string line, word, name;
     int         iValue;
     double      dValue;
     bool        bValue;
+    int         lineNumber{0};
 
     if (defFile.is_open())
     {
         while (std::getline(defFile,line))
         {
+            // increment the line number
+            lineNumber++;
+
             // the first letter of the line will determine
             // what config item will be passed in
             std::istringstream iss(line);
@@ -34,35 +34,39 @@ bool keyWordReader::defaultReader(keyWordVec&  kwv)
             {
                 case 'I':
                     iss >> word;
-                    iValue = readlib::readINT(word,
-                                              "Invalid config item:" + name + "\n");
+                    iValue = readlib::readINT(word,errorString(name,lineNumber));
                     kwv.addKeyWord(keyWord(name,iValue),true);
                     break;
 
                 case 'D':
                     iss >> word;
-                    dValue = readlib::readDOU(word,
-                                              "Invalid config item:" + name + "\n");
-                    std::cout << "double " << dValue << std::endl;
+                    dValue = readlib::readDOU(word,errorString(name,lineNumber));
                     kwv.addKeyWord(keyWord(name,dValue),true);
                     break;
 
                 case 'B':
                     iss >> word;
-                    bValue = readlib::readBOO(word,
-                                              "Invalid config item:" + name + "\n");
+                    bValue = readlib::readBOO(word,errorString(name,lineNumber));
                     kwv.addKeyWord(keyWord(name,bValue),true);
                     break;
 
+                default:
+                    /*
+                     * We ignore unsupported values
+                     **/
+                    break;
             }
         }
     }
-    else
-    {
-        std::cout << "Unable to open file" << std::endl;
-    }
 
-    isOk = kwv.isOk();
+    return kwv.isOk();
+}
 
-    return isOk;
+[[nodiscard]]
+std::string keyWordReader::errorString(
+                             const std::string& name,
+                             int                lineNumber) const
+{
+    return "Invalid config item:" + name + "\n"
+           "on line number: " + std::to_string(lineNumber) + '\n';
 }

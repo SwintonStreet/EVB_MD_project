@@ -1,5 +1,12 @@
 CC=g++
-CFLAGS=-Wall -Wextra -Wshadow -Werror -std=c++17
+CFLAGS=-Wall                  \
+       -Wextra                \
+       -Wshadow               \
+       -Wreorder              \
+       -Wpedantic             \
+       -Wimplicit-fallthrough \
+       -Werror                \
+       -std=c++17
 LDFLAGS=
 
 TARGET     := EVB_MD

@@ -23,7 +23,11 @@ class keyWordReader
     public:
 
     keyWordReader();
-    bool defaultReader(keyWordVec& kwv);
+    bool defaultReader(keyWordVec& kwv) const;
+
+    [[nodiscard]]
+    std::string errorString(const std::string& name,
+                            int                lineNumber) const;
 
 };
 

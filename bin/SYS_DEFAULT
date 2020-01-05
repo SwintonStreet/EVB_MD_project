@@ -1,7 +1,7 @@
 I KEY1  11
-I KEY1  Y
+B KEY2  Y
 D KEY3  12.3
 
-I NUM_ITER 10
+I NUM_ITER Y
 
 ! a comment

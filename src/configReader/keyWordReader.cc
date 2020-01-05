@@ -1,12 +1,9 @@
-
-
 #include "keyWordReader.h"
-
-keyWordReader::keyWordReader()
-{
-}
-
-//template<typename keyWord>
+#include "readlib.h"
+#include "keyWordVec.h"
+#include "keyWord.h"
+#include "fstream"
+#include "sstream"
 
 bool keyWordReader::defaultReader(keyWordVec&  kwv) const
 {
@@ -16,6 +13,12 @@ bool keyWordReader::defaultReader(keyWordVec&  kwv) const
     double      dValue;
     bool        bValue;
     int         lineNumber{0};
+
+    auto errstr = [&lineNumber,&name] () -> std::string
+    {
+        return "Invalid config item:" + name + '\n' +
+               "on line number: " + std::to_string(lineNumber) + '\n';
+    };
 
     if (defFile.is_open())
     {
@@ -34,39 +37,28 @@ bool keyWordReader::defaultReader(keyWordVec&  kwv) const
             {
                 case 'I':
                     iss >> word;
-                    iValue = readlib::readINT(word,errorString(name,lineNumber));
+                    iValue = readlib::readINT(word,errstr());
                     kwv.addKeyWord(keyWord(name,iValue),true);
                     break;
 
                 case 'D':
                     iss >> word;
-                    dValue = readlib::readDOU(word,errorString(name,lineNumber));
+                    dValue = readlib::readDOU(word,errstr());
                     kwv.addKeyWord(keyWord(name,dValue),true);
                     break;
 
                 case 'B':
                     iss >> word;
-                    bValue = readlib::readBOO(word,errorString(name,lineNumber));
+                    bValue = readlib::readBOO(word,errstr());
                     kwv.addKeyWord(keyWord(name,bValue),true);
                     break;
 
                 default:
-                    /*
-                     * We ignore unsupported values
-                     **/
+                    // Ignore unsupported values
                     break;
             }
         }
     }
 
     return kwv.isOk();
-}
-
-[[nodiscard]]
-std::string keyWordReader::errorString(
-                             const std::string& name,
-                             int                lineNumber) const
-{
-    return "Invalid config item:" + name + "\n"
-           "on line number: " + std::to_string(lineNumber) + '\n';
 }

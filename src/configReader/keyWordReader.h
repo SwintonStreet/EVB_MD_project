@@ -2,18 +2,9 @@
 #ifndef KEYWORDREADER_H
 #define KEYWORDREADER_H
 
-#include "iostream"
-//#include "keyWords.h"
-#include "keyWord.h"
-#include "fstream"
 #include "string"
-#include "sstream"
-#include "cstring"
-#include "stdio.h"
-#include <vector>
-#include "memory"
-#include "stdexcept"
-#include "readlib.h"
+
+class keyWordVec;
 
 class keyWordReader
 {
@@ -22,13 +13,8 @@ class keyWordReader
 
     public:
 
-    keyWordReader();
+    keyWordReader() = default;
     bool defaultReader(keyWordVec& kwv) const;
-
-    [[nodiscard]]
-    std::string errorString(const std::string& name,
-                            int                lineNumber) const;
-
 };
 
 #endif // KEYWORDREADER_H

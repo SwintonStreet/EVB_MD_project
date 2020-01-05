@@ -3,8 +3,7 @@
 
 bool keyWordVec::containsKeyWord(keyWord& inKw)
 {
-    auto it = kWM.find(inKw.getName());
-    return it != kWM.end();
+    return kWM.find(inKw.getName()) != kWM.end();
 }
 
 bool keyWordVec::containsKeyWord(const std::string& name,
@@ -86,7 +85,7 @@ void keyWordVec::print(std::ofstream& out)
                 break;
         }
     }
-    out << "================================" << std::endl
-        << "================================" << std::endl
-        << "================================" << std::endl;
+    out << "================================" << '\n'
+        << "================================" << '\n'
+        << "================================" << '\n';
 }

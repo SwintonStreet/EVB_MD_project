@@ -32,13 +32,13 @@ class keyWord
     void setValue(double);
     void setValue(bool);
 
-    int          getInt();
-    double       getDou();
-    bool         getBoo();
-    std::string  getName();
-    bool         getOk();
-    const char&  getType() {return Type;};
-    bool         getDef() {return isDefault;};
+    int          getInt() const;
+    double       getDou() const;
+    bool         getBoo() const;
+    std::string  getName() const;
+    bool         getOk() const;
+    const char&  getType() const {return Type;};
+    bool         getDef() const {return isDefault;};
 
     void copyKeyWord(keyWord);
 

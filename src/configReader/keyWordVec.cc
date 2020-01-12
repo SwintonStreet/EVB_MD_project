@@ -1,7 +1,7 @@
 #include "keyWordVec.h"
 #include "keyWord.h"
 
-bool keyWordVec::containsKeyWord(keyWord& inKw)
+bool keyWordVec::containsKeyWord(const keyWord& inKw) const
 {
     return kWM.find(inKw.getName()) != kWM.end();
 }
@@ -40,7 +40,7 @@ bool keyWordVec::addKeyWord(keyWord inKw,
     return ok;
 }
 
-bool keyWordVec::isOk()
+bool keyWordVec::isOk() const
 {
     bool ret = true;
     for (auto& kw : kWM)
@@ -54,17 +54,17 @@ bool keyWordVec::isOk()
     return ret;
 }
 
-unsigned int keyWordVec::size()
+unsigned int keyWordVec::size() const
 {
     return kWM.size();
 }
 
-void keyWordVec::print(std::ofstream& out)
+void keyWordVec::print(std::ofstream& out) const
 {
     out << "================================" << std::endl
         << "=  printing put configuration  =" << std::endl
         << "================================" << std::endl;
-    for (auto& kw : kWM)
+    for (const auto& kw : kWM)
     {
         const char type = kw.second.getType();
         out << "==== Key word ===="             << std::endl

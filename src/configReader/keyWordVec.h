@@ -14,18 +14,18 @@ class keyWordVec
     public:
         keyWordVec() = default;
 
-        bool containsKeyWord(keyWord& inKw);
+        bool containsKeyWord(const keyWord& inKw) const;
         bool containsKeyWord(const std::string& name,
                              keyWord&           inKw);
 
         bool addKeyWord(keyWord inKw,
                         bool    overWrite = false);
 
-        bool isOk();
+        bool isOk() const;
 
-        unsigned int size();
+        unsigned int size() const;
 
-        void print(std::ofstream& out);
+        void print(std::ofstream& out) const;
 };
 
 #endif // KEYWORDVEC_H

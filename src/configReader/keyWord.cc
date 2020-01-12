@@ -81,27 +81,27 @@ void keyWord::setValue(bool inBoo)
 }
 
 
-int keyWord::getInt()
+int keyWord::getInt() const
 {
     return intValue;
 }
 
-double keyWord::getDou()
+double keyWord::getDou() const
 {
     return douValue;
 }
 
-bool keyWord::getBoo()
+bool keyWord::getBoo() const
 {
     return booValue;
 }
 
-std::string keyWord::getName()
+std::string keyWord::getName() const
 {
     return name;
 }
 
-bool keyWord::getOk()
+bool keyWord::getOk() const
 {
     return isOk;
 }

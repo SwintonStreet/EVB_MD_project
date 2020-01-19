@@ -1,5 +1,6 @@
 #include "string"
 #include "vector"
+#include "optional"
 
 enum keyWordType {BOOL, DOUBLE, INT};
 
@@ -45,23 +46,37 @@ struct keyWordDefault
 class keyWordsList
 {
     static const std::vector<keyWordDefault> keyWordList;
-    static const keyWordDefault kwD;
     public:
 
-    static bool isInKeyWordList(std::string     inWord,
-                                keyWordDefault& inKwD)
+    static bool isInKeyWordList(const std::string_view inWord)
     {
         bool test = false;
-        for (auto kwD : keyWordsList::keyWordList)
+        for (const auto& kwD : keyWordsList::keyWordList)
         {
             if ( kwD.name.compare(inWord) != 0)
             {
                 test = true;
-                inKwD = kwD;
                 break;
             }
         }
         return test;
+    }
+
+    static std::optional<keyWordDefault>
+                  getKeyWordFromList(const std::string_view inWord)
+    {
+        std::optional<keyWordDefault> retKeyWord;
+
+        for (const auto& kw : keyWordsList::keyWordList)
+        {
+            if ( kw.name.compare(inWord) != 0)
+            {
+                retKeyWord = kw;
+                break;
+            }
+        }
+
+        return retKeyWord;
     }
 
 };

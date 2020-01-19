@@ -22,9 +22,9 @@ class keyWord
 
     public:
 
-    keyWord(std::string,int   );
-    keyWord(std::string,double);
-    keyWord(std::string,bool  );
+    keyWord(std::string_view,int   );
+    keyWord(std::string_view,double);
+    keyWord(std::string_view,bool  );
     keyWord(keyWordDefault);
     keyWord();
 
@@ -32,13 +32,13 @@ class keyWord
     void setValue(double);
     void setValue(bool);
 
-    int          getInt() const;
-    double       getDou() const;
-    bool         getBoo() const;
-    std::string  getName() const;
-    bool         getOk() const;
-    const char&  getType() const {return Type;};
-    bool         getDef() const {return isDefault;};
+    int         getInt() const;
+    double      getDou() const;
+    bool        getBoo() const;
+    std::string getName() const;
+    bool        getOk() const;
+    const char& getType() const {return Type;};
+    bool        getDef() const {return isDefault;};
 
     void copyKeyWord(keyWord);
 

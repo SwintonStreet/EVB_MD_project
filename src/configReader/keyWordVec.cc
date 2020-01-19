@@ -9,8 +9,7 @@ bool keyWordVec::containsKeyWord(const keyWord& inKw) const
 bool keyWordVec::containsKeyWord(const std::string& name,
                                  keyWord&           inKw)
 {
-    auto it  = kWM.find(name);
-    bool ret = (it != kWM.end());
+    bool ret = (kWM.find(name) != kWM.end());
     if (ret)
     {
         inKw = kWM[name];

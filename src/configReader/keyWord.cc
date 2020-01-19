@@ -1,40 +1,36 @@
 
 #include "keyWord.h"
+#include "optional"
 
 keyWord::keyWord()
 {
     isDefault = true;
 }
 
-keyWordDefault dummyKwD;
-
-keyWord::keyWord(std::string inName, int inInt)
+keyWord::keyWord(std::string_view inName,
+                 int              inInt) : name     {inName},
+                                           intValue {inInt}
 {
-    name      = inName;
-    intValue  = inInt;
-    isOk      = keyWordsList::isInKeyWordList(inName,
-                                              dummyKwD);
+    isOk      = keyWordsList::isInKeyWordList(inName);
     Type      = 'I';
     isDefault = false;
 }
 
 
-keyWord::keyWord(std::string inName, double inDou)
+keyWord::keyWord(std::string_view inName,
+                 double           inDou): name     {inName},
+                                          douValue {inDou}
 {
-    name     = inName;
-    douValue = inDou;
-    isOk     = keyWordsList::isInKeyWordList(inName,
-                                             dummyKwD);
+    isOk      = keyWordsList::isInKeyWordList(inName);
     Type      = 'D';
     isDefault = false;
 }
 
-keyWord::keyWord(std::string inName, bool inBoo)
+keyWord::keyWord(std::string_view inName,
+                 bool             inBoo): name     {inName},
+                                          booValue {inBoo}
 {
-    name      = inName;
-    booValue  = inBoo;
-    isOk      = keyWordsList::isInKeyWordList(inName,
-                                              dummyKwD);
+    isOk      = keyWordsList::isInKeyWordList(inName);
     Type      = 'B';
     isDefault = false;
 }
@@ -61,8 +57,8 @@ keyWord::keyWord(keyWordDefault kwD)
             isDefault = false;
             break;
     }
-    isOk      = keyWordsList::isInKeyWordList(name,
-                                              dummyKwD);
+
+    isOk = keyWordsList::isInKeyWordList(name);
 }
 
 void keyWord::setValue(int inInt)
@@ -79,7 +75,6 @@ void keyWord::setValue(bool inBoo)
 {
     booValue = inBoo;
 }
-
 
 int keyWord::getInt() const
 {
@@ -110,23 +105,22 @@ void keyWord::setKeyWord(keyWordVec&        kwv,
                          const std::string& keyName,
                          bool               mandatory)
 {
-    keyWord        retKw = keyWord();
-    keyWordDefault kwD   = keyWordDefault();
+    keyWord        retKw {};
+    keyWordDefault kwD   {};
 
     if (kwv.containsKeyWord(keyName,retKw))
     {
     }
-    else if (keyWordsList::isInKeyWordList(keyName,kwD))
+    else if (const auto& defKw = keyWordsList::getKeyWordFromList(keyName);
+             defKw)
     {
-        retKw = keyWord(kwD);
+        retKw = keyWord(defKw.value());
     }
     else if (mandatory)
     {
         // if the look up is mandatory and the field hasn't
         // been found then throw an error!!!
-        std::cerr << "Failed to find mandatory field : " <<
-                     keyName  <<
-                     "\n";
+        std::cerr << "Failed to find mandatory field : " << keyName  << '\n';
         exit(EXIT_FAILURE);
     }
 

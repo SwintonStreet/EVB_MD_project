@@ -6,6 +6,9 @@ enum keyWordType {BOOL, DOUBLE, INT};
 
 struct keyWordDefault
 {
+    keyWordDefault() = default;
+    ~keyWordDefault() = default;
+
     std::string name;
     keyWordType kwType;
     bool        boolValue;
@@ -13,7 +16,8 @@ struct keyWordDefault
     int         intValue;
 
     // set bool keyWord
-    static keyWordDefault setBool(std::string inName, bool inBool)
+    static keyWordDefault setBool(std::string inName,
+                                  bool        inBool)
     {
         keyWordDefault ret;
         ret.name      = inName;
@@ -23,7 +27,8 @@ struct keyWordDefault
     }
 
     // set int keyWord
-    static keyWordDefault setInt(std::string inName, int inInt)
+    static keyWordDefault setInt(std::string inName,
+                                 int         inInt)
     {
         keyWordDefault ret;
         ret.name     = inName;
@@ -33,7 +38,8 @@ struct keyWordDefault
     }
 
     // set double keyWord
-    static keyWordDefault setDouble(std::string inName, double inDouble)
+    static keyWordDefault setDouble(std::string inName,
+                                    double      inDouble)
     {
         keyWordDefault ret;
         ret.name        = inName;
@@ -50,16 +56,16 @@ class keyWordsList
 
     static bool isInKeyWordList(const std::string_view inWord)
     {
-        bool test = false;
+        bool keyWordIsInList = false;
         for (const auto& kwD : keyWordsList::keyWordList)
         {
             if ( kwD.name.compare(inWord) != 0)
             {
-                test = true;
+                keyWordIsInList = true;
                 break;
             }
         }
-        return test;
+        return keyWordIsInList;
     }
 
     static std::optional<keyWordDefault>
@@ -78,6 +84,5 @@ class keyWordsList
 
         return retKeyWord;
     }
-
 };
 

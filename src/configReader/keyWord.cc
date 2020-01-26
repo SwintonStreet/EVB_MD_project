@@ -125,15 +125,4 @@ void keyWord::setKeyWord(keyWordVec&        kwv,
     }
 
     (*this) = retKw;
-    //this->copyKeyWord(retKw);
-}
-
-void keyWord::copyKeyWord(keyWord kW)
-{
-    name      = kW.name;
-    intValue  = kW.intValue;
-    douValue  = kW.douValue;
-    booValue  = kW.booValue;
-    isOk      = kW.isOk;
-    isDefault = kW.isDefault;
 }

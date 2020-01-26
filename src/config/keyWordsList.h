@@ -47,6 +47,36 @@ struct keyWordDefault
         ret.doubleValue = inDouble;
         return ret;
     }
+
+    /**
+     * Copy assignment
+     */
+    keyWordDefault& operator=(const keyWordDefault& rhs)
+    {
+        // do not self copy!
+        if (this != &rhs)
+        {
+            name        = rhs.name;
+            kwType      = rhs.kwType;
+            boolValue   = rhs.boolValue;
+            intValue    = rhs.intValue;
+            doubleValue = rhs.doubleValue;
+        }
+
+        return *this;
+    }
+
+    /**
+     * Copy operator
+     */
+    keyWordDefault (const keyWordDefault& rhs)
+    {
+        name        = rhs.name;
+        kwType      = rhs.kwType;
+        boolValue   = rhs.boolValue;
+        intValue    = rhs.intValue;
+        doubleValue = rhs.doubleValue;
+    }
 };
 
 class keyWordsList

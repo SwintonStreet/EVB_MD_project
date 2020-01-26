@@ -28,6 +28,8 @@ class keyWord
     keyWord(keyWordDefault);
     keyWord();
 
+    ~keyWord() = default;
+
     void setValue(int);
     void setValue(double);
     void setValue(bool);
@@ -40,7 +42,32 @@ class keyWord
     const char& getType() const {return Type;};
     bool        getDef() const {return isDefault;};
 
-    void copyKeyWord(keyWord);
+    // copy constructor
+    keyWord(const keyWord& kW)
+    {
+        name      = kW.name;
+        intValue  = kW.intValue;
+        douValue  = kW.douValue;
+        booValue  = kW.booValue;
+        isOk      = kW.isOk;
+        isDefault = kW.isDefault;
+    };
+
+    // copy assignment operator
+    keyWord& operator= (const keyWord& kW)
+    {
+        if (this != &kW)
+        {
+            name      = kW.name;
+            intValue  = kW.intValue;
+            douValue  = kW.douValue;
+            booValue  = kW.booValue;
+            isOk      = kW.isOk;
+            isDefault = kW.isDefault;
+        }
+
+        return *this;
+    }
 
     void setKeyWord(keyWordVec&        kwv,
                     const std::string& name,

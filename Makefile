@@ -5,6 +5,7 @@ CFLAGS=-Wall                  \
        -Wreorder              \
        -Wpedantic             \
        -Wimplicit-fallthrough \
+       -Wempty-body           \
        -Werror                \
        -std=c++17
 LDFLAGS=

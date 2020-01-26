@@ -1,3 +1,8 @@
+
+
+#ifndef KEYWORDSLIST_H
+#define KEYWORDSLIST_H
+
 #include "string"
 #include "vector"
 #include "optional"
@@ -79,12 +84,15 @@ struct keyWordDefault
     }
 };
 
-class keyWordsList
+namespace keyWordsList
 {
-    static const std::vector<keyWordDefault> keyWordList;
-    public:
+    const std::vector<keyWordDefault> keyWordList =
+    {
+        keyWordDefault::setInt("NUM_ITER",1),
+        keyWordDefault::setDouble("TIME_STEP",1)
+    };
 
-    static bool isInKeyWordList(const std::string_view inWord)
+    bool isInKeyWordList(const std::string_view inWord)
     {
         bool keyWordIsInList = false;
         for (const auto& kwD : keyWordsList::keyWordList)
@@ -98,7 +106,7 @@ class keyWordsList
         return keyWordIsInList;
     }
 
-    static std::optional<keyWordDefault>
+    std::optional<keyWordDefault>
                   getKeyWordFromList(const std::string_view inWord)
     {
         std::optional<keyWordDefault> retKeyWord;
@@ -114,5 +122,6 @@ class keyWordsList
 
         return retKeyWord;
     }
-};
+}
 
+#endif // KEYWORDSLIST_H

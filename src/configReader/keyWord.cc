@@ -1,5 +1,6 @@
 
 #include "keyWord.h"
+#include "keyWordsList.h"
 #include "optional"
 
 keyWord::keyWord()
@@ -105,8 +106,8 @@ void keyWord::setKeyWord(keyWordVec&        kwv,
                          const std::string& keyName,
                          bool               mandatory)
 {
-    keyWord        retKw {};
-    keyWordDefault kwD   {};
+    keyWord        retKw;
+    keyWordDefault kwD;
 
     if (kwv.containsKeyWord(keyName,retKw))
     {

@@ -5,9 +5,10 @@
 #include "iostream"
 #include "string"
 #include "vector"
-#include "keyWordsList.h"
 #include "stdlib.h"
 #include "keyWordVec.h"
+
+class keyWordDefault;
 
 
 class keyWord
@@ -25,7 +26,7 @@ class keyWord
     keyWord(std::string_view,int   );
     keyWord(std::string_view,double);
     keyWord(std::string_view,bool  );
-    keyWord(keyWordDefault);
+    explicit keyWord(keyWordDefault);
     keyWord();
 
     ~keyWord() = default;
@@ -43,7 +44,7 @@ class keyWord
     bool        getDef() const {return isDefault;};
 
     // copy constructor
-    keyWord(const keyWord& kW)
+    explicit keyWord(const keyWord& kW) noexcept
     {
         name      = kW.name;
         intValue  = kW.intValue;
@@ -54,7 +55,7 @@ class keyWord
     };
 
     // copy assignment operator
-    keyWord& operator= (const keyWord& kW)
+    keyWord& operator= (const keyWord& kW) noexcept
     {
         if (this != &kW)
         {

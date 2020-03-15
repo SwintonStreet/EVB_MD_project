@@ -1,8 +1,8 @@
+#include "fstream"
 #include "keyWordReader.h"
-#include "readlib.h"
 #include "keyWordVec.h"
 #include "keyWord.h"
-#include "fstream"
+#include "readlib.h"
 #include "sstream"
 
 bool keyWordReader::defaultReader(keyWordVec&  kwv) const

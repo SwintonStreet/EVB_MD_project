@@ -1,4 +1,5 @@
 CC:=g++
+CC_VER_FLAG=-std=c++17
 CFLAGS=-Wall                  \
        -Wextra                \
        -Wshadow               \
@@ -7,7 +8,7 @@ CFLAGS=-Wall                  \
        -Wimplicit-fallthrough \
        -Wempty-body           \
        -Werror                \
-       -std=c++17
+       $(CC_VER_FLAG)
 LDFLAGS=
 
 TARGET     := EVB_MD
@@ -24,20 +25,23 @@ EXECUTABLE = $(TARGETDIR)/$(TARGET)
 INCLUDE=$(patsubst %,-I./%,$(shell find $(SRCDIR) -mindepth 1 -type d))
 SOURCES := $(shell find $(SRCDIR) -name "*$(SRCEXT)"| sort)
 OBJECTS=$(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.$(OBJEXT)))
-
+OBJECTS_CLANG_TIDY=$(shell echo $(OBJECTS) | sed 's/\.o\(\s\?\)/.clangtidy\1/g' )
 
 default: all
 
-
-all: startEcho $(SOURCES)  $(EXECUTABLE)
+all: startEcho $(EXECUTABLE)
 
 # add the debug options!
 debug: CFLAGS += -g
 debug: all
 
 # build with clang
+clang: CC := clang++
 clang: all
-CC := clang++
+
+# build with clang-tidy
+clang-tidy: CC := clang-tidy
+clang-tidy: $(OBJECTS_CLANG_TIDY)
 
 startEcho:
 	@echo "Starting compilation"
@@ -68,6 +72,11 @@ $(BUILDDIR)/%.$(OBJEXT): $(SRCDIR)/%.$(SRCEXT)
 	@sed -e 's/.*://' -e 's/\\$$//' < $(BUILDDIR)/$*.$(DEPEXT).tmp | fmt -1 | sed -e 's/^ *//' -e 's/$$/:/' >> $(BUILDDIR)/$*.$(DEPEXT)
 	@rm -f $(BUILDDIR)/$*.$(DEPEXT).tmp
 
+
+# for clang-tidy
+$(BUILDDIR)/%.clangtidy: $(SRCDIR)/%.$(SRCEXT)
+	@echo $<
+	$(CC) $< -checks=* -- $(CC_VER_FLAG) $(INCLUDE)
 
 clean:
 	@$(RM) -rf $(BUILDDIR)

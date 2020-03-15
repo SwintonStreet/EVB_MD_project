@@ -8,8 +8,7 @@
 #include "stdlib.h"
 #include "keyWordVec.h"
 
-class keyWordDefault;
-
+struct keyWordDefault;
 
 class keyWord
 {

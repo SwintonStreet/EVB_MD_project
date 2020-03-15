@@ -1,4 +1,4 @@
-CC=g++
+CC:=g++
 CFLAGS=-Wall                  \
        -Wextra                \
        -Wshadow               \
@@ -24,7 +24,6 @@ EXECUTABLE = $(TARGETDIR)/$(TARGET)
 INCLUDE=$(patsubst %,-I./%,$(shell find $(SRCDIR) -mindepth 1 -type d))
 SOURCES := $(shell find $(SRCDIR) -name "*$(SRCEXT)"| sort)
 OBJECTS=$(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.$(OBJEXT)))
-#OBJECTSCLEAN := $(shell echo $(SOURCES) | sed 's/\s/\n/g' | sed 's|^.*\(/[^/]*\)$(SRCEXT)$$|$(BUILDDIR)\1$(OBJEXT)|g' | awk 1 ORS=' ' )
 
 
 default: all
@@ -36,6 +35,9 @@ all: startEcho $(SOURCES)  $(EXECUTABLE)
 debug: CFLAGS += -g
 debug: all
 
+# build with clang
+clang: all
+CC := clang++
 
 startEcho:
 	@echo "Starting compilation"
@@ -80,7 +82,5 @@ cleaner: clean
 # $(SOURCE:.cc=.o) is a rule for the variable SOURCES
 # to convery .cc to .o files and apply the rule defined
 # by .cc.o
-
-
 
 # DO NOT DELETE THIS LINE

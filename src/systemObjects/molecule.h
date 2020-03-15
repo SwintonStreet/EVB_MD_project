@@ -22,7 +22,6 @@ class molecule
 
     public:
 
-
     molecule(std::string&&             inName,
              std::vector<atom>&&       numAtoms,
              std::vector<twoBonds_t>&& num2Bonds);
@@ -60,6 +59,8 @@ class molecule
 
         return oStream;
     }
+
+    bool operator() () {return isOk;}
 };
 
 #endif // MOLECULE_H

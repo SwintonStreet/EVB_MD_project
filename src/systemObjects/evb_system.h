@@ -13,14 +13,14 @@ class evb_system
 
     std::string name;
 
-
     public:
 
     evb_system(const int   inSize,
                sys&        inSys,
-               std::string inName) :
-        systems{inSys},
-        size{inSize},
-        name{inName}
+               std::string inName): systems{inSys},
+                                    size{inSize},
+                                    name{inName}
     {}
+
+    int getSize() const noexcept {return size;}
 };

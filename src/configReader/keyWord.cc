@@ -17,7 +17,6 @@ keyWord::keyWord(std::string_view inName,
     isDefault = false;
 }
 
-
 keyWord::keyWord(std::string_view inName,
                  double           inDou): name     {inName},
                                           douValue {inDou}

@@ -76,7 +76,7 @@ $(BUILDDIR)/%.$(OBJEXT): $(SRCDIR)/%.$(SRCEXT)
 # for clang-tidy
 $(BUILDDIR)/%.clangtidy: $(SRCDIR)/%.$(SRCEXT)
 	@echo $<
-	$(CC) $< -checks=* -- $(CC_VER_FLAG) $(INCLUDE)
+	$(CC) $< -checks=performance-*,readability-*,google-* -- $(CC_VER_FLAG) $(INCLUDE)
 
 clean:
 	@$(RM) -rf $(BUILDDIR)

@@ -17,8 +17,8 @@ bool keyWordVec::containsKeyWord(const std::string& name,
     return ret;
 }
 
-bool keyWordVec::addKeyWord(keyWord inKw,
-                            bool    overWrite)
+bool keyWordVec::addKeyWord(const keyWord& inKw,
+                            bool           overWrite)
 {
     bool ok = true;
     if (containsKeyWord(inKw))

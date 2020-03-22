@@ -121,9 +121,9 @@ sys xyzReader::readXyzFile(std::vector<molecule> inMolVec)
     return tmp;
 }
 
-void xyzReader::readAtom(std::string  inLine,
-                         atom&        inAtom,
-                         int          k)
+void xyzReader::readAtom(const std::string&  inLine,
+                         atom&               inAtom,
+                         int                 k)
 {
     std::istringstream iss(inLine);
     std::cout << inLine << "\n";

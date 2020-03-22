@@ -10,9 +10,12 @@
 class readlib
 {
     public:
-    static bool   readBOO(std::string,std::string);
-    static int    readINT(std::string,std::string);
-    static double readDOU(std::string,std::string);
+    static bool   readBOO(const std::string&,
+                          const std::string&);
+    static int    readINT(const std::string&,
+                          const std::string&);
+    static double readDOU(const std::string&,
+                          const std::string&);
 };
 
 

@@ -18,8 +18,8 @@ class keyWordVec
         bool containsKeyWord(const std::string& name,
                              keyWord&           inKw);
 
-        bool addKeyWord(keyWord inKw,
-                        bool    overWrite = false);
+        bool addKeyWord(const keyWord& inKw,
+                        bool           overWrite = false);
 
         bool isOk() const;
 

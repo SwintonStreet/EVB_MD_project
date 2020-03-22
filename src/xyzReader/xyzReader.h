@@ -21,7 +21,7 @@ class xyzReader
     public:
     xyzReader();
 
-    void readAtom(std::string,atom&,int);
+    void readAtom(const std::string&,atom&,int);
     sys  readXyzFile(std::vector<molecule>);
 
 };

@@ -1,7 +1,7 @@
 #include "readlib.h"
 
-bool readlib::readBOO(std::string word,
-                      std::string errorText)
+bool readlib::readBOO(const std::string& word,
+                      const std::string& errorText)
 {
     bool outBool;
     try
@@ -35,8 +35,8 @@ bool readlib::readBOO(std::string word,
     return outBool;
 }
 
-int readlib::readINT(std::string word,
-                     std::string errorText)
+int readlib::readINT(const std::string& word,
+                     const std::string& errorText)
 {
     int outInt;
     try
@@ -59,8 +59,8 @@ int readlib::readINT(std::string word,
     return outInt;
 }
 
-double readlib::readDOU(std::string word,
-                        std::string errorText)
+double readlib::readDOU(const std::string& word,
+                        const std::string& errorText)
 {
     double outDoub;
     try

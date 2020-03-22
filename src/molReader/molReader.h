@@ -30,16 +30,16 @@ class molReader
     [[nodiscard]] molecule readSingleMol(std::ifstream&) const;
 
     // read an atom
-    bool readAtom (std::string,
+    bool readAtom (const std::string&,
                    atom&,
-                   std::string,
+                   const std::string&,
                    int,
                    int&) const;
 
     // read 2 atom bonds
-    bool read2ABond(std::string&,
+    bool read2ABond(const std::string&,
                     twoBonds_t&,
-                    std::string,
+                    const std::string&,
                     int) const;
 };
 

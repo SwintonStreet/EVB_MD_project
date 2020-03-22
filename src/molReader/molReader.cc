@@ -82,7 +82,8 @@
         exit (EXIT_FAILURE);
     }
     
-    std::string numOf2ABondsErr = "Invalid number of atoms in molecule \"" + name + "\"\n";
+    std::string numOf2ABondsErr =
+        "<Invalid number of atoms in molecule \"" + name + "\"\n";
     int numOfTwoAtomBonds = readlib::readINT( numOf2ABonds, numOf2ABondsErr );
 
     // allocate 2 bonds poitner
@@ -113,11 +114,11 @@
 *
 */
 
-bool molReader::readAtom(std::string inStream,
-                         atom&       inAtom,
-                         std::string molName,
-                         int         atomNum,
-                         int&        inNumOfAtoms) const
+bool molReader::readAtom(const std::string& inStream,
+                         atom&              inAtom,
+                         const std::string& molName,
+                         int                atomNum,
+                         int&               inNumOfAtoms) const
 {
     std::istringstream iss(inStream);
     std::string        name,
@@ -157,10 +158,10 @@ bool molReader::readAtom(std::string inStream,
 *
 */
 
-bool molReader::read2ABond(std::string&   inStream,
-                           twoBonds_t&    inBond,
-                           std::string    molName,
-                           int            bondNum) const
+bool molReader::read2ABond(const std::string& inStream,
+                           twoBonds_t&        inBond,
+                           const std::string& molName,
+                           int                bondNum) const
 {
 
     std::istringstream iss(inStream);

@@ -21,7 +21,7 @@ atom::atom(const atom& inAtom)
 atom::atom( threeVec_t  inPos,
             threeVec_t  inVel,
             threeVec_t  inForc,
-            std::string inName) : name {inName}
+            std::string&& inName) : name {inName}
 {
     setPos( inPos );
     setVel( inVel );

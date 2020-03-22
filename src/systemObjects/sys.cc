@@ -4,7 +4,7 @@
 
 sys::sys(const int                    inNumOfMolTypes,
          std::vector<int>             inNumOfMol,
-         const std::vector<molecule>  inMol)
+         const std::vector<molecule>& inMol)
          :numOfMolTypes(inNumOfMolTypes),
           numOfMol(std::vector<int>(inNumOfMolTypes)),
           molecules(std::vector<std::vector<molecule>>(inNumOfMolTypes)),
@@ -14,14 +14,14 @@ sys::sys(const int                    inNumOfMolTypes,
     // this assigns the number of molecules in each molecule type
     // then the set up each molecule as a copy of the 
 
-    for (int i=0; i<numOfMolTypes; i++)
+    for (int i=0; i<numOfMolTypes; ++i)
     {
         molecules[i] = std::vector<molecule>(inNumOfMol[i]);
         numOfMol[i]  = inNumOfMol[i];
-        for (int j=0; j<inNumOfMol[i]; j++)
+        for (int j=0; j<inNumOfMol[i]; ++j)
         {
             std::cout << "==1== " << j << "\n";
-            molecules[i][j] = molecule(inMol[i]);
+            molecules[i].emplace_back(molecule(inMol[i]));
         }
     }
 

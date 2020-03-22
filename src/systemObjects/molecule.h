@@ -23,8 +23,8 @@ class molecule
     public:
 
     molecule(std::string&&             inName,
-             std::vector<atom>&&       numAtoms,
-             std::vector<twoBonds_t>&& num2Bonds);
+             std::vector<atom>&&       inAtoms,
+             std::vector<twoBonds_t>&& in2Bonds);
     molecule(const molecule& inMol);
     molecule(): mSize{0}, mName{""} {};
     
@@ -40,7 +40,7 @@ class molecule
     int         getSize() const {return mSize;};
 
     void setAtom(int         atomNumber,
-                 const atom& newAtom);
+                 const atom& inAtom);
 
     [[nodiscard]] atom& getAtom(int atomNumber) {return atoms[atomNumber];};
     [[nodiscard]] std::vector<atom>& getAtoms() {return atoms;};

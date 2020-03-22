@@ -27,7 +27,7 @@ class sys
 
     sys(const int, 
         std::vector<int>,
-        const std::vector<molecule>);
+        const std::vector<molecule>&);
 
     std::vector<int>& getNumOfMol() {return numOfMol;};
     std::vector<std::vector<molecule>>& getMols() {return molecules;};

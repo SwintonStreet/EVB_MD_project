@@ -34,13 +34,13 @@ class keyWord
     void setValue(double);
     void setValue(bool);
 
-    int         getInt() const;
-    double      getDou() const;
-    bool        getBoo() const;
+    int         getInt()  const;
+    double      getDou()  const;
+    bool        getBoo()  const;
     std::string getName() const;
-    bool        getOk() const;
+    bool        getOk()   const;
     const char& getType() const {return Type;};
-    bool        getDef() const {return isDefault;};
+    bool        getDef()  const {return isDefault;};
 
     // copy constructor
     explicit keyWord(const keyWord& kW) noexcept
@@ -70,7 +70,7 @@ class keyWord
     }
 
     void setKeyWord(keyWordVec&        kwv,
-                    const std::string& name,
+                    const std::string& keyName,
                     bool               mandatory = false);
 
 };

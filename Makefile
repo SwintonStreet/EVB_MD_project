@@ -26,6 +26,7 @@ INCLUDE=$(patsubst %,-I./%,$(shell find $(SRCDIR) -mindepth 1 -type d))
 SOURCES := $(shell find $(SRCDIR) -name "*$(SRCEXT)"| sort)
 OBJECTS=$(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.$(OBJEXT)))
 OBJECTS_CLANG_TIDY=$(shell echo $(OBJECTS) | sed 's/\.o\(\s\?\)/.clangtidy\1/g' )
+OBJECTS_CLANG_FORMAT=$(shell echo $(OBJECTS) | sed 's/\.o\(\s\?\)/.clangformat\1/g' )
 
 default: all
 
@@ -42,6 +43,10 @@ clang: all
 # build with clang-tidy
 clang-tidy: CC := clang-tidy
 clang-tidy: $(OBJECTS_CLANG_TIDY)
+
+# build with clang-format
+clang-format: CC := clang-format
+clang-format: $(OBJECTS_CLANG_FORMAT)
 
 startEcho:
 	@echo "Starting compilation"
@@ -78,10 +83,17 @@ $(BUILDDIR)/%.clangtidy: $(SRCDIR)/%.$(SRCEXT)
 	@echo $<
 	$(CC) $< -checks=performance-*,readability-*,google-* -- $(CC_VER_FLAG) $(INCLUDE)
 
+# for clang-format
+$(BUILDDIR)/%.clangformat: $(SRCDIR)/%.$(SRCEXT)
+	@echo $<
+	$(CC) --verbose --Werror $<
+
 clean:
+	@echo "Cleaning"
 	@$(RM) -rf $(BUILDDIR)
 
 cleaner: clean
+	@echo "Further cleaning"
 	@$(RM) -rf $(TARGETDIR)
 
 # Some notes about makefiles

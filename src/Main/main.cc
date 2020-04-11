@@ -36,15 +36,12 @@ int main ()
     xyzReader test3 = xyzReader();
 
     std::vector<molecule> defMol = test2.MolConfReader();
+
     sys testSys = test3.readXyzFile(defMol);
 
     testSys.printSysPos(std::cout);
     // print out system information
-    std::cout << "====____====\n==========\n";
     testSys.printSysPos(mainOutputFile);
-    //testSys.printSysPos(std::cout);
-    std::cout << "====____====\n==========\n";
-
 
     mainLoop mL = mainLoop(kwVec,
                            testSys);

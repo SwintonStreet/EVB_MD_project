@@ -16,6 +16,10 @@ struct threeVec_t
 {
     double x, y, z;
 
+    // c'tor/d'tor
+    threeVec_t()  = default;
+    ~threeVec_t() = default;
+
     friend threeVec_t operator*(const double&    factor,
                                 const threeVec_t b)
     {
@@ -63,17 +67,27 @@ struct threeVec_t
 class atom 
 {
     
-    threeVec_t  pos, vel, forc;
+    threeVec_t  pos  = { 0.0, 0.0, 0.0 };
+    threeVec_t  vel  = { 0.0, 0.0, 0.0 };
+    threeVec_t  forc = { 0.0, 0.0, 0.0 };
     double      mass;
     std::string name;
 
     public:
 
-    // Empty constructor
-    atom();
+    // Default c'tor/d'tor
+    atom() = default;
+    ~atom() = default;
     
     // copy constructor
     atom(const atom&);
+
+    // copy assignment
+    atom& operator=(const atom&);
+
+    // defaulted move & copy/move assignment
+    atom(atom&&) = default;
+    atom& operator=(atom&&) = default;
 
     // non-empty constructor
     // This includes
@@ -84,7 +98,6 @@ class atom
     atom( threeVec_t, threeVec_t, threeVec_t, std::string&& );
 
     atom(std::string,double);
-
 
     // sets the position,velocity,force
     void setPos (const threeVec_t& inPos)  {pos.set(inPos);};
@@ -113,7 +126,7 @@ class atom
     friend std::ostream& operator<< (std::ostream& oStream,
                                      atom          a)
     {
-        oStream << "The atoms name is: " << a.name <<
+        oStream << "The atom's name is: " << a.name <<
                    " X:" << a.pos.x <<
                    " Y:" << a.pos.y <<
                    " Z:" << a.pos.z << "\n";

@@ -1,5 +1,3 @@
-
-
 #include "sys.h"
 
 sys::sys(const int                    inNumOfMolTypes,
@@ -9,23 +7,22 @@ sys::sys(const int                    inNumOfMolTypes,
           numOfMol(std::vector<int>(inNumOfMolTypes)),
           molecules(std::vector<std::vector<molecule>>(inNumOfMolTypes)),
           sysEnergy(0)
-
 {
     // this assigns the number of molecules in each molecule type
     // then the set up each molecule as a copy of the 
 
+    std::cout << "No. of mol types: " << numOfMolTypes << '\n';
     for (int i=0; i<numOfMolTypes; ++i)
     {
+        std::cout << "setting mol: " << i << '\n';
         molecules[i] = std::vector<molecule>(inNumOfMol[i]);
         numOfMol[i]  = inNumOfMol[i];
         for (int j=0; j<inNumOfMol[i]; ++j)
         {
-            std::cout << "==1== " << j << "\n";
-            molecules[i].emplace_back(molecule(inMol[i]));
+            std::cout << "==1== " << j << '\n';
+            molecules[i][j] = inMol[i];
         }
     }
-
-
 }
 
 // copy constuctor
@@ -33,8 +30,8 @@ sys::sys(const sys& inSys):
    numOfMolTypes(inSys.getNumOfMolTypes()),
    sysEnergy(0)
 {
-   numOfMol      = inSys.getNumOfMol();
-   molecules     = inSys.getMols();
+   numOfMol  = inSys.getNumOfMol();
+   molecules = inSys.getMols();
 }
 
 void sys::resetAllForces()

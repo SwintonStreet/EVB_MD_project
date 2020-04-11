@@ -22,14 +22,22 @@ class molecule
 
     public:
 
-    molecule(std::string&&             inName,
-             std::vector<atom>&&       inAtoms,
-             std::vector<twoBonds_t>&& in2Bonds);
-    molecule(const molecule& inMol);
+    // c'tors
+    molecule(std::string&             inName,
+             std::vector<atom>&       inAtoms,
+             std::vector<twoBonds_t>& in2Bonds);
     molecule(): mSize{0}, mName{""} {};
-    
+
+    // copy c'tor
+    molecule(const molecule& inMol);
+
+    // defaulted move c'tor & copy/move assignment
+    molecule(molecule&&) = default;
+    molecule& operator=(const molecule&) = default;
+    molecule& operator=(molecule&&) = default;
+
     // destructor
-    //~molecule();
+    ~molecule() = default;
 
     // clone assignment operator
     //molecule& operator=(const molecule& rhs) {};
@@ -50,7 +58,7 @@ class molecule
     friend std::ostream& operator<< (std::ostream& oStream,
                                      molecule      mol)
     {
-        oStream << "The molecules name is " << mol.mName << "\n";
+        oStream << "The molecules name is " << mol.mName << '\n';
 
         for (const atom& at : mol.atoms)
         {

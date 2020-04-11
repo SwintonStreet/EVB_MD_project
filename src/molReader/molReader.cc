@@ -1,4 +1,3 @@
-
 #include "molReader.h"
 #include "atom.h"
 #include "twoAtomBonds.h"
@@ -14,7 +13,7 @@
 {
     std::ifstream molFile(defaultFileName);
     std::string   line;
-    std::vector<molecule> outMolecule;
+    std::vector<molecule> outMolecules;
 
     std::cout << "Got here\n";
 
@@ -24,11 +23,12 @@
         {
             if (line[0] == 'M')
             {
-                outMolecule.push_back(readSingleMol(molFile));
+                outMolecules.push_back(readSingleMol(molFile));
             }
         }
     }
-    return outMolecule;
+
+    return outMolecules;
 }
 
 /*
@@ -55,8 +55,7 @@
     for (int i=0; i<numOfAtoms && readOk; i++)
     {
         std::getline(inStream,line);
-        std::cout << line << std::endl;
-        std::cout << "--" << i << std::endl;
+        std::cout << line << "--" << i << '\n';
         readOk = readAtom(line,
                           tempAtoms[i],
                           name,
@@ -73,8 +72,7 @@
     std::getline(inStream,line);
     std::istringstream iss(line);
     std::string identifer, numOf2ABonds;
-    iss >> identifer;
-    iss >> numOf2ABonds;
+    iss >> identifer >> numOf2ABonds;
 
     if ( identifer.compare("2B") != 0)
     {
@@ -92,10 +90,9 @@
     //  get the 2 Atom Bonds
     for (int i=0; i<numOfTwoAtomBonds && readOk; i++)
     {
-        std::cout << numOfTwoAtomBonds << "\n";
+        std::cout << numOfTwoAtomBonds << '\n';
         std::getline(inStream,line);
-        std::cout << line << std::endl;
-        std::cout << "--" << i << std::endl;
+        std::cout << line << "\n--" << i << '\n';
         readOk = read2ABond(line,
                             temp2Bonds[i],
                             name,
@@ -103,9 +100,9 @@
     }
 
     // create and return the molecule
-    return molecule(std::move(name),
-                    std::move(tempAtoms),
-                    std::move(temp2Bonds));
+    return molecule(name,
+                    tempAtoms,
+                    temp2Bonds);
 }
 
 /*

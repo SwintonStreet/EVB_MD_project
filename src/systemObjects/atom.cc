@@ -3,10 +3,6 @@
 #include "atom.h"
 #include "cmath"
 
-atom::atom ()
-{
-}
-
 atom::atom(const atom& inAtom)
 {
     name = inAtom.getName();
@@ -15,6 +11,18 @@ atom::atom(const atom& inAtom)
     setPos(inAtom.getPos());
     setVel(inAtom.getVel());
     setForc(inAtom.getForc());
+}
+
+atom& atom::operator=(const atom& inAtom)
+{
+    name = inAtom.getName();
+    mass = inAtom.getMass();
+
+    setPos(inAtom.getPos());
+    setVel(inAtom.getVel());
+    setForc(inAtom.getForc());
+
+    return *this;
 }
 
 

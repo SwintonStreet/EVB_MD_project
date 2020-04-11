@@ -9,5 +9,10 @@ cp ../res/SYS_* ./
 # run simulation
 ../bin/EVB_MD
 
-# remove resources -> only leave the run output
-rm SYS_*
+if [ $? == 0 ]
+then
+    # remove resources -> only leave the run output
+    rm SYS_*
+else
+    echo "Failed to run simulation -> please investigate"
+fi

@@ -19,9 +19,9 @@ class xyzReader
     const char* defaultXyzFile = "SYS_XYZ";
 
     public:
-    xyzReader();
+    xyzReader() = default;
 
     void readAtom(const std::string&,atom&,int);
-    sys  readXyzFile(std::vector<molecule>);
+    sys  readXyzFile(std::vector<molecule>&);
 
 };

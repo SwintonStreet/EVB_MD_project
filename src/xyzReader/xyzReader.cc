@@ -1,15 +1,7 @@
-
 #include "xyzReader.h"
 
-
-xyzReader::xyzReader()
+sys xyzReader::readXyzFile(std::vector<molecule>& inMolVec)
 {
-}
-
-sys xyzReader::readXyzFile(std::vector<molecule> inMolVec)
-{
-    std::cout << "===6===\n";
-
     std::ifstream molFile(xyzReader::defaultMolFile);
     std::ifstream xyzFile(xyzReader::defaultXyzFile);
     std::string   line, temp, numOfMols, numErr;
@@ -87,9 +79,8 @@ sys xyzReader::readXyzFile(std::vector<molecule> inMolVec)
 
             // read atom
             atom& tmpAtom = inMols[j[0]][j[1]].getAtom(j[2]);
-            readAtom(line,tmpAtom,++k);
 
-            // std::cout << "--+--" << k;
+            readAtom(line,tmpAtom,++k);
 
             // increment the atom number
             j[2]++;
@@ -116,8 +107,6 @@ sys xyzReader::readXyzFile(std::vector<molecule> inMolVec)
     tmp.printSysPos(std::cout);
     std::cout << "==========\n==========\n";
 
-    
-
     return tmp;
 }
 
@@ -134,15 +123,10 @@ void xyzReader::readAtom(const std::string&  inLine,
     // read in the xyz values
     iss >> x >> y >> z;
 
-    std::cout << "__1__" << x << y << z;
-
-
     std::string errText = "Failed to read atom " + std::to_string(k) + 
                           " position from the xyz file";
 
-    //readlib::readDou(x,errText);
-    inAtom.setPos( { readlib::readDOU(x,errText),
-                     readlib::readDOU(y,errText),
-                     readlib::readDOU(z,errText)} );
-
+    inAtom.setPos( {readlib::readDOU(x,errText),
+                    readlib::readDOU(y,errText),
+                    readlib::readDOU(z,errText)} );
 }

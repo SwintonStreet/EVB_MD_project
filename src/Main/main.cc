@@ -1,31 +1,28 @@
 // main - the thing that runs!
 
-#include "iostream"
-#include "fstream"
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <string>
+
 #include "molReader.h"
 #include "xyzReader.h"
 #include "evb_system.h"
 #include "mainLoop.h"
 #include "molecule.h"
 #include "keyWordReader.h"
-#include "vector"
 #include "keyWordVec.h"
+#include "logger.h"
 
 int main ()
 {
-    std::cout << "Hello world!!" << std::endl;
     keyWordVec kwVec;
-
-    // main output fileName
-    std::ofstream mainOutputFile;
-    mainOutputFile.open("Run");
-
+    LOGTOSCREEN("==--START-OF-PROGRAM--==\n")
 
     keyWordReader test1 = keyWordReader();
     test1.defaultReader(kwVec);
 
-    std::cout << "finished!!" << kwVec.size() << std::endl;
-    kwVec.print(mainOutputFile);
+    kwVec.print(logger::getLogFile());
 
     keyWord test = keyWord();
     test.setKeyWord(kwVec,"KEY1");
@@ -41,20 +38,16 @@ int main ()
 
     testSys.printSysPos(std::cout);
     // print out system information
-    testSys.printSysPos(mainOutputFile);
+    testSys.printSysPos(logger::getLogFile());
 
     mainLoop mL = mainLoop(kwVec,
                            testSys);
 
-    mL.runLoop(mainOutputFile);
+    mL.runLoop(logger::getLogFile());
 
+    LOGTOSCREEN("==--END-OF-PROGRAM--==\n")
 
-    std::cout << "==--END-OF-PROGRAM--==\n";
-
-    mainOutputFile.close();
-
-
-    //std::cout << "testboo is " << testboo << std::endl;
+    logger::getLogFile().close();
 
     return 0;
 }

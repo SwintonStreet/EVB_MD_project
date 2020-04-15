@@ -18,6 +18,7 @@ class keyWord
     int         intValue;
     double      douValue;
     bool        booValue;
+    std::string sValue;
     char        Type;
 
     public:
@@ -25,6 +26,7 @@ class keyWord
     keyWord(std::string_view,int   );
     keyWord(std::string_view,double);
     keyWord(std::string_view,bool  );
+    keyWord(std::string_view,std::string_view);
     explicit keyWord(keyWordDefault);
     keyWord();
 
@@ -34,21 +36,24 @@ class keyWord
     void setValue(double);
     void setValue(bool);
 
-    int         getInt()  const;
-    double      getDou()  const;
-    bool        getBoo()  const;
-    std::string getName() const;
-    bool        getOk()   const;
-    const char& getType() const {return Type;};
-    bool        getDef()  const {return isDefault;};
+    int         getInt()    const;
+    double      getDou()    const;
+    bool        getBoo()    const;
+    std::string getString() const;
+    std::string getName()   const;
+    bool        getOk()     const;
+    const char& getType()   const {return Type;};
+    bool        getDef()    const {return isDefault;};
 
     // copy constructor
     explicit keyWord(const keyWord& kW) noexcept
     {
         name      = kW.name;
+        Type      = kW.Type;
         intValue  = kW.intValue;
         douValue  = kW.douValue;
         booValue  = kW.booValue;
+        sValue    = kW.sValue;
         isOk      = kW.isOk;
         isDefault = kW.isDefault;
     };
@@ -59,9 +64,11 @@ class keyWord
         if (this != &kW)
         {
             name      = kW.name;
+            Type      = kW.Type;
             intValue  = kW.intValue;
             douValue  = kW.douValue;
             booValue  = kW.booValue;
+            sValue    = kW.sValue;
             isOk      = kW.isOk;
             isDefault = kW.isDefault;
         }

@@ -35,6 +35,15 @@ keyWord::keyWord(std::string_view inName,
     isDefault = false;
 }
 
+keyWord::keyWord(std::string_view inName,
+                 std::string_view inString): name   {inName},
+                                             sValue {inString}
+{
+    isOk      = keyWordsList::isInKeyWordList(inName);
+    Type      = 'S';
+    isDefault = false;
+}
+
 keyWord::keyWord(keyWordDefault kwD)
 {
     name      = kwD.name;
@@ -89,6 +98,11 @@ double keyWord::getDou() const
 bool keyWord::getBoo() const
 {
     return booValue;
+}
+
+std::string keyWord::getString() const
+{
+    return sValue;
 }
 
 std::string keyWord::getName() const

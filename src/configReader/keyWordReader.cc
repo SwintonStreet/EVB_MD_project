@@ -53,12 +53,19 @@ bool keyWordReader::defaultReader(keyWordVec&  kwv) const
                     kwv.addKeyWord(keyWord(name,bValue),true);
                     break;
 
+                case 'S':
+                    iss >> word;
+                    kwv.addKeyWord(keyWord(name,word),true);
+                    break;
+
                 default:
                     // Ignore unsupported values
                     break;
             }
         }
     }
+
+    kwv.print(std::cout);
 
     return kwv.isOk();
 }

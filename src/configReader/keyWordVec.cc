@@ -18,9 +18,10 @@ bool keyWordVec::containsKeyWord(const std::string& name,
 }
 
 bool keyWordVec::addKeyWord(const keyWord& inKw,
-                            bool           overWrite)
+                            bool          overWrite)
 {
     bool ok = true;
+
     if (containsKeyWord(inKw))
     {
         if (overWrite)
@@ -58,29 +59,34 @@ unsigned int keyWordVec::size() const
     return kWM.size();
 }
 
-void keyWordVec::print(std::ofstream& out) const
+void keyWordVec::print(std::ostream& out) const
 {
-    out << "================================" << std::endl
-        << "=  printing put configuration  =" << std::endl
-        << "================================" << std::endl;
+    out << "================================" << '\n'
+        << "=  printing put configuration  =" << '\n'
+        << "================================" << '\n';
     for (const auto& kw : kWM)
     {
         const char type = kw.second.getType();
-        out << "==== Key word ===="             << std::endl
-            << "Name : " << kw.second.getName() << std::endl;
+        out << "==== Key word ===="             << '\n'
+            << "Name : " << kw.second.getName() << '\n';
         switch (type)
         {
             case 'I':
-                out << "Type : Integer"                << std::endl
-                    << "Value: " << kw.second.getInt() << std::endl;
+                out << "Type : Integer"                << '\n'
+                    << "Value: " << kw.second.getInt() << '\n';
                 break;
             case 'D':
-                out << "Type : Double"                 << std::endl
-                    << "Value: " << kw.second.getDou() << std::endl;
+                out << "Type : Double"                 << '\n'
+                    << "Value: " << kw.second.getDou() << '\n';
                 break;
             case 'B':
-                out << "Type : Boolean"                << std::endl
-                    << "Value: " << kw.second.getBoo() << std::endl;
+                out << "Type : Boolean"                << '\n'
+                    << "Value: " << kw.second.getBoo() << '\n';
+                break;
+
+            case 'S':
+                out << "Type : String"                 << '\n'
+                    << "Value: " << kw.second.getString() << '\n';
                 break;
         }
     }

@@ -4,4 +4,6 @@ D KEY3  12.3
 
 I NUM_ITER 10
 
+S LOG_LEVEL DEBUG
+
 ! a comment

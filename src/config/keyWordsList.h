@@ -7,7 +7,7 @@
 #include "vector"
 #include "optional"
 
-enum keyWordType {BOOL, DOUBLE, INT};
+enum keyWordType {BOOL, DOUBLE, INT, STRING};
 
 struct keyWordDefault
 {
@@ -18,6 +18,7 @@ struct keyWordDefault
     keyWordType kwType;
     bool        boolValue;
     double      doubleValue;
+    std::string stringValue;
     int         intValue;
 
     // set bool keyWord
@@ -50,6 +51,17 @@ struct keyWordDefault
         ret.name        = inName;
         ret.kwType      = DOUBLE;
         ret.doubleValue = inDouble;
+        return ret;
+    }
+
+    // set string keyWord
+    static keyWordDefault setString(std::string inName,
+                                    std::string inString)
+    {
+        keyWordDefault ret;
+        ret.name        = inName;
+        ret.kwType      = STRING;
+        ret.stringValue = inString;
         return ret;
     }
 
@@ -89,7 +101,8 @@ namespace keyWordsList
     const std::vector<keyWordDefault> keyWordList =
     {
         keyWordDefault::setInt("NUM_ITER",1),
-        keyWordDefault::setDouble("TIME_STEP",1)
+        keyWordDefault::setDouble("TIME_STEP",1),
+        keyWordDefault::setString("LOG_LEVEL","DEFAULT")
     };
 
     bool isInKeyWordList(const std::string_view inWord)

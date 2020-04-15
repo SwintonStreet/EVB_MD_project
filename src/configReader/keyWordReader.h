@@ -1,8 +1,5 @@
-
 #ifndef KEYWORDREADER_H
 #define KEYWORDREADER_H
-
-#include "string"
 
 class keyWordVec;
 

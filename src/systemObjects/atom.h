@@ -64,9 +64,9 @@ struct threeVec_t
     }
 };
 
-class atom 
+class atom
 {
-    
+
     threeVec_t  pos  = { 0.0, 0.0, 0.0 };
     threeVec_t  vel  = { 0.0, 0.0, 0.0 };
     threeVec_t  forc = { 0.0, 0.0, 0.0 };
@@ -78,7 +78,7 @@ class atom
     // Default c'tor/d'tor
     atom() = default;
     ~atom() = default;
-    
+
     // copy constructor
     atom(const atom&);
 
@@ -97,7 +97,7 @@ class atom
     // Name
     atom( threeVec_t, threeVec_t, threeVec_t, std::string&& );
 
-    atom(std::string,double);
+    atom(const std::string&,const double);
 
     // sets the position,velocity,force
     void setPos (const threeVec_t& inPos)  {pos.set(inPos);};
@@ -106,7 +106,7 @@ class atom
 
     // print atom information
     void printAtom(std::ostream&);
-    
+
     // gets the position,velocity,force
     threeVec_t getPos () const noexcept {return pos;};
     threeVec_t getVel () const noexcept {return vel;};

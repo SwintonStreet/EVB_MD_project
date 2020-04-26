@@ -11,7 +11,7 @@ class keyWordReader
     public:
 
     keyWordReader() = default;
-    bool defaultReader(keyWordVec& kwv) const;
+    static bool defaultReader(keyWordVec& kwv);
 };
 
 #endif // KEYWORDREADER_H

@@ -43,7 +43,7 @@ class molecule
     //molecule& operator=(const molecule& rhs) {};
 
     twoBonds_t& get2Bond(int);
-    std::vector<twoBonds_t>& getAll2Bond() {return twoBonds;};
+    const std::vector<twoBonds_t>& getAll2Bond() const {return twoBonds;};
     std::string getName() const {return mName;};
     int         getSize() const {return mSize;};
 

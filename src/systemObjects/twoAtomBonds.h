@@ -37,15 +37,15 @@ class twoAtomBonds
 
     //constructor
     twoAtomBonds();
-    static double calc2AtomEngFor(twoBonds_t&,
+    static double calc2AtomEngFor(const twoBonds_t&,
                                   atom&,
                                   atom&);
 
     static double simpleSpring(atom&,
                                atom&,
-                               twoBonds_t&);
+                               const twoBonds_t&);
 
-    static void updateForce(threeVec_t&,
+    static void updateForce(const threeVec_t&,
                             atom&,
                             atom&);
 

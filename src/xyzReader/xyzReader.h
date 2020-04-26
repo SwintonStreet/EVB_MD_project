@@ -15,13 +15,14 @@
 
 class xyzReader
 {
-    const char* defaultMolFile = "SYS_MOLECULES";
-    const char* defaultXyzFile = "SYS_XYZ";
+    constexpr static const char* defaultMolFile = "SYS_MOLECULES";
+    constexpr static const char* defaultXyzFile = "SYS_XYZ";
 
     public:
     xyzReader() = default;
+    ~xyzReader() = default;
 
-    void readAtom(const std::string&,atom&,int);
-    sys  readXyzFile(std::vector<molecule>&);
+    static void readAtom(const std::string&,atom&,int);
+    static sys  readXyzFile(std::vector<molecule>&);
 
 };

@@ -4,11 +4,12 @@
 void forceUpdate::forcUpdate(sys& inSys)
 {
     double totalEnergy = 0;
-    int    i = 0, j = 0;
+    int    i           = 0;
+    int    j           = 0;
 
-    for (auto vecMol : inSys.getMols())
+    for (auto& vecMol : inSys.getMols())
     {
-        for (auto mol : vecMol)
+        for (auto& mol : vecMol)
         {
             // calculate bonds
             totalEnergy += twoBondLoop::calcEngForTwoBond(mol.getAll2Bond(),

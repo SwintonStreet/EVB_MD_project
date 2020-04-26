@@ -4,12 +4,16 @@ sys xyzReader::readXyzFile(std::vector<molecule>& inMolVec)
 {
     std::ifstream molFile(xyzReader::defaultMolFile);
     std::ifstream xyzFile(xyzReader::defaultXyzFile);
-    std::string   line, temp, numOfMols, numErr;
+    std::string   line;
+    std::string   temp;
+    std::string   numOfMols;
+    std::string   numErr;
 
     std::cout << "Got here\n";
     // inMolVec is a vector of the defined molecules
     std::vector<int> molNums(inMolVec.size());
-    int              i = 0, totalNumMolecules = 0;
+    int              i                 = 0;
+    int              totalNumMolecules = 0;
 
     /*
      * reads in the number of molecules
@@ -58,7 +62,8 @@ sys xyzReader::readXyzFile(std::vector<molecule>& inMolVec)
          *
          * k is the over-all-number used for debuging
          */
-        int j[3] = {0, 0, 0}, k = 0;
+        int j[3] = {0, 0, 0};
+        int k    = 0;
         while (std::getline(xyzFile, line))
         {
             if (line.length() == 0)
@@ -112,7 +117,9 @@ void xyzReader::readAtom(const std::string& inLine, atom& inAtom, int k)
 {
     std::istringstream iss(inLine);
     std::cout << inLine << "\n";
-    std::string x, y, z;
+    std::string x;
+    std::string y;
+    std::string z;
 
     // ignore the atom name
     iss >> x;

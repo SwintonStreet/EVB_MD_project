@@ -35,9 +35,9 @@ sys::sys(const sys& inSys)
 
 void sys::resetAllForces()
 {
-    for (auto molvec : molecules)
+    for (auto& molvec : molecules)
     {
-        for (auto mol : molvec)
+        for (auto& mol : molvec)
         {
             mol.resetForces();
         }

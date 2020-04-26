@@ -19,28 +19,28 @@ class twoAtomBonds;
 class molReader
 {
     constexpr static const char* defaultFileName = "SYS_MOLECULES";
-    
+
     public:
     molReader() = default;
 
-    // will read the SYS_MOLECULES file 
-    [[nodiscard]] std::vector<molecule> MolConfReader() const;
+    // will read the SYS_MOLECULES file
+    [[nodiscard]] static std::vector<molecule> MolConfReader();
 
     // read a single molecules config
-    [[nodiscard]] molecule readSingleMol(std::ifstream&) const;
+    [[nodiscard]] static molecule readSingleMol(std::ifstream&);
 
     // read an atom
-    bool readAtom (const std::string&,
+    static bool readAtom (const std::string&,
                    atom&,
                    const std::string&,
                    int,
-                   int&) const;
+                   int&);
 
     // read 2 atom bonds
-    bool read2ABond(const std::string&,
+    static bool read2ABond(const std::string&,
                     twoBonds_t&,
                     const std::string&,
-                    int) const;
+                    int);
 };
 
 #endif // MOLREADER_H

@@ -5,10 +5,12 @@
 #include "readlib.h"
 #include "sstream"
 
-bool keyWordReader::defaultReader(keyWordVec& kwv) const
+bool keyWordReader::defaultReader(keyWordVec& kwv)
 {
     std::ifstream defFile(keyWordReader::defaultFileName);
-    std::string   line, word, name;
+    std::string   line;
+    std::string   word;
+    std::string   name;
     int           iValue;
     double        dValue;
     bool          bValue;

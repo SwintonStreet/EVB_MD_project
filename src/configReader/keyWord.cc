@@ -37,7 +37,7 @@ keyWord::keyWord(std::string_view inName, std::string_view inString)
     isDefault = false;
 }
 
-keyWord::keyWord(keyWordDefault kwD)
+keyWord::keyWord(const keyWordDefault& kwD)
 {
     name      = kwD.name;
     isDefault = true;

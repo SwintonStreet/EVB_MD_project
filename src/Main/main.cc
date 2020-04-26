@@ -19,8 +19,7 @@ int main()
     keyWordVec kwVec;
     LOGTOSCREEN("==--START-OF-PROGRAM--==\n")
 
-    keyWordReader test1 = keyWordReader();
-    test1.defaultReader(kwVec);
+    keyWordReader::defaultReader(kwVec);
 
     kwVec.print(logger::getLogFile());
 
@@ -29,12 +28,8 @@ int main()
 
     std::cout << "value is " << test.getInt() << std::endl;
 
-    molReader test2 = molReader();
-    xyzReader test3 = xyzReader();
-
-    std::vector<molecule> defMol = test2.MolConfReader();
-
-    sys testSys = test3.readXyzFile(defMol);
+    std::vector<molecule> defMol  = molReader::MolConfReader();
+    sys                   testSys = xyzReader::readXyzFile(defMol);
 
     testSys.printSysPos(std::cout);
     // print out system information

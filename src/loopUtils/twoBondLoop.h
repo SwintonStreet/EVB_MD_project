@@ -11,7 +11,7 @@
 
 namespace twoBondLoop
 {
-    double calcEngForTwoBond(std::vector<twoBonds_t>&,
+    double calcEngForTwoBond(const std::vector<twoBonds_t>&,
                              std::vector<atom>&);
 
     void calcEngForSysTwoBond(sys&);

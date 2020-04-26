@@ -13,19 +13,16 @@
 class sys
 {
     const int numOfMolTypes;
-    //molecule** molecules;
     std::vector<int> numOfMol;
     std::vector<std::vector<molecule>> molecules;
     double sysEnergy;
-    // number of molecules types
-
 
     public:
 
     sys();
     sys(const sys&);
 
-    sys(const int, 
+    sys(const int,
         std::vector<int>,
         const std::vector<molecule>&);
 
@@ -35,11 +32,10 @@ class sys
     void addEnergy(double inEn)   {sysEnergy += inEn;}
     void resetAllForces();
 
+    int getNumOfMolTypes() const {return numOfMolTypes;}
 
     const std::vector<int>& getNumOfMol() const {return numOfMol;};
     const std::vector<std::vector<molecule>>& getMols() const {return molecules;};
-    int getNumOfMolTypes() const {return numOfMolTypes;}
-
 
     void printSysPos(std::ostream&);
 };

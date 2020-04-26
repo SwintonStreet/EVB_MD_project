@@ -41,7 +41,7 @@ bool keyWordVec::addKeyWord(const keyWord& inKw, bool overWrite)
 bool keyWordVec::isOk() const
 {
     bool ret = true;
-    for (auto& kw : kWM)
+    for (const auto& kw : kWM)
     {
         if (!kw.second.getOk())
         {

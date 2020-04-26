@@ -36,7 +36,7 @@ atom::atom(threeVec_t    inPos,
     setForc(inForc);
 }
 
-atom::atom(std::string inName, double inMass)
+atom::atom(const std::string& inName, const double inMass)
 {
     name = inName;
     mass = inMass;

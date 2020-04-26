@@ -9,7 +9,7 @@
  *
  */
 
-[[nodiscard]] std::vector<molecule> molReader::MolConfReader() const
+[[nodiscard]] std::vector<molecule> molReader::MolConfReader()
 {
     std::ifstream         molFile(defaultFileName);
     std::string           line;
@@ -37,10 +37,11 @@
  *
  */
 
-[[nodiscard]] molecule molReader::readSingleMol(std::ifstream& inStream) const
+[[nodiscard]] molecule molReader::readSingleMol(std::ifstream& inStream)
 {
     bool        readOk = true;
-    std::string name, line;
+    std::string name;
+    std::string line;
     std::getline(inStream, name);
     std::getline(inStream, line);
     std::string numOfAtomsErr =
@@ -67,10 +68,11 @@
     // get the 2atom bonds
     std::getline(inStream, line);
     std::istringstream iss(line);
-    std::string        identifer, numOf2ABonds;
+    std::string        identifer;
+    std::string        numOf2ABonds;
     iss >> identifer >> numOf2ABonds;
 
-    if (identifer.compare("2B") != 0)
+    if (identifer != "2B")
     {
         std::cout << "failed to find 2 atoms bond config for " << name << "\n";
         exit(EXIT_FAILURE);
@@ -106,10 +108,12 @@ bool molReader::readAtom(const std::string& inStream,
                          atom&              inAtom,
                          const std::string& molName,
                          int                atomNum,
-                         int&               inNumOfAtoms) const
+                         int&               inNumOfAtoms)
 {
     std::istringstream iss(inStream);
-    std::string        name, word, numOfAtoms;
+    std::string        name;
+    std::string        word;
+    std::string        numOfAtoms;
 
     iss >> name;
     iss >> word;
@@ -148,11 +152,15 @@ bool molReader::readAtom(const std::string& inStream,
 bool molReader::read2ABond(const std::string& inStream,
                            twoBonds_t&        inBond,
                            const std::string& molName,
-                           int                bondNum) const
+                           int                bondNum)
 {
 
     std::istringstream iss(inStream);
-    std::string        bondName, inAtom1, inAtom2, inParam1, inParam2;
+    std::string        bondName;
+    std::string        inAtom1;
+    std::string        inAtom2;
+    std::string        inParam1;
+    std::string        inParam2;
 
     std::string errText = "Argument is invalid\n"
                           "The molecule is \"" +

@@ -27,7 +27,7 @@ class keyWord
     keyWord(std::string_view,double);
     keyWord(std::string_view,bool  );
     keyWord(std::string_view,std::string_view);
-    explicit keyWord(keyWordDefault);
+    explicit keyWord(const keyWordDefault&);
     keyWord();
 
     ~keyWord() = default;

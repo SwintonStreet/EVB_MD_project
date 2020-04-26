@@ -7,8 +7,9 @@ twoAtomBonds::twoAtomBonds() {}
 std::map<std::string, twoAtomBondName> twoAtomBonds::string2AtomBond = {
     {"SPRING", SIMPLE_SPRING}, {"TMP", TYPE_2}};
 
-double
-twoAtomBonds::calc2AtomEngFor(twoBonds_t& inBond, atom& atom1, atom& atom2)
+double twoAtomBonds::calc2AtomEngFor(const twoBonds_t& inBond,
+                                     atom&             atom1,
+                                     atom&             atom2)
 {
     double energy = 0;
     switch (inBond.bondName)
@@ -26,7 +27,8 @@ twoAtomBonds::calc2AtomEngFor(twoBonds_t& inBond, atom& atom1, atom& atom2)
     return energy;
 }
 
-double twoAtomBonds::simpleSpring(atom& atomA, atom& atomB, twoBonds_t& inBond)
+double
+twoAtomBonds::simpleSpring(atom& atomA, atom& atomB, const twoBonds_t& inBond)
 {
     // do some stuff.
     double eng = 0.5 * inBond.param1 *
@@ -54,7 +56,9 @@ twoAtomBondName twoAtomBonds::get2AtomBond(std::string& inString)
     return out2AtomBondName;
 }
 
-void twoAtomBonds::updateForce(threeVec_t& inVec, atom& atomA, atom& atomB)
+void twoAtomBonds::updateForce(const threeVec_t& inVec,
+                               atom&             atomA,
+                               atom&             atomB)
 {
     atomA.setForc(atomA.getForc() + inVec);
     atomB.setForc(atomB.getForc() - inVec);

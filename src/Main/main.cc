@@ -1,20 +1,20 @@
 // main - the thing that runs!
 
-#include <iostream>
 #include <fstream>
-#include <vector>
+#include <iostream>
 #include <string>
+#include <vector>
 
-#include "molReader.h"
-#include "xyzReader.h"
 #include "evb_system.h"
-#include "mainLoop.h"
-#include "molecule.h"
 #include "keyWordReader.h"
 #include "keyWordVec.h"
 #include "logger.h"
+#include "mainLoop.h"
+#include "molReader.h"
+#include "molecule.h"
+#include "xyzReader.h"
 
-int main ()
+int main()
 {
     keyWordVec kwVec;
     LOGTOSCREEN("==--START-OF-PROGRAM--==\n")
@@ -25,7 +25,7 @@ int main ()
     kwVec.print(logger::getLogFile());
 
     keyWord test = keyWord();
-    test.setKeyWord(kwVec,"KEY1");
+    test.setKeyWord(kwVec, "KEY1");
 
     std::cout << "value is " << test.getInt() << std::endl;
 
@@ -40,8 +40,7 @@ int main ()
     // print out system information
     testSys.printSysPos(logger::getLogFile());
 
-    mainLoop mL = mainLoop(kwVec,
-                           testSys);
+    mainLoop mL = mainLoop(kwVec, testSys);
 
     mL.runLoop(logger::getLogFile());
 

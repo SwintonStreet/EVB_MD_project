@@ -6,8 +6,7 @@ bool keyWordVec::containsKeyWord(const keyWord& inKw) const
     return kWM.find(inKw.getName()) != kWM.end();
 }
 
-bool keyWordVec::containsKeyWord(const std::string& name,
-                                 keyWord&           inKw)
+bool keyWordVec::containsKeyWord(const std::string& name, keyWord& inKw)
 {
     bool ret = (kWM.find(name) != kWM.end());
     if (ret)
@@ -17,8 +16,7 @@ bool keyWordVec::containsKeyWord(const std::string& name,
     return ret;
 }
 
-bool keyWordVec::addKeyWord(const keyWord& inKw,
-                            bool          overWrite)
+bool keyWordVec::addKeyWord(const keyWord& inKw, bool overWrite)
 {
     bool ok = true;
 
@@ -45,7 +43,7 @@ bool keyWordVec::isOk() const
     bool ret = true;
     for (auto& kw : kWM)
     {
-        if (! kw.second.getOk())
+        if (!kw.second.getOk())
         {
             ret = false;
             break;
@@ -54,10 +52,7 @@ bool keyWordVec::isOk() const
     return ret;
 }
 
-unsigned int keyWordVec::size() const
-{
-    return kWM.size();
-}
+unsigned int keyWordVec::size() const { return kWM.size(); }
 
 void keyWordVec::print(std::ostream& out) const
 {
@@ -67,27 +62,27 @@ void keyWordVec::print(std::ostream& out) const
     for (const auto& kw : kWM)
     {
         const char type = kw.second.getType();
-        out << "==== Key word ===="             << '\n'
+        out << "==== Key word ====" << '\n'
             << "Name : " << kw.second.getName() << '\n';
         switch (type)
         {
-            case 'I':
-                out << "Type : Integer"                << '\n'
-                    << "Value: " << kw.second.getInt() << '\n';
-                break;
-            case 'D':
-                out << "Type : Double"                 << '\n'
-                    << "Value: " << kw.second.getDou() << '\n';
-                break;
-            case 'B':
-                out << "Type : Boolean"                << '\n'
-                    << "Value: " << kw.second.getBoo() << '\n';
-                break;
+        case 'I':
+            out << "Type : Integer" << '\n'
+                << "Value: " << kw.second.getInt() << '\n';
+            break;
+        case 'D':
+            out << "Type : Double" << '\n'
+                << "Value: " << kw.second.getDou() << '\n';
+            break;
+        case 'B':
+            out << "Type : Boolean" << '\n'
+                << "Value: " << kw.second.getBoo() << '\n';
+            break;
 
-            case 'S':
-                out << "Type : String"                 << '\n'
-                    << "Value: " << kw.second.getString() << '\n';
-                break;
+        case 'S':
+            out << "Type : String" << '\n'
+                << "Value: " << kw.second.getString() << '\n';
+            break;
         }
     }
     out << "================================" << '\n'

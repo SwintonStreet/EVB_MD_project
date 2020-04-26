@@ -86,7 +86,7 @@ $(BUILDDIR)/%.clangtidy: $(SRCDIR)/%.$(SRCEXT)
 # for clang-format
 $(BUILDDIR)/%.clangformat: $(SRCDIR)/%.$(SRCEXT)
 	@echo $<
-	$(CC) --verbose --Werror $<
+	$(CC) --verbose --Werror -i $<
 
 clean:
 	@echo "Cleaning"

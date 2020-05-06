@@ -26,7 +26,7 @@ class molecule
     molecule(std::string&             inName,
              std::vector<atom>&       inAtoms,
              std::vector<twoBonds_t>& in2Bonds);
-    molecule(): mSize{0}, mName{""} {};
+    molecule(): mSize{0}, mName{""}, isOk{true} {};
 
     // copy c'tor
     molecule(const molecule& inMol);
@@ -68,7 +68,7 @@ class molecule
         return oStream;
     }
 
-    bool operator() () {return isOk;}
+    bool operator() () const noexcept {return isOk;}
 };
 
 #endif // MOLECULE_H

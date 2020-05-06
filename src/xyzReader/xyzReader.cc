@@ -12,7 +12,6 @@ sys xyzReader::readXyzFile(std::vector<molecule>& inMolVec)
     std::cout << "Got here\n";
     // inMolVec is a vector of the defined molecules
     std::vector<int> molNums(inMolVec.size());
-    int              i                 = 0;
     int              totalNumMolecules = 0;
 
     /*
@@ -23,6 +22,7 @@ sys xyzReader::readXyzFile(std::vector<molecule>& inMolVec)
      */
     if (molFile.is_open())
     {
+        int i{0};
         while (std::getline(molFile, line))
         {
             if (line[0] == 'M')

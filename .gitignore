@@ -14,4 +14,7 @@ bin/
 *.ignore
 
 # ignore any run outputs
-run/Run
+run/Run.output
+
+# ignore cppChecks output
+cppCheck.output

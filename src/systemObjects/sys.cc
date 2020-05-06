@@ -27,10 +27,20 @@ sys::sys(const int                    inNumOfMolTypes,
 
 // copy constuctor
 sys::sys(const sys& inSys)
-    : numOfMolTypes(inSys.getNumOfMolTypes()), sysEnergy(0)
+    : numOfMolTypes(inSys.getNumOfMolTypes()),
+      numOfMol{inSys.getNumOfMol()},
+      molecules{inSys.getMols()},
+      sysEnergy(0)
 {
-    numOfMol  = inSys.getNumOfMol();
-    molecules = inSys.getMols();
+}
+
+// move constuctor
+sys::sys(sys&& inSys)
+    : numOfMolTypes(inSys.getNumOfMolTypes()),
+      numOfMol{inSys.getNumOfMol()},
+      molecules{inSys.getMols()},
+      sysEnergy(0)
+{
 }
 
 void sys::resetAllForces()
@@ -44,7 +54,7 @@ void sys::resetAllForces()
     }
 }
 
-void sys::printSysPos(std::ostream& inStream)
+void sys::printSysPos(std::ostream& inStream) const noexcept
 {
     for (const auto& molVec : molecules)
     {

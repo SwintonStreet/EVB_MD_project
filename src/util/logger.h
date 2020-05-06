@@ -25,7 +25,7 @@ namespace logger
 
     std::ofstream& getLogFile()
     {
-        static std::ofstream logFile("Run2");
+        static std::ofstream logFile("Run.output");
         return logFile;
     }
 

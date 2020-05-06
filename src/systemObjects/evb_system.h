@@ -15,9 +15,9 @@ class evb_system
 
     public:
 
-    evb_system(const int   inSize,
-               sys&        inSys,
-               std::string inName): systems{inSys},
+    evb_system(const int    inSize,
+               sys&         inSys,
+               std::string& inName): systems{inSys},
                                     size{inSize},
                                     name{inName}
     {}

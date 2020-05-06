@@ -21,6 +21,10 @@ class sys
 
     sys();
     sys(const sys&);
+    sys(sys&&);
+
+    sys operator= (const sys&) = delete;
+    sys operator= (sys&&) = delete;
 
     sys(const int,
         std::vector<int>,
@@ -35,9 +39,12 @@ class sys
     int getNumOfMolTypes() const {return numOfMolTypes;}
 
     const std::vector<int>& getNumOfMol() const {return numOfMol;};
-    const std::vector<std::vector<molecule>>& getMols() const {return molecules;};
+    const std::vector<std::vector<molecule>>& getMols() const
+    {
+        return molecules;
+    };
 
-    void printSysPos(std::ostream&);
+    void printSysPos(std::ostream&) const noexcept;
 };
 
 #endif // SYS_H

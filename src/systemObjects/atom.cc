@@ -3,9 +3,9 @@
 #include "atom.h"
 #include "cmath"
 
-atom::atom(const atom& inAtom)
+atom::atom(const atom& inAtom):
+    name{inAtom.getName()}
 {
-    name = inAtom.getName();
     mass = inAtom.getMass();
 
     setPos(inAtom.getPos());
@@ -36,13 +36,13 @@ atom::atom(threeVec_t    inPos,
     setForc(inForc);
 }
 
-atom::atom(const std::string& inName, const double inMass)
+atom::atom(const std::string& inName, const double inMass):
+    name{inName}
 {
-    name = inName;
     mass = inMass;
 }
 
-void atom::printAtom(std::ostream& inStream)
+void atom::printAtom(std::ostream& inStream) const noexcept
 {
     inStream << "===============================\n"
              << "The name of the atom is " << name << "The position is " << pos

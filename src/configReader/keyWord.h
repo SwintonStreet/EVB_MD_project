@@ -46,14 +46,13 @@ class keyWord
     bool        getDef()    const {return isDefault;};
 
     // copy constructor
-    explicit keyWord(const keyWord& kW) noexcept
+    explicit keyWord(const keyWord& kW) noexcept : name   {kW.name},
+                                                   sValue {kW.sValue}
     {
-        name      = kW.name;
         Type      = kW.Type;
         intValue  = kW.intValue;
         douValue  = kW.douValue;
         booValue  = kW.booValue;
-        sValue    = kW.sValue;
         isOk      = kW.isOk;
         isDefault = kW.isDefault;
     };

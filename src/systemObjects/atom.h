@@ -20,22 +20,22 @@ struct threeVec_t
     threeVec_t()  = default;
     ~threeVec_t() = default;
 
-    friend threeVec_t operator*(const double&    factor,
-                                const threeVec_t b)
+    friend threeVec_t operator*(const double&     factor,
+                                const threeVec_t& b)
     {
         return {factor * b.x,
                 factor * b.y,
                 factor * b.z};
     }
 
-    threeVec_t operator+(const threeVec_t b)
+    threeVec_t operator+(const threeVec_t& b) const
     {
         return {x+b.x,
                 y+b.y,
                 z+b.z};
     }
 
-    threeVec_t operator-(const threeVec_t b)
+    threeVec_t operator-(const threeVec_t& b) const
     {
         return {x-b.x,
                 y-b.y,
@@ -105,7 +105,7 @@ class atom
     void setForc(const threeVec_t& inForc) {forc.set(inForc);};
 
     // print atom information
-    void printAtom(std::ostream&);
+    void printAtom(std::ostream&) const noexcept;
 
     // gets the position,velocity,force
     threeVec_t getPos () const noexcept {return pos;};

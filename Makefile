@@ -48,6 +48,11 @@ clang-tidy: $(OBJECTS_CLANG_TIDY)
 clang-format: CC := clang-format
 clang-format: $(OBJECTS_CLANG_FORMAT)
 
+# run the cppChecker
+cppCheck:
+	@echo "Running cppCheck now"
+	./cppCheck.sh
+
 startEcho:
 	@echo "Starting compilation"
 	@echo "===================="

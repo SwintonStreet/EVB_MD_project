@@ -88,15 +88,12 @@ void keyWord::setKeyWord(keyWordVec&        kwv,
     keyWord        retKw;
     keyWordDefault kwD;
 
-    if (kwv.containsKeyWord(keyName, retKw))
-    {
-    }
-    else if (const auto& defKw = keyWordsList::getKeyWordFromList(keyName);
-             defKw)
+    if (const auto& defKw = keyWordsList::getKeyWordFromList(keyName); defKw)
     {
         retKw = keyWord(defKw.value());
     }
-    else if (mandatory)
+    else if (!kwv.containsKeyWord(keyName, retKw) &&
+             mandatory)
     {
         // if the look up is mandatory and the field hasn't
         // been found then throw an error!!!

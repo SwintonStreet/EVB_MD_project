@@ -11,9 +11,6 @@ bool keyWordReader::defaultReader(keyWordVec& kwv)
     std::string   line;
     std::string   word;
     std::string   name;
-    int           iValue;
-    double        dValue;
-    bool          bValue;
     int           lineNumber{0};
 
     auto errstr = [&lineNumber, &name]() -> std::string {
@@ -23,6 +20,10 @@ bool keyWordReader::defaultReader(keyWordVec& kwv)
 
     if (defFile.is_open())
     {
+        int    iValue;
+        double dValue;
+        bool   bValue;
+
         while (std::getline(defFile, line))
         {
             // increment the line number

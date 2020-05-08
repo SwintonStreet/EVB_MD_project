@@ -3,8 +3,7 @@
 #include "atom.h"
 #include "cmath"
 
-atom::atom(const atom& inAtom):
-    name{inAtom.getName()}
+atom::atom(const atom& inAtom) : name{inAtom.getName()}
 {
     mass = inAtom.getMass();
 
@@ -28,16 +27,15 @@ atom& atom::operator=(const atom& inAtom)
 atom::atom(threeVec_t    inPos,
            threeVec_t    inVel,
            threeVec_t    inForc,
-           std::string&& inName)
-    : name{inName}
+           std::string&& inName) :
+    name{inName}
 {
     setPos(inPos);
     setVel(inVel);
     setForc(inForc);
 }
 
-atom::atom(const std::string& inName, const double inMass):
-    name{inName}
+atom::atom(const std::string& inName, const double inMass) : name{inName}
 {
     mass = inMass;
 }

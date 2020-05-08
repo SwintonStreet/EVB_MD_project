@@ -1,5 +1,5 @@
-
 #include "mainLoop.h"
+#include "logger.h"
 
 mainLoop::mainLoop(keyWordVec& inKWV, sys& inSys) : curSys(inSys)
 {
@@ -9,6 +9,9 @@ mainLoop::mainLoop(keyWordVec& inKWV, sys& inSys) : curSys(inSys)
     // extract variables
     setInt(numOfLoop, "NUM_ITER", true);
     setDouble(timeStep, "TIME_STEP", true);
+
+    // print output
+    LOGTOSCREEN("numOfLoop: " + std::to_string(numOfLoop))
 }
 
 void mainLoop::runLoop(std::ostream& inStream)
@@ -27,8 +30,7 @@ void mainLoop::setInt(int&               inInt,
                       const std::string& inName,
                       const bool&        mandatory)
 {
-    keyWord dummy;
-    dummy.setKeyWord(kwVec, inName, mandatory);
+    keyWord dummy = keyWord::getKeyWord(kwVec, inName, mandatory);
     inInt = dummy.getInt();
 }
 
@@ -36,8 +38,7 @@ void mainLoop::setDouble(double&            inDouble,
                          const std::string& inName,
                          const bool&        mandatory)
 {
-    keyWord dummy;
-    dummy.setKeyWord(kwVec, inName, mandatory);
+    keyWord dummy = keyWord::getKeyWord(kwVec, inName, mandatory);
     inDouble = dummy.getDou();
 }
 
@@ -45,7 +46,6 @@ void mainLoop::setBool(bool&              inBool,
                        const std::string& inName,
                        const bool&        mandatory)
 {
-    keyWord dummy;
-    dummy.setKeyWord(kwVec, inName, mandatory);
+    keyWord dummy = keyWord::getKeyWord(kwVec, inName, mandatory);
     inBool = dummy.getBoo();
 }

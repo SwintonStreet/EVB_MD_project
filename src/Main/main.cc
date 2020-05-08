@@ -16,22 +16,16 @@
 
 int main()
 {
-    keyWordVec kwVec;
     LOGTOSCREEN("==--START-OF-PROGRAM--==\n")
 
+    keyWordVec kwVec;
     keyWordReader::defaultReader(kwVec);
-
-    kwVec.print(logger::getLogFile());
-
-    keyWord test = keyWord();
-    test.setKeyWord(kwVec, "KEY1");
-
-    std::cout << "value is " << test.getInt() << std::endl;
+    LOGTOSCREEN("==--VARIABLES--==\n");
+    kwVec.print(std::cout);
 
     std::vector<molecule> defMol  = molReader::MolConfReader();
     sys                   testSys = xyzReader::readXyzFile(defMol);
 
-    testSys.printSysPos(std::cout);
     // print out system information
     testSys.printSysPos(logger::getLogFile());
 

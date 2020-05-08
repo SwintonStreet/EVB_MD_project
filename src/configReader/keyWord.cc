@@ -81,15 +81,19 @@ std::string keyWord::getName() const { return name; }
 
 bool keyWord::getOk() const { return isOk; }
 
-void keyWord::setKeyWord(keyWordVec&        kwv,
-                         const std::string& keyName,
-                         bool               mandatory)
+keyWord keyWord::getKeyWord(keyWordVec&        kwv,
+                            const std::string& keyName,
+                            bool               mandatory)
 {
     keyWord        retKw;
     keyWordDefault kwD;
-
-    if (const auto& defKw = keyWordsList::getKeyWordFromList(keyName); defKw)
+    if (kwv.containsKeyWord(keyName, retKw))
     {
+    }
+    else if (const auto& defKw = keyWordsList::getKeyWordFromList(keyName);
+             defKw)
+    {
+        std::cout << "Found kew word " << keyName << '\n';
         retKw = keyWord(defKw.value());
     }
     else if (!kwv.containsKeyWord(keyName, retKw) && mandatory)
@@ -100,5 +104,5 @@ void keyWord::setKeyWord(keyWordVec&        kwv,
         exit(EXIT_FAILURE);
     }
 
-    (*this) = retKw;
+    return retKw;
 }

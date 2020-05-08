@@ -46,13 +46,14 @@ class keyWord
     bool        getDef()    const {return isDefault;};
 
     // copy constructor
-    explicit keyWord(const keyWord& kW) noexcept : name   {kW.name},
-                                                   sValue {kW.sValue}
+    keyWord(const keyWord& kW) noexcept : name   {kW.name},
+                                          sValue {kW.sValue}
     {
         Type      = kW.Type;
         intValue  = kW.intValue;
         douValue  = kW.douValue;
         booValue  = kW.booValue;
+        sValue    = kW.sValue;
         isOk      = kW.isOk;
         isDefault = kW.isDefault;
     };
@@ -75,9 +76,9 @@ class keyWord
         return *this;
     }
 
-    void setKeyWord(keyWordVec&        kwv,
-                    const std::string& keyName,
-                    bool               mandatory = false);
+    static keyWord getKeyWord(keyWordVec&        kwv,
+                              const std::string& keyName,
+                              bool               mandatory = false);
 
 };
 

@@ -18,7 +18,7 @@
 class mainLoop
 {
 
-    // List of mandatory internal 
+    // List of mandatory internal
     // variables for mainLoop
     int                  numOfLoop;
     double               timeStep;

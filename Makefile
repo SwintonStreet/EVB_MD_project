@@ -68,18 +68,12 @@ clang-format: CC := clang-format
 clang-format: $(OBJECTS_CLANG_FORMAT)
 
 # run tests
-unitTest: | startTestEcho $(SOURCES_TEST) $(RUN_TESTS)
+unitTest: startTestEcho $(SOURCES_TEST) $(RUN_TESTS)
 
 # run the cppChecker
 cppCheck:
 	@echo "Running cppCheck now"
 	./cppCheck.sh
-
-printVar:
-	@echo "Folders"
-	@echo $(INCLUDE_TEST) | tr ' ' '\n'
-	@echo "Sources"
-	@echo $(SOURCES_TEST) | tr ' ' '\n'
 
 startEcho:
 	@echo "Starting compilation"
@@ -87,7 +81,7 @@ startEcho:
 	@mkdir -p $(BUILDDIR) $(TARGETDIR)
 	@find $(RESDIR)/ -type f | xargs -I {} cp {} $(TARGETDIR)
 
-startTestEcho: |
+startTestEcho:
 	@echo "Starting test compilation\n=========================" ; \
 	 mkdir -p $(TESTSDIR)
 
@@ -117,17 +111,16 @@ $(BUILDDIR)/%.$(OBJEXT): $(SRCDIR)/%.$(SRCEXT)
      sed -e 's/^ *//' -e 's/$$/:/' >> $(BUILDDIR)/$*.$(DEPEXT)
 	@rm -f $(BUILDDIR)/$*.$(DEPEXT).tmp
 
-
 # for clang-tidy
 $(BUILDDIR)/%.clangtidy: $(SRCDIR)/%.$(SRCEXT)
 	@echo $<
-	$(CC) $< -checks=performance-*,readability-*,google-* -- $(CC_VER_FLAG) $(INCLUDE)
+	$(CC) $< -checks=performance-*,readability-*,google-* -- \
+          $(CC_VER_FLAG) $(INCLUDE)
 
 # for clang-format
 $(BUILDDIR)/%.clangformat: $(SRCDIR)/%.$(SRCEXT)
 	@echo $<
 	$(CC) --verbose --Werror -i $<
-
 
 # compiling tests
 $(SRCDIR)/%.test: $(SRCDIR)/%.$(SRCEXT)

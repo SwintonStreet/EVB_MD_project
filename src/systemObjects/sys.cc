@@ -32,9 +32,9 @@ sys::sys(const sys& inSys) :
 }
 
 // move constuctor
-sys::sys(sys&& inSys) :
+sys::sys(sys&& inSys) noexcept :
     numOfMolTypes(inSys.getNumOfMolTypes()), numOfMol{inSys.getNumOfMol()},
-    molecules{inSys.getMols()}, sysEnergy(0)
+    molecules{inSys.getMols()}, sysEnergy{0}
 {
 }
 

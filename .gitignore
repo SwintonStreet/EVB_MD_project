@@ -7,6 +7,9 @@ obj/
 # ignore all bin executables
 bin/
 
+# ignore all test executables
+tests/
+
 # ignore all vim swap files
 *.sw*
 

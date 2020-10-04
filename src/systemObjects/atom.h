@@ -70,8 +70,8 @@ class atom
     threeVec_t  pos  = { 0.0, 0.0, 0.0 };
     threeVec_t  vel  = { 0.0, 0.0, 0.0 };
     threeVec_t  forc = { 0.0, 0.0, 0.0 };
-    double      mass;
-    std::string name;
+    double      mass = 0;
+    std::string name{""};
 
     public:
 

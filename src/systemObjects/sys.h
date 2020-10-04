@@ -21,7 +21,7 @@ class sys
 
     sys();
     sys(const sys&);
-    sys(sys&&);
+    sys(sys&&) noexcept;
 
     sys operator= (const sys&) = delete;
     sys operator= (sys&&) = delete;

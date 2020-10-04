@@ -3,44 +3,33 @@
 #include "keyWordsList.h"
 #include "optional"
 
-keyWord::keyWord() { isDefault = true; }
-
 keyWord::keyWord(std::string_view inName, int inInt) :
-    name{inName}, intValue{inInt}
+    name{inName}, isOk{keyWordsList::isInKeyWordList(inName)}, isDefault{false},
+    intValue{inInt}, Type{'I'}
 {
-    isOk      = keyWordsList::isInKeyWordList(inName);
-    Type      = 'I';
-    isDefault = false;
 }
 
 keyWord::keyWord(std::string_view inName, double inDou) :
-    name{inName}, douValue{inDou}
+    name{inName}, isOk{keyWordsList::isInKeyWordList(inName)}, isDefault{false},
+    douValue{inDou}, Type{'D'}
 {
-    isOk      = keyWordsList::isInKeyWordList(inName);
-    Type      = 'D';
-    isDefault = false;
 }
 
 keyWord::keyWord(std::string_view inName, bool inBoo) :
-    name{inName}, booValue{inBoo}
+    name{inName}, isOk{keyWordsList::isInKeyWordList(inName)}, isDefault{false},
+    booValue{inBoo}, Type{'B'}
 {
-    isOk      = keyWordsList::isInKeyWordList(inName);
-    Type      = 'B';
-    isDefault = false;
 }
 
 keyWord::keyWord(std::string_view inName, std::string_view inString) :
-    name{inName}, sValue{inString}
+    name{inName}, isOk{keyWordsList::isInKeyWordList(inName)}, isDefault{false},
+    sValue{inString}, Type{'B'}
 {
-    isOk      = keyWordsList::isInKeyWordList(inName);
-    Type      = 'S';
-    isDefault = false;
 }
 
-keyWord::keyWord(const keyWordDefault& kwD)
+keyWord::keyWord(const keyWordDefault& kwD) :
+    name{kwD.name}, isOk{keyWordsList::isInKeyWordList(name)}, isDefault{true}
 {
-    name      = kwD.name;
-    isDefault = true;
     switch (kwD.kwType)
     {
     case BOOL:
@@ -59,8 +48,6 @@ keyWord::keyWord(const keyWordDefault& kwD)
         isDefault = false;
         break;
     }
-
-    isOk = keyWordsList::isInKeyWordList(name);
 }
 
 void keyWord::setValue(int inInt) { intValue = inInt; }
@@ -81,9 +68,8 @@ std::string keyWord::getName() const { return name; }
 
 bool keyWord::getOk() const { return isOk; }
 
-keyWord keyWord::getKeyWord(keyWordVec&        kwv,
-                            const std::string& keyName,
-                            bool               mandatory)
+keyWord
+keyWord::getKeyWord(keyWordVec& kwv, const std::string& keyName, bool mandatory)
 {
     keyWord        retKw;
     keyWordDefault kwD;

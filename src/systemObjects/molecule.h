@@ -26,7 +26,13 @@ class molecule
     molecule(std::string&             inName,
              std::vector<atom>&       inAtoms,
              std::vector<twoBonds_t>& in2Bonds);
-    molecule(): mSize{0}, mName{""}, isOk{true} {};
+    molecule(): mSize    {0},
+                mName    {""},
+                atoms    {},
+                twoBonds {},
+                isOk     {true}
+    {
+    };
 
     // copy c'tor
     molecule(const molecule& inMol);

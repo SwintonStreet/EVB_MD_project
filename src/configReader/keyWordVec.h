@@ -13,7 +13,9 @@ class keyWordVec
     private:
         std::map<std::string,keyWord> kWM;
     public:
-        keyWordVec() = default;
+        keyWordVec(): kWM{}
+        {
+        }
         ~keyWordVec() = default;
 
         keyWordVec&& operator=(keyWordVec&& inKWM) = delete;

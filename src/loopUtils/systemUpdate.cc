@@ -27,11 +27,11 @@ void systemUpdate::sysUpdate(sys& inSys, double timeStep)
 
 void systemUpdate::posUpdate(sys& inSys, double timeStep)
 {
-    for (auto molVec : inSys.getMols())
+    for (auto& molVec : inSys.getMols())
     {
-        for (auto mol : molVec)
+        for (auto& mol : molVec)
         {
-            for (auto atom : mol.getAtoms())
+            for (auto& atom : mol.getAtoms())
             {
                 atom.setPos(atom.getPos() + timeStep * atom.getVel() +
                             ((timeStep * timeStep) / (2 * atom.getMass())) *
@@ -43,11 +43,11 @@ void systemUpdate::posUpdate(sys& inSys, double timeStep)
 
 void systemUpdate::velUpdate(sys& inSys, double timeStep)
 {
-    for (auto molVec : inSys.getMols())
+    for (auto& molVec : inSys.getMols())
     {
-        for (auto mol : molVec)
+        for (auto& mol : molVec)
         {
-            for (auto atom : mol.getAtoms())
+            for (auto& atom : mol.getAtoms())
             {
                 atom.setVel(atom.getVel() +
                             (timeStep / (2 * atom.getMass())) * atom.getForc());

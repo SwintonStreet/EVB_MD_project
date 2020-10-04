@@ -23,7 +23,7 @@ class mainLoop
     int                  numOfLoop;
     double               timeStep;
     sys                  curSys;
-    keyWordVec           kwVec;
+    keyWordVec           kwVec{};
 
     public:
 

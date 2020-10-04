@@ -25,11 +25,11 @@ void forceUpdate::forcUpdate(sys& inSys)
 
 void forceUpdate::resetForce(sys& inSys)
 {
-    for (auto molVec : inSys.getMols())
+    for (auto& molVec : inSys.getMols())
     {
-        for (auto mol : molVec)
+        for (auto& mol : molVec)
         {
-            for (auto atom : mol.getAtoms())
+            for (auto& atom : mol.getAtoms())
             {
                 atom.setForc({0, 0, 0});
             }

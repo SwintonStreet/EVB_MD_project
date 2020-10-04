@@ -12,14 +12,14 @@ struct keyWordDefault;
 
 class keyWord
 {
-    std::string name;
-    bool        isOk;
-    bool        isDefault;
-    int         intValue;
-    double      douValue;
-    bool        booValue;
-    std::string sValue;
-    char        Type;
+    std::string name      {""};
+    bool        isOk      {true};
+    bool        isDefault {true};
+    int         intValue  {0};
+    double      douValue  {0};
+    bool        booValue  {true};
+    std::string sValue    {""};
+    char        Type      {'?'};
 
     public:
 
@@ -28,8 +28,8 @@ class keyWord
     keyWord(std::string_view,bool  );
     keyWord(std::string_view,std::string_view);
     explicit keyWord(const keyWordDefault&);
-    keyWord();
 
+    keyWord()  = default;
     ~keyWord() = default;
 
     void setValue(int);
@@ -46,16 +46,15 @@ class keyWord
     bool        getDef()    const {return isDefault;};
 
     // copy constructor
-    keyWord(const keyWord& kW) noexcept : name   {kW.name},
-                                          sValue {kW.sValue}
+    keyWord(const keyWord& kW) noexcept : name      {kW.name},
+                                          isOk      {kW.isOk},
+                                          isDefault {kW.isDefault},
+                                          intValue  {kW.intValue},
+                                          douValue  {kW.douValue},
+                                          booValue  {kW.booValue},
+                                          sValue    {kW.sValue},
+                                          Type      {kW.Type}
     {
-        Type      = kW.Type;
-        intValue  = kW.intValue;
-        douValue  = kW.douValue;
-        booValue  = kW.booValue;
-        sValue    = kW.sValue;
-        isOk      = kW.isOk;
-        isDefault = kW.isDefault;
     };
 
     // copy assignment operator

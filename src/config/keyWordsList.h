@@ -11,9 +11,6 @@ enum keyWordType {BOOL, DOUBLE, INT, STRING};
 
 struct keyWordDefault
 {
-    keyWordDefault() = default;
-    ~keyWordDefault() = default;
-
     std::string name;
     keyWordType kwType;
     bool        boolValue;
@@ -86,14 +83,26 @@ struct keyWordDefault
     /**
      * Copy operator
      */
-    keyWordDefault (const keyWordDefault& rhs)
+    keyWordDefault (const keyWordDefault& rhs):
+        name        {rhs.name},
+        kwType      {rhs.kwType},
+        boolValue   {rhs.boolValue},
+        doubleValue {rhs.doubleValue},
+        stringValue {rhs.stringValue},
+        intValue    {rhs.intValue}
     {
-        name        = rhs.name;
-        kwType      = rhs.kwType;
-        boolValue   = rhs.boolValue;
-        intValue    = rhs.intValue;
-        doubleValue = rhs.doubleValue;
     }
+
+    keyWordDefault (): name        {},
+                       kwType      {},
+                       boolValue   {},
+                       doubleValue {},
+                       stringValue {},
+                       intValue    {}
+    {
+    }
+    ~keyWordDefault() = default;
+
 };
 
 namespace keyWordsList

@@ -1,7 +1,8 @@
 #include "mainLoop.h"
 #include "logger.h"
 
-mainLoop::mainLoop(keyWordVec& inKWV, sys& inSys) : curSys(inSys)
+mainLoop::mainLoop(keyWordVec& inKWV, sys& inSys) :
+    numOfLoop{0}, timeStep{1}, curSys(inSys)
 {
     // set up keyWords vector
     kwVec = inKWV;
@@ -31,7 +32,7 @@ void mainLoop::setInt(int&               inInt,
                       const bool&        mandatory)
 {
     keyWord dummy = keyWord::getKeyWord(kwVec, inName, mandatory);
-    inInt = dummy.getInt();
+    inInt         = dummy.getInt();
 }
 
 void mainLoop::setDouble(double&            inDouble,
@@ -39,7 +40,7 @@ void mainLoop::setDouble(double&            inDouble,
                          const bool&        mandatory)
 {
     keyWord dummy = keyWord::getKeyWord(kwVec, inName, mandatory);
-    inDouble = dummy.getDou();
+    inDouble      = dummy.getDou();
 }
 
 void mainLoop::setBool(bool&              inBool,
@@ -47,5 +48,5 @@ void mainLoop::setBool(bool&              inBool,
                        const bool&        mandatory)
 {
     keyWord dummy = keyWord::getKeyWord(kwVec, inName, mandatory);
-    inBool = dummy.getBoo();
+    inBool        = dummy.getBoo();
 }

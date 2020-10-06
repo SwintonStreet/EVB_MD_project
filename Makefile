@@ -1,59 +1,36 @@
-CC:=g++
-CC_VER_FLAG=-std=c++17
-CFLAGS=-Werror                \
-       -Wall                  \
-       -Wextra                \
-       -Wshadow               \
-       -Wreorder              \
-       -Wpedantic             \
-       -Wimplicit-fallthrough \
-       -Wempty-body           \
-       -Wwrite-strings        \
-       -Wno-parentheses       \
-       -Warray-bounds         \
-       -Weffc++               \
-       $(CC_VER_FLAG)
-CTESTFLAGS=-pthread
-LDFLAGS=
+include makefile.include
 
-TARGET     := EVB_MD
-DEPEXT     := d
-OBJEXT     := o
-SRCEXT     := cc
-SRCDIR     := src
-BUILDDIR   := obj
-RESDIR     := res
-TARGETDIR  := bin
-TESTSDIR   := tests
-EXECUTABLE = $(TARGETDIR)/$(TARGET)
-
-# To have multiple file locations you need to give the path to these
-INCLUDE=$(patsubst %,-I./%,$(shell find $(SRCDIR) -mindepth 1 \
-                                                  -type d     \
-                                                  -not -name '*test*'))
-INCLUDE_TEST=$(patsubst %,-I./%,$(shell find $(SRCDIR) -mindepth 1 -type d ))
-SOURCES := $(shell find $(SRCDIR) -name "*$(SRCEXT)" | grep -v 'test' | sort)
-SOURCES_TEST := $(shell find $(SRCDIR) -name "*$(SRCEXT)" | grep 'test' | \
-                        sort | sed 's/\.cc/\.test/g')
-RUN_TESTS := $(SOURCES_TEST:.test=.runTest)
-OBJECTS=$(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.$(OBJEXT)))
-OBJECTS_CLANG_TIDY=$(shell echo $(OBJECTS) | \
-                           sed 's/\.o\(\s\?\)/.clangtidy\1/g' )
-OBJECTS_CLANG_FORMAT=$(shell echo $(OBJECTS) | \
-                             sed 's/\.o\(\s\?\)/.clangformat\1/g' )
-
-# test compliation options
-TEST_EXTRA_FLAGS = /usr/lib/libgtest.a -lm
+.DELETE_ON_ERROR:
+.NOTPARALLEL:
+.PHONY: all           \
+        $(EXECUTABLE) \
+        clang         \
+        debug         \
+        clang-tidy    \
+        clang-format  \
+        unitTest      \
+        compileTests  \
+        cppCheck      \
+        clean         \
+        cleaner
 
 default: all
 
-all: startEcho $(EXECUTABLE)
+all:
+	@echo "Starting compilation"
+	@echo "===================="
+	@mkdir -p $(BUILDDIR) $(TARGETDIR)
+	@find $(RESDIR)/ -type f | xargs -I {} cp {} $(TARGETDIR)
+	$(MAKE) -f makefile.parallel objects
+	@echo ""
+	@echo "Objects done, now linking the program"
+	@echo "====================================="
+	$(CC) $(LDFLAGS) $(CFLAGS) $(OBJECTS) -o $(EXECUTABLE)
+	@echo "Compulation finished!"
 
 # add the debug options!
 debug: CFLAGS += -g
 debug: all
-
-.DELETE_ON_ERROR:
 
 # build with clang
 clang: CC := clang++
@@ -61,76 +38,34 @@ clang: all
 
 # build with clang-tidy
 clang-tidy: CC := clang-tidy
-clang-tidy: $(OBJECTS_CLANG_TIDY)
+clang-tidy:
+	$(MAKE) -f makefile.parallel clang-tidy
 
 # build with clang-format
 clang-format: CC := clang-format
-clang-format: $(OBJECTS_CLANG_FORMAT)
+clang-format:
+	$(MAKE) -f makefile.parallel clang-format
 
-# run tests
-unitTest: startTestEcho $(SOURCES_TEST) $(RUN_TESTS)
+# compile and run tests
+unitTest: compileTests $(RUN_TESTS)
+
+# compile tests
+compileTests:
+	@echo "Starting test compilation"
+	@echo "========================="
+	$(MAKE) -f makefile.parallel tests
+	@echo "Running tests"
+	@echo "============="
 
 # run the cppChecker
 cppCheck:
 	@echo "Running cppCheck now"
 	./cppCheck.sh
 
-startEcho:
-	@echo "Starting compilation"
-	@echo "===================="
-	@mkdir -p $(BUILDDIR) $(TARGETDIR)
-	@find $(RESDIR)/ -type f | xargs -I {} cp {} $(TARGETDIR)
-
-startTestEcho:
-	@echo "Starting test compilation\n=========================" ; \
-	 mkdir -p $(TESTSDIR)
-
-objectsDone:
-	@echo ""
-	@echo "Objects done, now for the program!"
-	@echo "=================================="
-
-$(EXECUTABLE): $(OBJECTS) objectsDone
-	$(CC) $(LDFLAGS) $(CFLAGS) $(OBJECTS) -o $(EXECUTABLE)
-	@echo "Compulation finished!"
-
-#Pull in dependency info for *existing* .o files
--include $(OBJECTS:.$(OBJEXT)=.$(DEPEXT))
-
-# needs hard tab :/ use <C-V><Tab> in insert mode
-$(BUILDDIR)/%.$(OBJEXT): $(SRCDIR)/%.$(SRCEXT)
-	@echo "Compiling $<"
-	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) $(INCLUDE)  -c $< -o $@
-	@$(CC) $(CFLAGS) $(INCLUDE) -MM $(SRCDIR)/$*.$(SRCEXT) \
-           > $(BUILDDIR)/$*.$(DEPEXT)
-	@cp -f $(BUILDDIR)/$*.$(DEPEXT) $(BUILDDIR)/$*.$(DEPEXT).tmp
-	@sed -e 's|.*:|$(BUILDDIR)/$*.$(OBJEXT):|' < $(BUILDDIR)/$*.$(DEPEXT).tmp \
-         > $(BUILDDIR)/$*.$(DEPEXT)
-	@sed -e 's/.*://' -e 's/\\$$//' < $(BUILDDIR)/$*.$(DEPEXT).tmp | fmt -1 | \
-     sed -e 's/^ *//' -e 's/$$/:/' >> $(BUILDDIR)/$*.$(DEPEXT)
-	@rm -f $(BUILDDIR)/$*.$(DEPEXT).tmp
-
-# for clang-tidy
-$(BUILDDIR)/%.clangtidy: $(SRCDIR)/%.$(SRCEXT)
-	@echo $<
-	$(CC) $< -checks=performance-*,readability-*,google-* -- \
-          $(CC_VER_FLAG) $(INCLUDE)
-
-# for clang-format
-$(BUILDDIR)/%.clangformat: $(SRCDIR)/%.$(SRCEXT)
-	@echo $<
-	$(CC) --verbose --Werror -i $<
-
-# compiling tests
-$(SRCDIR)/%.test: $(SRCDIR)/%.$(SRCEXT)
-	$(CC) $(CFLAGS) $(CTESTFLAGS) $(INCLUDE_TEST) $< $(TEST_EXTRA_FLAGS) \
-          -o $(TESTSDIR)/$(notdir $@)
-
 # run tests
-$(SRCDIR)/%.runTest: $(SRCDIR)/%.test
-	$(TESTSDIR)/$(notdir $<)
-	@rm $(TESTSDIR)/$(notdir $<)
+%.test:
+	$(TESTSDIR)/$@
+	@rm $(TESTSDIR)/$@
 
 clean:
 	@echo "Cleaning"
@@ -139,6 +74,9 @@ clean:
 cleaner: clean
 	@echo "Further cleaning"
 	@$(RM) -rf $(TARGETDIR)
+
+# export all variables set at the top layer
+export
 
 # Some notes about makefiles
 # $@ left side of the :

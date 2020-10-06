@@ -1,0 +1,47 @@
+#pulls in variables through parent export
+
+#Pull in dependency info for *existing* .o files
+-include $(OBJECTS:.$(OBJEXT)=.$(DEPEXT))
+
+# builds objects
+objects: $(OBJECTS)
+
+# needs hard tab :/ use <C-V><Tab> in insert mode
+$(BUILDDIR)/%.$(OBJEXT): $(SRCDIR)/%.$(SRCEXT)
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) $(INCLUDE)  -c $< -o $@
+	@$(CC) $(CFLAGS) $(INCLUDE) -MM $(SRCDIR)/$*.$(SRCEXT) \
+           > $(BUILDDIR)/$*.$(DEPEXT)
+	@cp -f $(BUILDDIR)/$*.$(DEPEXT) $(BUILDDIR)/$*.$(DEPEXT).tmp
+	@sed -e 's|.*:|$(BUILDDIR)/$*.$(OBJEXT):|' < $(BUILDDIR)/$*.$(DEPEXT).tmp \
+         > $(BUILDDIR)/$*.$(DEPEXT)
+	@sed -e 's/.*://' -e 's/\\$$//' < $(BUILDDIR)/$*.$(DEPEXT).tmp | fmt -1 | \
+     sed -e 's/^ *//' -e 's/$$/:/' >> $(BUILDDIR)/$*.$(DEPEXT)
+	@rm -f $(BUILDDIR)/$*.$(DEPEXT).tmp
+
+# test compliation hook
+tests: $(SOURCES_TEST)
+
+# compiling tests
+$(SRCDIR)/%.test: $(SRCDIR)/%.$(SRCEXT)
+	$(CC) $(CFLAGS) $(CTESTFLAGS) $(INCLUDE_TEST) $< $(TEST_EXTRA_FLAGS) \
+          -o $(TESTSDIR)/$(notdir $@)
+
+# clang-tidy hook
+clang-tidy: $(OBJECTS_CLANG_TIDY)
+
+# for clang-tidy
+$(BUILDDIR)/%.clangtidy: $(SRCDIR)/%.$(SRCEXT)
+	@echo $<
+	$(CC) $< -checks=performance-*,readability-*,google-* -- \
+          $(CC_VER_FLAG) $(INCLUDE)
+
+# clang-tidy hook
+clang-format: $(OBJECTS_CLANG_FORMAT)
+
+# for clang-format
+$(BUILDDIR)/%.clangformat: $(SRCDIR)/%.$(SRCEXT)
+	@echo $<
+	$(CC) --verbose --Werror -i $<
+
+# DO NOT DELETE THIS LINE

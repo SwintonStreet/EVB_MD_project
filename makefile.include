@@ -1,0 +1,47 @@
+CC:=g++
+CC_VER_FLAG=-std=c++17
+CFLAGS=-Werror                \
+       -Wall                  \
+       -Wextra                \
+       -Wshadow               \
+       -Wreorder              \
+       -Wpedantic             \
+       -Wimplicit-fallthrough \
+       -Wempty-body           \
+       -Wwrite-strings        \
+       -Wno-parentheses       \
+       -Warray-bounds         \
+       -Weffc++               \
+       $(CC_VER_FLAG)
+CTESTFLAGS=-pthread
+LDFLAGS=
+
+TARGET     := EVB_MD
+DEPEXT     := d
+OBJEXT     := o
+SRCEXT     := cc
+SRCDIR     := src
+BUILDDIR   := obj
+RESDIR     := res
+TARGETDIR  := bin
+TESTSDIR   := tests
+EXECUTABLE := $(TARGETDIR)/$(TARGET)
+MAKE       := make
+
+# To have multiple file locations you need to give the path to these
+INCLUDE=$(patsubst %,-I./%,$(shell find $(SRCDIR) -mindepth 1 \
+                                                  -type d     \
+                                                  -not -name '*test*'))
+INCLUDE_TEST=$(patsubst %,-I./%,$(shell find $(SRCDIR) -mindepth 1 -type d ))
+SOURCES := $(shell find $(SRCDIR) -name "*$(SRCEXT)" | grep -v 'test' | sort)
+SOURCES_TEST := $(shell find $(SRCDIR) -name "*$(SRCEXT)" | grep 'test' | \
+                        sort | sed 's/\.cc/\.test/g')
+RUN_TESTS := $(shell echo $(SOURCES_TEST) | xargs -n 1 basename)
+OBJECTS=$(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.$(OBJEXT)))
+OBJECTS_CLANG_TIDY=$(shell echo $(OBJECTS) | \
+                           sed 's/\.o\(\s\?\)/.clangtidy\1/g' )
+OBJECTS_CLANG_FORMAT=$(shell echo $(OBJECTS) | \
+                             sed 's/\.o\(\s\?\)/.clangformat\1/g' )
+
+# test compliation options
+TEST_EXTRA_FLAGS = /usr/lib/libgtest.a -lm

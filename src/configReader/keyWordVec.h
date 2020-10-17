@@ -19,12 +19,16 @@ class keyWordVec
         ~keyWordVec() = default;
 
         keyWordVec&& operator=(keyWordVec&& inKWM) = delete;
-        keyWordVec(keyWordVec&) = delete;
+        keyWordVec(const keyWordVec& inKWV): kWM(inKWV.kWM)
+        {
+            std::cout << "coping keywordvec now";
+            print(std::cout);
+        };
         keyWordVec(keyWordVec&&) = delete;
-        keyWordVec& operator=(keyWordVec& inKWV)
+        keyWordVec& operator=(const keyWordVec& inKWV)
         {
             kWM = inKWV.kWM;
-            std::cout << "coping keywordvec now";
+            std::cout << "coping assignment keywordvec now";
             print(std::cout);
             return *this;
         }

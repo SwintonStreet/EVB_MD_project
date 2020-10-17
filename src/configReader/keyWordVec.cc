@@ -1,5 +1,6 @@
 #include "keyWordVec.h"
 #include "keyWord.h"
+#include <algorithm>
 
 bool keyWordVec::containsKeyWord(const keyWord& inKw) const
 {
@@ -40,16 +41,9 @@ bool keyWordVec::addKeyWord(const keyWord& inKw, bool overWrite)
 
 bool keyWordVec::isOk() const
 {
-    bool ret = true;
-    for (const auto& kw : kWM)
-    {
-        if (!kw.second.getOk())
-        {
-            ret = false;
-            break;
-        }
-    }
-    return ret;
+    return std::any_of(kWM.begin(), kWM.end(), [](const auto& kw) {
+        return kw.second.getOk();
+    });
 }
 
 unsigned int keyWordVec::size() const { return kWM.size(); }

@@ -1,12 +1,9 @@
 #include "mainLoop.h"
 #include "logger.h"
 
-mainLoop::mainLoop(keyWordVec& inKWV, sys& inSys) :
-    numOfLoop{0}, timeStep{1}, curSys(inSys)
+mainLoop::mainLoop(const keyWordVec& inKWV, const sys& inSys) :
+    numOfLoop{0}, timeStep{1}, curSys(inSys), kwVec{inKWV}
 {
-    // set up keyWords vector
-    kwVec = inKWV;
-
     // extract variables
     setInt(numOfLoop, "NUM_ITER", true);
     setDouble(timeStep, "TIME_STEP", true);

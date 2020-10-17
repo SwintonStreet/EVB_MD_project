@@ -24,10 +24,10 @@ atom& atom::operator=(const atom& inAtom)
     return *this;
 }
 
-atom::atom(threeVec_t    inPos,
-           threeVec_t    inVel,
-           threeVec_t    inForc,
-           std::string&& inName) :
+atom::atom(const threeVec_t& inPos,
+           const threeVec_t& inVel,
+           const threeVec_t& inForc,
+           std::string&&     inName) :
     name{inName}
 {
     setPos(inPos);

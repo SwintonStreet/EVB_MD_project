@@ -14,7 +14,6 @@
 #include "systemUpdate.h"
 #include "systemUpdate.h"
 
-
 class mainLoop
 {
 
@@ -28,8 +27,8 @@ class mainLoop
     public:
 
     // constructor
-    mainLoop(keyWordVec& inKWV,
-             sys&        inSys);
+    mainLoop(const keyWordVec& inKWV,
+             const sys&        inSys);
 
     // sets double value
     void setDouble(double&,
@@ -45,7 +44,6 @@ class mainLoop
     void setBool(bool&,
                  const std::string&,
                  const bool&);
-
 
     void runLoop(std::ostream& = std::cout);
 };

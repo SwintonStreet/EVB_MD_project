@@ -95,7 +95,10 @@ class atom
     // Velocity vector
     // force vector
     // Name
-    atom( threeVec_t, threeVec_t, threeVec_t, std::string&& );
+    atom( const threeVec_t&,
+          const threeVec_t&,
+          const threeVec_t&,
+          std::string&& );
 
     atom(const std::string&,const double);
 

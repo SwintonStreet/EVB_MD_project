@@ -1,4 +1,5 @@
 #include "xyzReader.h"
+#include "logger.h"
 
 sys xyzReader::readXyzFile(std::vector<molecule>& inMolVec)
 {
@@ -9,7 +10,6 @@ sys xyzReader::readXyzFile(std::vector<molecule>& inMolVec)
     std::string   numOfMols;
     std::string   numErr;
 
-    std::cout << "Got here\n";
     // inMolVec is a vector of the defined molecules
     std::vector<int> molNums(inMolVec.size());
     int              totalNumMolecules = 0;
@@ -37,9 +37,6 @@ sys xyzReader::readXyzFile(std::vector<molecule>& inMolVec)
             }
         }
     }
-
-    std::cout << "The total number of molecules is " << totalNumMolecules
-              << "\n";
 
     // set up the system
     sys tmp(inMolVec.size(), molNums, inMolVec);
@@ -75,7 +72,7 @@ sys xyzReader::readXyzFile(std::vector<molecule>& inMolVec)
             // make sure there aren't to many atoms!
             if (j[0] >= static_cast<int>(inMols.size()))
             {
-                std::cout << "To many atoms in the XYZ file";
+                LOGTOSCREEN("To many atoms in the XYZ file");
                 exit(EXIT_FAILURE);
             }
 
@@ -106,9 +103,7 @@ sys xyzReader::readXyzFile(std::vector<molecule>& inMolVec)
     }
 
     // print out system information
-    std::cout << "==========\n==========\n";
-    tmp.printSysPos(std::cout);
-    std::cout << "==========\n==========\n";
+    logger::logFile << tmp;
 
     return tmp;
 }
@@ -116,7 +111,6 @@ sys xyzReader::readXyzFile(std::vector<molecule>& inMolVec)
 void xyzReader::readAtom(const std::string& inLine, atom& inAtom, int k)
 {
     std::istringstream iss(inLine);
-    std::cout << inLine << "\n";
     std::string x;
     std::string y;
     std::string z;

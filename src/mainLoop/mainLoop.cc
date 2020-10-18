@@ -2,7 +2,7 @@
 #include "logger.h"
 
 mainLoop::mainLoop(const keyWordVec& inKWV, const sys& inSys) :
-    numOfLoop{0}, timeStep{1}, curSys(inSys), kwVec{inKWV}
+    numOfLoop{0}, timeStep{1}, curSys(inSys), kwVec{inKWV}, iteration{0}
 {
     // extract variables
     setInt(numOfLoop, "NUM_ITER", true);
@@ -12,15 +12,15 @@ mainLoop::mainLoop(const keyWordVec& inKWV, const sys& inSys) :
     LOGTOSCREEN("numOfLoop: " + std::to_string(numOfLoop))
 }
 
-void mainLoop::runLoop(std::ostream& inStream)
+void mainLoop::runLoop()
 {
-    for (int i = 0; i <= numOfLoop; i++)
+    for (; iteration <= numOfLoop; ++iteration)
     {
         // update energy and forces
         systemUpdate::sysUpdate(curSys, timeStep);
 
-        curSys.printSysPos(inStream);
-        inStream << "-- " << i << "\n";
+        // print system information
+        logger::logFile << *this;
     }
 }
 

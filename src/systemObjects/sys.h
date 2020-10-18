@@ -44,7 +44,17 @@ class sys
         return molecules;
     };
 
-    void printSysPos(std::ostream&) const noexcept;
+    friend std::ostream& operator<<(std::ostream& os, const sys& s)
+    {
+        for (const auto& molVec : s.molecules)
+        {
+            for (const auto& mol : molVec)
+            {
+                os << mol;
+            }
+        }
+        return os;
+    }
 };
 
 #endif // SYS_H

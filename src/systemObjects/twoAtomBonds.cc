@@ -1,5 +1,6 @@
 
 #include "twoAtomBonds.h"
+#include "logger.h"
 
 twoAtomBonds::twoAtomBonds() {}
 
@@ -21,8 +22,8 @@ double twoAtomBonds::calc2AtomEngFor(const twoBonds_t& inBond,
     case TYPE_2:
         break;
     default:
-        std::cout << "Error found in twoAtomBonds class\n"
-                  << "Unknown bond!!\n";
+        LOGTOSCREEN("Error found in twoAtomBonds class\n"
+                    "Unknown bond!!\n");
         exit(EXIT_FAILURE);
     }
     return energy;
@@ -49,9 +50,9 @@ twoAtomBondName twoAtomBonds::get2AtomBond(std::string& inString)
     }
     else
     {
-        std::cout << "Error in twoAtomBonds\n"
-                  << "Failed to find 2 atom bond named " << inString
-                  << "in map\n";
+        LOGTOSCREEN("Error in twoAtomBonds\n"
+                    "Failed to find 2 atom bond named " + inString +
+                    "in map\n");
         exit(EXIT_FAILURE);
     }
     return out2AtomBondName;

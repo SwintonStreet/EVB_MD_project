@@ -1,5 +1,6 @@
 #include "keyWordVec.h"
 #include "keyWord.h"
+#include "logger.h"
 #include <algorithm>
 
 bool keyWordVec::containsKeyWord(const keyWord& inKw) const
@@ -48,38 +49,40 @@ bool keyWordVec::isOk() const
 
 unsigned int keyWordVec::size() const { return kWM.size(); }
 
-void keyWordVec::print(std::ostream& out) const
+void keyWordVec::print() const
 {
-    out << "================================" << '\n'
-        << "=  printing put configuration  =" << '\n'
-        << "================================" << '\n';
+    logger::logFile << "================================\n"
+                       "=  printing put configuration  =\n"
+                       "================================\n";
     for (const auto& kw : kWM)
     {
         const char type = kw.second.getType();
-        out << "==== Key word ====" << '\n'
-            << "Name : " << kw.second.getName() << '\n';
+        logger::logFile << "==== Key word ====\n"
+                           "Name : " << kw.second.getName() << '\n';
         switch (type)
         {
         case 'I':
-            out << "Type : Integer" << '\n'
-                << "Value: " << kw.second.getInt() << '\n';
+            logger::logFile << "Type : Integer\n"
+                               "Value: " << kw.second.getInt() << '\n';
             break;
+
         case 'D':
-            out << "Type : Double" << '\n'
-                << "Value: " << kw.second.getDou() << '\n';
+            logger::logFile << "Type : Double\n"
+                               "Value: " << kw.second.getDou() << '\n';
             break;
+
         case 'B':
-            out << "Type : Boolean" << '\n'
-                << "Value: " << kw.second.getBoo() << '\n';
+            logger::logFile << "Type : Boolean\n"
+                               "Value: " << kw.second.getBoo() << '\n';
             break;
 
         case 'S':
-            out << "Type : String" << '\n'
-                << "Value: " << kw.second.getString() << '\n';
+            logger::logFile << "Type : String\n"
+                               "Value: " << kw.second.getString() << '\n';
             break;
         }
     }
-    out << "================================" << '\n'
-        << "================================" << '\n'
-        << "================================" << '\n';
+    logger::logFile << "================================\n"
+                       "================================\n"
+                       "================================\n";
 }

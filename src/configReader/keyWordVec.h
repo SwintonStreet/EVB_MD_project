@@ -12,6 +12,7 @@ class keyWordVec
 {
     private:
         std::map<std::string,keyWord> kWM;
+        constexpr static const char* className = "keyWordVec";
     public:
         keyWordVec(): kWM{}
         {
@@ -19,17 +20,11 @@ class keyWordVec
         ~keyWordVec() = default;
 
         keyWordVec&& operator=(keyWordVec&& inKWM) = delete;
-        keyWordVec(const keyWordVec& inKWV): kWM(inKWV.kWM)
-        {
-            std::cout << "coping keywordvec now";
-            print(std::cout);
-        };
+        keyWordVec(const keyWordVec& inKWV): kWM(inKWV.kWM) {};
         keyWordVec(keyWordVec&&) = delete;
         keyWordVec& operator=(const keyWordVec& inKWV)
         {
             kWM = inKWV.kWM;
-            std::cout << "coping assignment keywordvec now";
-            print(std::cout);
             return *this;
         }
 
@@ -44,7 +39,7 @@ class keyWordVec
 
         unsigned int size() const;
 
-        void print(std::ostream& out) const;
+        void print() const;
 
 };
 

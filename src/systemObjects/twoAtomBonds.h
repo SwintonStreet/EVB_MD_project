@@ -30,6 +30,7 @@ struct twoBonds_t
 
 class twoAtomBonds
 {
+    constexpr static const char* className = "twoAtomBond";
 
     public:
 

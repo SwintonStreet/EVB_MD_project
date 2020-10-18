@@ -19,10 +19,13 @@ class mainLoop
 
     // List of mandatory internal
     // variables for mainLoop
-    int                  numOfLoop;
-    double               timeStep;
-    sys                  curSys;
-    keyWordVec           kwVec{};
+    int        numOfLoop;
+    double     timeStep;
+    sys        curSys;
+    keyWordVec kwVec{};
+    int        iteration;
+
+    constexpr static const char* className = "mainLoop";
 
     public:
 
@@ -45,7 +48,17 @@ class mainLoop
                  const std::string&,
                  const bool&);
 
-    void runLoop(std::ostream& = std::cout);
+    // Run the loop
+    void runLoop();
+
+    // print out SysInformation to an ostream
+    friend std::ostream& operator<<(std::ostream& os, const mainLoop& mL)
+    {
+        os << "-- " << mL.iteration << "\n"
+           << mL.curSys;
+        return os;
+    }
+
 };
 
 

@@ -18,7 +18,8 @@ class twoAtomBonds;
 
 class molReader
 {
-    constexpr static const char* defaultFileName = "SYS_MOLECULES";
+    constexpr static const char* defaultFileName {"SYS_MOLECULES"};
+    constexpr static const char* className       {"molReader"};
 
     public:
     molReader() = default;

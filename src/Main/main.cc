@@ -14,6 +14,8 @@
 #include "molecule.h"
 #include "xyzReader.h"
 
+constexpr static const char* className = "Main";
+
 int main()
 {
     LOGTOSCREEN("==--START-OF-PROGRAM--==\n")
@@ -21,21 +23,20 @@ int main()
     keyWordVec kwVec;
     keyWordReader::defaultReader(kwVec);
     LOGTOSCREEN("==--VARIABLES--==\n");
-    kwVec.print(std::cout);
 
     std::vector<molecule> defMol  = molReader::MolConfReader();
     sys                   testSys = xyzReader::readXyzFile(defMol);
 
     // print out system information
-    testSys.printSysPos(logger::getLogFile());
+    logger::logFile << testSys;
 
     mainLoop mL = mainLoop(kwVec, testSys);
 
-    mL.runLoop(logger::getLogFile());
+    mL.runLoop();
 
     LOGTOSCREEN("==--END-OF-PROGRAM--==\n")
 
-    logger::getLogFile().close();
+    logger::logFile.close();
 
     return 0;
 }

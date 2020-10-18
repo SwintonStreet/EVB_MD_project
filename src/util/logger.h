@@ -4,8 +4,12 @@
 #define LOGTOFILE(x) logger::logToFile( className, __FUNCTION__, x);
 #endif
 
+#ifndef TEXTTOSCREEN
+#define TEXTTOSCREEN(x) logger::logToScreen(x);
+#endif
+
 #ifndef LOGTOSCREEN
-#define LOGTOSCREEN(x) logger::logToScreen(x);
+#define LOGTOSCREEN(x) logger::logToScreen( className, __FUNCTION__, x);
 #endif
 
 #ifndef LOGGER_H
@@ -17,35 +21,39 @@
 
 namespace logger
 {
+    static std::ofstream logFile("Run.output");
 
     // inline is needed here so that the global function
     // is not defined twice
-    inline void logToStream(std::ostream& o,
-                            std::string   className,
-                            std::string   funcName,
-                            std::string   text)
+    inline void logToStream(std::ostream&    o,
+                            std::string_view className,
+                            std::string_view funcName,
+                            std::string_view text)
     {
-        o << "class name:    " << className << '\n'
+        o << '\n'
+          << "class name:    " << className << '\n'
           << "function name: " << funcName  << '\n'
-          << text;
+          << text
+          << '\n';
     }
 
-    inline std::ofstream& getLogFile()
+    inline void logToFile(std::string_view className,
+                          std::string_view funcName,
+                          std::string_view text)
     {
-        static std::ofstream logFile("Run.output");
-        return logFile;
-    }
-
-    inline void logToFile(std::string className,
-                          std::string funcName,
-                          std::string text)
-    {
-        logger::logToStream(logger::getLogFile(), className, funcName, text);
+        logger::logToStream(logger::logFile, className, funcName, text);
     }
 
     inline void logToScreen(std::string text)
     {
         std::cout << text;
+    }
+
+    inline void logToScreen(std::string_view className,
+                            std::string_view funcName,
+                            std::string_view text)
+    {
+        logger::logToStream(std::cout, className, funcName, text);
     }
 }
 

@@ -10,15 +10,12 @@ sys::sys(const int                    inNumOfMolTypes,
     // this assigns the number of molecules in each molecule type
     // then the set up each molecule as a copy of the
 
-    std::cout << "No. of mol types: " << numOfMolTypes << '\n';
     for (int i = 0; i < numOfMolTypes; ++i)
     {
-        std::cout << "setting mol: " << i << '\n';
         molecules[i] = std::vector<molecule>(inNumOfMol[i]);
         numOfMol[i]  = inNumOfMol[i];
         for (int j = 0; j < inNumOfMol[i]; ++j)
         {
-            std::cout << "==1== " << j << '\n';
             molecules[i][j] = inMol[i];
         }
     }
@@ -45,17 +42,6 @@ void sys::resetAllForces()
         for (auto& mol : molvec)
         {
             mol.resetForces();
-        }
-    }
-}
-
-void sys::printSysPos(std::ostream& inStream) const noexcept
-{
-    for (const auto& molVec : molecules)
-    {
-        for (const auto& mol : molVec)
-        {
-            inStream << mol;
         }
     }
 }

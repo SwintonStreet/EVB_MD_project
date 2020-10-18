@@ -67,7 +67,5 @@ bool keyWordReader::defaultReader(keyWordVec& kwv)
         }
     }
 
-    kwv.print(std::cout);
-
     return kwv.isOk();
 }

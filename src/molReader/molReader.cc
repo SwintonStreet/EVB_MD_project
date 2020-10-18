@@ -1,6 +1,7 @@
 #include "molReader.h"
 #include "atom.h"
 #include "twoAtomBonds.h"
+#include "logger.h"
 #include <vector>
 
 /*
@@ -14,8 +15,6 @@
     std::ifstream         molFile(defaultFileName);
     std::string           line;
     std::vector<molecule> outMolecules;
-
-    std::cout << "Got here\n";
 
     if (molFile.is_open())
     {
@@ -56,7 +55,6 @@
     for (int i = 0; i < numOfAtoms && readOk; i++)
     {
         std::getline(inStream, line);
-        std::cout << line << "--" << i << '\n';
         readOk    = readAtom(line, tempAtoms[i], name, i, tempNum);
         int iTemp = i;
         for (int j = 1; j < tempNum; j++)
@@ -74,7 +72,7 @@
 
     if (identifer != "2B")
     {
-        std::cout << "failed to find 2 atoms bond config for " << name << "\n";
+        LOGTOSCREEN("failed to find 2 atoms bond config for " + name + "\n");
         exit(EXIT_FAILURE);
     }
 
@@ -88,9 +86,7 @@
     //  get the 2 Atom Bonds
     for (int i = 0; i < numOfTwoAtomBonds && readOk; i++)
     {
-        std::cout << numOfTwoAtomBonds << '\n';
         std::getline(inStream, line);
-        std::cout << line << "\n--" << i << '\n';
         readOk = read2ABond(line, temp2Bonds[i], name, i);
     }
 
@@ -119,8 +115,8 @@ bool molReader::readAtom(const std::string& inStream,
     iss >> word;
     iss >> numOfAtoms;
     double inMass;
-    std::cout << "name is " << name << "\n";
-    std::cout << "word is " << word << "\n";
+    logger::logFile << "name is " << name << "\n";
+    logger::logFile << "word is " << word << "\n";
 
     std::string errText = "Argument is invalid\n"
                           "The molecule is \"" +

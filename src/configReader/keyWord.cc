@@ -79,7 +79,6 @@ keyWord::getKeyWord(keyWordVec& kwv, const std::string& keyName, bool mandatory)
     else if (const auto& defKw = keyWordsList::getKeyWordFromList(keyName);
              defKw)
     {
-        std::cout << "Found kew word " << keyName << '\n';
         retKw = keyWord(defKw.value());
     }
     else if (!kwv.containsKeyWord(keyName, retKw) && mandatory)

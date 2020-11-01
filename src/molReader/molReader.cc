@@ -1,7 +1,7 @@
 #include "molReader.h"
 #include "atom.h"
-#include "twoAtomBonds.h"
 #include "logger.h"
+#include "twoAtomBonds.h"
 #include <vector>
 
 /*

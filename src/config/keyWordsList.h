@@ -110,6 +110,7 @@ namespace keyWordsList
     const std::vector<keyWordDefault> keyWordList =
     {
         keyWordDefault::setInt("NUM_ITER",1),
+        keyWordDefault::setInt("PRINT_EVERY",1),
         keyWordDefault::setDouble("TIME_STEP",1),
         keyWordDefault::setString("LOG_LEVEL","DEFAULT")
     };

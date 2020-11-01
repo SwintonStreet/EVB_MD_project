@@ -111,9 +111,9 @@ sys xyzReader::readXyzFile(std::vector<molecule>& inMolVec)
 void xyzReader::readAtom(const std::string& inLine, atom& inAtom, int k)
 {
     std::istringstream iss(inLine);
-    std::string x;
-    std::string y;
-    std::string z;
+    std::string        x;
+    std::string        y;
+    std::string        z;
 
     // ignore the atom name
     iss >> x;

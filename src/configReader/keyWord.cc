@@ -1,4 +1,3 @@
-
 #include "keyWord.h"
 #include "keyWordsList.h"
 #include "optional"
@@ -68,23 +67,28 @@ std::string keyWord::getName() const { return name; }
 
 bool keyWord::getOk() const { return isOk; }
 
-keyWord
-keyWord::getKeyWord(keyWordVec& kwv, const std::string& keyName, bool mandatory)
+keyWord keyWord::getKeyWord(keyWordVec&        kwv,
+                            const std::string& keyName,
+                            bool               mandatory)
 {
     keyWord        retKw;
     keyWordDefault kwD;
+
+    // first attempt to get the value from the read values
     if (kwv.containsKeyWord(keyName, retKw))
     {
     }
+    // if no value is in the config, check if we have default values and
+    // assign that
     else if (const auto& defKw = keyWordsList::getKeyWordFromList(keyName);
              defKw)
     {
         retKw = keyWord(defKw.value());
     }
+    // if the look up is mandatory and the field hasn't
+    // been found then throw an error!!!
     else if (!kwv.containsKeyWord(keyName, retKw) && mandatory)
     {
-        // if the look up is mandatory and the field hasn't
-        // been found then throw an error!!!
         std::cerr << "Failed to find mandatory field : " << keyName << '\n';
         exit(EXIT_FAILURE);
     }

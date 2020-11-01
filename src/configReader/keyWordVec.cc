@@ -58,27 +58,32 @@ void keyWordVec::print() const
     {
         const char type = kw.second.getType();
         logger::logFile << "==== Key word ====\n"
-                           "Name : " << kw.second.getName() << '\n';
+                           "Name : "
+                        << kw.second.getName() << '\n';
         switch (type)
         {
         case 'I':
             logger::logFile << "Type : Integer\n"
-                               "Value: " << kw.second.getInt() << '\n';
+                               "Value: "
+                            << kw.second.getInt() << '\n';
             break;
 
         case 'D':
             logger::logFile << "Type : Double\n"
-                               "Value: " << kw.second.getDou() << '\n';
+                               "Value: "
+                            << kw.second.getDou() << '\n';
             break;
 
         case 'B':
             logger::logFile << "Type : Boolean\n"
-                               "Value: " << kw.second.getBoo() << '\n';
+                               "Value: "
+                            << kw.second.getBoo() << '\n';
             break;
 
         case 'S':
             logger::logFile << "Type : String\n"
-                               "Value: " << kw.second.getString() << '\n';
+                               "Value: "
+                            << kw.second.getString() << '\n';
             break;
         }
     }

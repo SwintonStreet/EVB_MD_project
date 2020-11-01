@@ -11,12 +11,10 @@ class keyWord;
 class keyWordVec
 {
     private:
-        std::map<std::string,keyWord> kWM;
+        std::map<std::string,keyWord,std::less<>> kWM;
         constexpr static const char* className = "keyWordVec";
     public:
-        keyWordVec(): kWM{}
-        {
-        }
+        keyWordVec(): kWM{} {}
         ~keyWordVec() = default;
 
         keyWordVec&& operator=(keyWordVec&& inKWM) = delete;

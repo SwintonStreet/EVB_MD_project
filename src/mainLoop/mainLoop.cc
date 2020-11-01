@@ -2,10 +2,11 @@
 #include "logger.h"
 
 mainLoop::mainLoop(const keyWordVec& inKWV, const sys& inSys) :
-    numOfLoop{0}, timeStep{1}, curSys(inSys), kwVec{inKWV}, iteration{0}
+    curSys(inSys), kwVec{inKWV}
 {
     // extract variables
     setInt(numOfLoop, "NUM_ITER", true);
+    setInt(printEvery, "PRINT_EVERY", true);
     setDouble(timeStep, "TIME_STEP", true);
 
     // print output
@@ -20,7 +21,10 @@ void mainLoop::runLoop()
         systemUpdate::sysUpdate(curSys, timeStep);
 
         // print system information
-        logger::logFile << *this;
+        if ((iteration % printEvery) == 0)
+        {
+            logger::logFile << *this;
+        }
     }
 }
 

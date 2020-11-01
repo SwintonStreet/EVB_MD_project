@@ -10,6 +10,5 @@ alias mc="cd $makeRoute && wait && make clean && wait && cd -"
 alias mcc="cd $makeRoute && wait && make cleaner && wait && cd -"
 alias mm="mc && wait && mk"
 
-alias R="cd $makeRoute/bin && ./main && wait && cd -"
-alias B="cd $makeRoute/bin"
+alias R="cd $makeRoute/run && ./RunSimulation && wait && cd -"
 alias C="cd $makeRoute"

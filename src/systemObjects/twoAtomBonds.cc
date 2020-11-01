@@ -51,8 +51,8 @@ twoAtomBondName twoAtomBonds::get2AtomBond(std::string& inString)
     else
     {
         LOGTOSCREEN("Error in twoAtomBonds\n"
-                    "Failed to find 2 atom bond named " + inString +
-                    "in map\n");
+                    "Failed to find 2 atom bond named " +
+                    inString + "in map\n");
         exit(EXIT_FAILURE);
     }
     return out2AtomBondName;

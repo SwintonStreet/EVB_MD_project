@@ -51,43 +51,43 @@ unsigned int keyWordVec::size() const { return kWM.size(); }
 
 void keyWordVec::print() const
 {
-    logger::logFile << "================================\n"
-                       "=  printing put configuration  =\n"
-                       "================================\n";
+    logger::paramFile << "================================\n"
+                         "=  printing put configuration  =\n"
+                         "================================\n";
     for (const auto& kw : kWM)
     {
         const char type = kw.second.getType();
-        logger::logFile << "==== Key word ====\n"
-                           "Name : "
-                        << kw.second.getName() << '\n';
+        logger::paramFile << "==== Key word ====\n"
+                             "Name : "
+                          << kw.second.getName() << '\n';
         switch (type)
         {
         case 'I':
-            logger::logFile << "Type : Integer\n"
-                               "Value: "
-                            << kw.second.getInt() << '\n';
+            logger::paramFile << "Type : Integer\n"
+                                 "Value: "
+                              << kw.second.getInt() << '\n';
             break;
 
         case 'D':
-            logger::logFile << "Type : Double\n"
-                               "Value: "
-                            << kw.second.getDou() << '\n';
+            logger::paramFile << "Type : Double\n"
+                                 "Value: "
+                              << kw.second.getDou() << '\n';
             break;
 
         case 'B':
-            logger::logFile << "Type : Boolean\n"
-                               "Value: "
-                            << kw.second.getBoo() << '\n';
+            logger::paramFile << "Type : Boolean\n"
+                                 "Value: "
+                              << kw.second.getBoo() << '\n';
             break;
 
         case 'S':
-            logger::logFile << "Type : String\n"
-                               "Value: "
-                            << kw.second.getString() << '\n';
+            logger::paramFile << "Type : String\n"
+                                 "Value: "
+                              << kw.second.getString() << '\n';
             break;
         }
     }
-    logger::logFile << "================================\n"
-                       "================================\n"
-                       "================================\n";
+    logger::paramFile << "================================\n"
+                         "================================\n"
+                         "================================\n";
 }

@@ -67,5 +67,8 @@ bool keyWordReader::defaultReader(keyWordVec& kwv)
         }
     }
 
+    // print out the parameters to the params file
+    kwv.print();
+
     return kwv.isOk();
 }

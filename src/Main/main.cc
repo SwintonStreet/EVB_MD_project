@@ -22,13 +22,9 @@ int main()
 
     keyWordVec kwVec;
     keyWordReader::defaultReader(kwVec);
-    LOGTOSCREEN("==--VARIABLES--==\n");
 
     std::vector<molecule> defMol  = molReader::MolConfReader();
     sys                   testSys = xyzReader::readXyzFile(defMol);
-
-    // print out system information
-    logger::logFile << testSys;
 
     mainLoop mL = mainLoop(kwVec, testSys);
 
@@ -37,6 +33,7 @@ int main()
     LOGTOSCREEN("==--END-OF-PROGRAM--==\n")
 
     logger::logFile.close();
+    logger::paramFile.close();
 
     return 0;
 }

@@ -12,7 +12,6 @@ sys xyzReader::readXyzFile(std::vector<molecule>& inMolVec)
 
     // inMolVec is a vector of the defined molecules
     std::vector<int> molNums(inMolVec.size());
-    int              totalNumMolecules = 0;
 
     /*
      * reads in the number of molecules
@@ -33,13 +32,12 @@ sys xyzReader::readXyzFile(std::vector<molecule>& inMolVec)
                 numErr = "error getting the number of molecule of type" +
                          std::string(inMolVec[i].getName());
                 molNums[i] = readlib::readINT(numOfMols, numErr);
-                totalNumMolecules += molNums[i++];
             }
         }
     }
 
     // set up the system
-    sys tmp(inMolVec.size(), molNums, inMolVec);
+    sys system(inMolVec.size(), molNums, inMolVec);
 
     if (xyzFile.is_open())
     {
@@ -49,7 +47,7 @@ sys xyzReader::readXyzFile(std::vector<molecule>& inMolVec)
         std::getline(xyzFile, line);
 
         // get the molecules list
-        std::vector<std::vector<molecule>>& inMols = tmp.getMols();
+        std::vector<std::vector<molecule>>& inMols = system.getMols();
 
         /*
          * j is the index for the three depth array
@@ -103,9 +101,9 @@ sys xyzReader::readXyzFile(std::vector<molecule>& inMolVec)
     }
 
     // print out system information
-    logger::logFile << tmp;
+    logger::logFile << system;
 
-    return tmp;
+    return system;
 }
 
 void xyzReader::readAtom(const std::string& inLine, atom& inAtom, int k)

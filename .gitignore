@@ -18,6 +18,7 @@ tests/
 
 # ignore any run outputs
 run/Run.output
+run/Run.params
 
 # ignore cppChecks output
 cppCheck.output

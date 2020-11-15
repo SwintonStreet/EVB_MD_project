@@ -22,7 +22,7 @@
         {
             if (line[0] == 'M')
             {
-                outMolecules.push_back(readSingleMol(molFile));
+                outMolecules.emplace_back(readSingleMol(molFile));
             }
         }
     }

@@ -1,4 +1,4 @@
-// molecule class
+// molecule Reader class
 
 #ifndef MOLREADER_H
 #define MOLREADER_H

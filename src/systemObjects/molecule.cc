@@ -3,7 +3,7 @@
 molecule::molecule(std::string&             inName,
                    std::vector<atom>&       inAtoms,
                    std::vector<twoBonds_t>& in2Bonds) :
-    mSize{static_cast<int>(inAtoms.size())},
+    mSize{inAtoms.size()},
     mName{inName}, atoms(inAtoms), twoBonds(in2Bonds), isOk{true}
 {
 }

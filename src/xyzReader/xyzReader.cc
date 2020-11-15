@@ -1,5 +1,7 @@
 #include "xyzReader.h"
+#include "readlib.h"
 #include "logger.h"
+#include "sstream"
 
 sys xyzReader::readXyzFile(std::vector<molecule>& inMolVec)
 {
@@ -57,8 +59,11 @@ sys xyzReader::readXyzFile(std::vector<molecule>& inMolVec)
          *
          * k is the over-all-number used for debuging
          */
-        int j[3] = {0, 0, 0};
-        int k    = 0;
+        size_t molType{0};
+        size_t molNum {0};
+        size_t atomNum{0};
+        size_t count  {0};
+
         while (std::getline(xyzFile, line))
         {
             if (line.length() == 0)
@@ -68,34 +73,34 @@ sys xyzReader::readXyzFile(std::vector<molecule>& inMolVec)
             }
 
             // make sure there aren't to many atoms!
-            if (j[0] >= static_cast<int>(inMols.size()))
+            if (molType >= inMols.size())
             {
                 LOGTOSCREEN("To many atoms in the XYZ file");
                 exit(EXIT_FAILURE);
             }
 
             // read atom
-            atom& tmpAtom = inMols[j[0]][j[1]].getAtom(j[2]);
+            atom& tmpAtom = inMols[molType][molNum].getAtom(atomNum);
 
-            readAtom(line, tmpAtom, ++k);
+            readAtom(line, tmpAtom, ++count);
 
             // increment the atom number
-            j[2]++;
+            atomNum++;
 
             // if we run out of atoms increment the molcule number
-            if (j[2] >= inMols[j[0]][j[1]].getSize())
+            if (atomNum >= inMols[molType][molNum].getSize())
             {
-                j[1]++;
-                j[2] = 0;
+                molNum++;
+                atomNum = 0;
             }
 
             // if we run out of molecules then increment the molecule type
             // number
-            if (j[1] >= static_cast<int>(inMols[j[0]].size()))
+            if (molNum >= inMols[molType].size())
             {
-                j[0]++;
-                j[1] = 0;
-                j[2] = 0;
+                molType++;
+                molNum  = 0;
+                atomNum = 0;
             }
         }
     }
@@ -106,12 +111,12 @@ sys xyzReader::readXyzFile(std::vector<molecule>& inMolVec)
     return system;
 }
 
-void xyzReader::readAtom(const std::string& inLine, atom& inAtom, int k)
+void xyzReader::readAtom(const std::string& line, atom& inAtom, int k)
 {
-    std::istringstream iss(inLine);
-    std::string        x;
-    std::string        y;
-    std::string        z;
+    std::istringstream iss(line);
+    std::string x;
+    std::string y;
+    std::string z;
 
     // ignore the atom name
     iss >> x;

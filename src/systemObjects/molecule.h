@@ -14,7 +14,7 @@ class atom;
 class molecule
 {
     // number of atoms
-    int                     mSize;
+    size_t                  mSize;
     std::string             mName;
     std::vector<atom>       atoms;
     std::vector<twoBonds_t> twoBonds;
@@ -50,8 +50,8 @@ class molecule
 
     twoBonds_t& get2Bond(int);
     const std::vector<twoBonds_t>& getAll2Bond() const {return twoBonds;};
-    std::string getName() const {return mName;};
-    int         getSize() const {return mSize;};
+    [[nodiscard]] std::string getName() const {return mName;};
+    [[nodiscard]] size_t      getSize() const {return mSize;};
 
     void setAtom(int         atomNumber,
                  const atom& inAtom);

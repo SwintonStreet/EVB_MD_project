@@ -23,8 +23,8 @@ int main()
     keyWordVec kwVec;
     keyWordReader::defaultReader(kwVec);
 
-    std::vector<molecule> defMol  = molReader::MolConfReader();
-    sys                   testSys = xyzReader::readXyzFile(defMol);
+    std::vector<molecule> defMol{molReader::MolConfReader()};
+    sys                   testSys{xyzReader::readXyzFile(defMol)};
 
     mainLoop mL = mainLoop(kwVec, testSys);
 

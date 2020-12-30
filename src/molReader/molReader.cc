@@ -38,15 +38,17 @@
 
 [[nodiscard]] molecule molReader::readSingleMol(std::ifstream& inStream)
 {
-    bool        readOk = true;
+    bool readOk{true};
+
     std::string name;
     std::string line;
     std::getline(inStream, name);
     std::getline(inStream, line);
     std::string numOfAtomsErr =
         "Invalid number of atoms in molecule \"" + name + "\"\n";
-    int numOfAtoms = readlib::readINT(line, numOfAtomsErr);
-    int tempNum    = 1;
+
+    int numOfAtoms{readlib::readINT(line, numOfAtomsErr)};
+    int tempNum{1};
 
     // molecule outMolecule = molecule(name,numOfAtoms);
     std::vector<atom> tempAtoms(numOfAtoms);
@@ -55,11 +57,17 @@
     for (int i = 0; i < numOfAtoms && readOk; i++)
     {
         std::getline(inStream, line);
-        readOk    = readAtom(line, tempAtoms[i], name, i, tempNum);
-        int iTemp = i;
-        for (int j = 1; j < tempNum; j++)
+        if (readAtom(line, tempAtoms[i], name, i, tempNum))
         {
-            tempAtoms[++i] = tempAtoms[iTemp];
+            int iTemp{i};
+            for (int j = 1; j < tempNum; j++)
+            {
+                tempAtoms[++i] = tempAtoms[iTemp];
+            }
+        }
+        else
+        {
+            readOk = false;
         }
     }
 

@@ -1,6 +1,6 @@
 #include "xyzReader.h"
-#include "readlib.h"
 #include "logger.h"
+#include "readlib.h"
 #include "sstream"
 
 sys xyzReader::readXyzFile(std::vector<molecule>& inMolVec)
@@ -60,9 +60,9 @@ sys xyzReader::readXyzFile(std::vector<molecule>& inMolVec)
          * k is the over-all-number used for debuging
          */
         size_t molType{0};
-        size_t molNum {0};
+        size_t molNum{0};
         size_t atomNum{0};
-        size_t count  {0};
+        size_t count{0};
 
         while (std::getline(xyzFile, line))
         {
@@ -114,9 +114,9 @@ sys xyzReader::readXyzFile(std::vector<molecule>& inMolVec)
 void xyzReader::readAtom(const std::string& line, atom& inAtom, int k)
 {
     std::istringstream iss(line);
-    std::string x;
-    std::string y;
-    std::string z;
+    std::string        x;
+    std::string        y;
+    std::string        z;
 
     // ignore the atom name
     iss >> x;

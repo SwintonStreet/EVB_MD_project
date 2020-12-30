@@ -3,16 +3,6 @@
 #ifndef INTRAMOLREADER_H
 #define INTRAMOLREADER_H
 
-#include "iostream"
-#include "sstream"
-#include "string"
-#include "vector"
-#include "fstream"
-#include "molecule.h"
-#include "stdexcept"
-#include "readlib.h"
-#include "stdlib.h" // for the exit statement
-
 class intraMolReader
 {
     constexpr static const char* defaultFileName {"SYS_INTRA_MOLECULES"};

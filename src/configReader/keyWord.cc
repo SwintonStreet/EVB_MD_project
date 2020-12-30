@@ -67,9 +67,8 @@ std::string keyWord::getName() const { return name; }
 
 bool keyWord::getOk() const { return isOk; }
 
-keyWord keyWord::getKeyWord(keyWordVec&        kwv,
-                            const std::string& keyName,
-                            bool               mandatory)
+keyWord
+keyWord::getKeyWord(keyWordVec& kwv, const std::string& keyName, bool mandatory)
 {
     keyWord        retKw;
     keyWordDefault kwD;

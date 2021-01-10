@@ -3,6 +3,10 @@
 #ifndef INTRAMOLREADER_H
 #define INTRAMOLREADER_H
 
+#include "readlib.h"
+
+class intraMolBondDefs;
+
 class intraMolReader
 {
     constexpr static const char* defaultFileName {"SYS_INTRA_MOLECULES"};
@@ -13,7 +17,12 @@ class intraMolReader
     ~intraMolReader() = default;
 
     // read intra molecular bonds
-    static bool readIntraMolReader();
+    static bool readIntraMolDefReader();
+
+    private:
+
+    // read intra mol bond def
+    static intraMolBondDefs readSingleIntraMolBondDef(std::ifstream& file);
 };
 
 #endif // INTRAMOLREADER_H

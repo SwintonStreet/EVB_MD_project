@@ -53,6 +53,7 @@ unitTest: compileTests $(RUN_TESTS)
 compileTests:
 	@echo "Starting test compilation"
 	@echo "========================="
+	@mkdir -p tests
 	$(MAKE) -f makefile.parallel tests
 	@echo "Running tests"
 	@echo "============="

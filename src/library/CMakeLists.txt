@@ -1,0 +1,5 @@
+add_subdirectory(config)
+add_subdirectory(reader)
+add_subdirectory(systemObjects)
+add_subdirectory(utils)
+add_subdirectory(loops)

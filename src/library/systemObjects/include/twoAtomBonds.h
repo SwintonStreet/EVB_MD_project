@@ -6,7 +6,7 @@
 
 #include <iostream>
 #include <map>
-#include <atom.h>
+#include "atom.h"
 #include <functional>
 #include <cmath>
 #include "stdlib.h" // for the exit statement

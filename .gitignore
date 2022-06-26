@@ -10,6 +10,9 @@ bin/
 # ignore all test executables
 tests/
 
+# ignore build dir
+build/
+
 # ignore all vim swap files
 *.sw*
 

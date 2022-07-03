@@ -12,8 +12,11 @@ set(CMAKE_C_COMPILER "clang")
 set(CMAKE_CXX_COMPILER "clang++")
 
 # add extra flags
-set(GCC_COVERAGE_COMPILE_FLAGS "-Wall -Wextra -Wpedantic -Werror")
+set(GCC_COVERAGE_COMPILE_FLAGS "-Wall -Wextra -Wpedantic -Werror -Wshadow")
 set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}")
+
+# enable testing
+include(cmake/tests.cmake)
 
 # add sub directories
 add_subdirectory(src)

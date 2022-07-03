@@ -1,4 +1,4 @@
-#include "readlib.cc"
+#include "readlib.h"
 #include <gtest/gtest.h>
 #include <string>
 

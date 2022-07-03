@@ -6,3 +6,5 @@ target_sources(utils
     PRIVATE
         src/readlib.cc
 )
+
+add_subdirectory(testSrc)

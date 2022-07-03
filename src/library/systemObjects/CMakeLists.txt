@@ -13,3 +13,5 @@ target_sources(systemObjects
 )
 
 target_link_libraries(systemObjects PRIVATE utils)
+
+add_subdirectory(testSrc)

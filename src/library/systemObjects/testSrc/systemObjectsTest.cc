@@ -1,6 +1,6 @@
-#include "molecule.cc"
-#include "atom.cc"
-#include "twoAtomBonds.cc"
+#include "molecule.h"
+#include "atom.h"
+#include "twoAtomBonds.h"
 #include <gtest/gtest.h>
 #include <vector>
 #include <string>

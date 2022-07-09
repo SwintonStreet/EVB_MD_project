@@ -3,6 +3,9 @@ cmake_minimum_required(VERSION 3.16)
 # set the project name and version
 project(EVB_MD VERSION 1.0)
 
+# enable testing
+include(cmake/tests.cmake)
+
 # specify the C++ standard
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
@@ -14,9 +17,6 @@ set(CMAKE_CXX_COMPILER "clang++")
 # add extra flags
 set(GCC_COVERAGE_COMPILE_FLAGS "-Wall -Wextra -Wpedantic -Werror -Wshadow")
 set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}")
-
-# enable testing
-include(cmake/tests.cmake)
 
 # add sub directories
 add_subdirectory(src)

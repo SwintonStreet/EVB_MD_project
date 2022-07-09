@@ -1,10 +1,12 @@
 #include "intraMolReader.h"
+
+#include <cstdlib> // for the exit statement
+#include <string>
+#include <vector>
+
 #include "atom.h"
 #include "intraMolBondDefs.h"
 #include "logger.h"
-#include "stdlib.h" // for the exit statement
-#include <string>
-#include <vector>
 
 using std::string;
 

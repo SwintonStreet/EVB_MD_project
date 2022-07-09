@@ -1,10 +1,9 @@
 // Atom class header
-
 #ifndef ATOM_H
 #define ATOM_H
 
-#include "iostream"
-#include "string"
+#include <iostream>
+#include <string>
 
 struct energyForce_t
 {

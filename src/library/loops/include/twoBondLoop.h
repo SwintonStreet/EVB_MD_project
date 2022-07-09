@@ -1,11 +1,12 @@
 #ifndef TWOBONDLOOP_H
 #define TWOBONDLOOP_H
 
+#include <string>
+#include <vector>
+
 #include "atom.h"
 #include "sys.h"
 #include "twoAtomBonds.h"
-#include <string>
-#include <vector>
 
 namespace twoBondLoop
 {

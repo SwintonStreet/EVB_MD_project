@@ -1,5 +1,7 @@
-
 #include "twoAtomBonds.h"
+
+#include <cmath>
+
 #include "logger.h"
 
 twoAtomBonds::twoAtomBonds() {}

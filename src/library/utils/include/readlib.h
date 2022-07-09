@@ -1,15 +1,11 @@
 // Reader class header
-
 #ifndef READLIB_H
 #define READLIB_H
 
-#include "iostream"
-#include "stdexcept"
-#include "string"
+#include <string>
 
-class readlib
+struct readlib
 {
-  public:
     static bool   readBOO(const std::string&, const std::string&);
     static int    readINT(const std::string&, const std::string&);
     static double readDOU(const std::string&, const std::string&);

@@ -1,13 +1,13 @@
 // sys update class header
-
 #ifndef SYSTEMUPDATE_H
 #define SYSTEMUPDATE_H
+
+#include <vector>
 
 #include "atom.h"
 #include "forceUpdate.h"
 #include "molecule.h"
 #include "sys.h"
-#include "vector"
 
 class systemUpdate
 {

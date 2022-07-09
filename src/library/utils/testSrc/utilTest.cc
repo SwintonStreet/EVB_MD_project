@@ -1,6 +1,8 @@
-#include "readlib.h"
-#include <gtest/gtest.h>
 #include <string>
+
+#include <gtest/gtest.h>
+
+#include "readlib.h"
 
 TEST(readDoubleTests, rightValues)
 {

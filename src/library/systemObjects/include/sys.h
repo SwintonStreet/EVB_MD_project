@@ -1,12 +1,11 @@
-
 // system class
-
 #ifndef SYS_H
 #define SYS_H
 
-#include "iostream"
+#include <iostream>
+#include <vector>
+
 #include "molecule.h"
-#include "vector"
 
 // class molecule;
 

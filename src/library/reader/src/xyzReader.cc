@@ -1,7 +1,9 @@
 #include "xyzReader.h"
+
+#include <sstream>
+
 #include "logger.h"
 #include "readlib.h"
-#include "sstream"
 
 sys xyzReader::readXyzFile(std::vector<molecule>& inMolVec)
 {

@@ -1,7 +1,7 @@
 // every bit of information relating to a atom
-
 #include "atom.h"
-#include "cmath"
+
+#include <cmath>
 
 atom::atom(const atom& inAtom) : name{inAtom.getName()}
 {

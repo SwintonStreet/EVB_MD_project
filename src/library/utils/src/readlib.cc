@@ -1,6 +1,14 @@
 #include "readlib.h"
 
-bool readlib::readBOO(const std::string& word, const std::string& errorText)
+#include <iostream>
+#include <stdexcept>
+#include <string>
+
+using std::cerr;
+using std::invalid_argument;
+using std::string;
+
+bool readlib::readBOO(const string& word, const string& errorText)
 {
     bool outBool;
     try
@@ -25,55 +33,55 @@ bool readlib::readBOO(const std::string& word, const std::string& errorText)
             throw errorText;
         }
     }
-    catch (const std::string& err)
+    catch (const string& err)
     {
-        std::cerr << err;
+        cerr << err;
         exit(1);
     }
 
     return outBool;
 }
 
-int readlib::readINT(const std::string& word, const std::string& errorText)
+int readlib::readINT(const string& word, const string& errorText)
 {
     int outInt;
     try
     {
         try
         {
-            outInt = std::stoi(word);
+            outInt = stoi(word);
         }
-        catch (const std::invalid_argument&)
+        catch (const invalid_argument&)
         {
             throw errorText;
         }
     }
-    catch (const std::string& err)
+    catch (const string& err)
     {
-        std::cerr << err;
+        cerr << err;
         exit(1);
     }
 
     return outInt;
 }
 
-double readlib::readDOU(const std::string& word, const std::string& errorText)
+double readlib::readDOU(const string& word, const string& errorText)
 {
     double outDoub;
     try
     {
         try
         {
-            outDoub = std::stod(word);
+            outDoub = stod(word);
         }
-        catch (const std::invalid_argument&)
+        catch (const invalid_argument&)
         {
             throw errorText;
         }
     }
-    catch (const std::string& err)
+    catch (const string& err)
     {
-        std::cerr << err;
+        cerr << err;
         exit(1);
     }
 

@@ -1,17 +1,17 @@
 // mainLoop class header
-
 #ifndef MAINLOOP_H
 #define MAINLOOP_H
 
-#include "iostream"
+#include <iostream>
+#include <string>
+#include <vector>
+
 #include "keyWord.h"
 #include "keyWordReader.h"
 #include "keyWordVec.h"
-#include "string"
 #include "sys.h"
 #include "systemUpdate.h"
 #include "twoBondLoop.h"
-#include "vector"
 
 class mainLoop
 {

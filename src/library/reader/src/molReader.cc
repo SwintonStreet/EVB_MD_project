@@ -1,8 +1,10 @@
 #include "molReader.h"
+
+#include <vector>
+
 #include "atom.h"
 #include "logger.h"
 #include "twoAtomBonds.h"
-#include <vector>
 
 /*
  *

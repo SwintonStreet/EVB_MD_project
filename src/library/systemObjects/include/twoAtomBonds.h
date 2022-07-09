@@ -1,15 +1,12 @@
 // used to retrieve the 2atom bonds
 // and to store the functions themself
-
 #ifndef TWOATOMBONDS_H
 #define TWOATOMBONDS_H
 
-#include "atom.h"
-#include "stdlib.h" // for the exit statement
-#include <cmath>
-#include <functional>
-#include <iostream>
 #include <map>
+#include <string>
+
+#include "atom.h"
 
 // energyForce_t type1(atom,atom,double,double);
 

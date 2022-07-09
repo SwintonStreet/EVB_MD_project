@@ -1,11 +1,10 @@
-
 #include "forceUpdate.h"
 
 void forceUpdate::forcUpdate(sys& inSys)
 {
-    double totalEnergy = 0;
-    int    i           = 0;
-    int    j           = 0;
+    [[maybe_unused]] double totalEnergy = 0;
+    int                     i           = 0;
+    int                     j           = 0;
 
     for (auto& vecMol : inSys.getMols())
     {

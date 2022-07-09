@@ -1,13 +1,13 @@
 // molecule class
-
 #ifndef MOLECULE_H
 #define MOLECULE_H
 
+#include <iostream>
+#include <string>
+#include <vector>
+
 #include "atom.h"
-#include "iostream"
-#include "string"
 #include "twoAtomBonds.h"
-#include "vector"
 
 class atom;
 

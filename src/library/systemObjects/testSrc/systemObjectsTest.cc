@@ -1,26 +1,31 @@
-#include "atom.h"
-#include "molecule.h"
-#include "twoAtomBonds.h"
-#include <gtest/gtest.h>
 #include <string>
 #include <vector>
 
+#include <gtest/gtest.h>
+
+#include "atom.h"
+#include "molecule.h"
+#include "twoAtomBonds.h"
+
+using std::string;
+using std::vector;
+
 TEST(moleculeTests, name)
 {
-    std::vector<atom>       atoms;
-    std::vector<twoBonds_t> twoAtomBonds;
-    std::string             name{"myMolecule"};
+    vector<atom>       atoms;
+    vector<twoBonds_t> twoAtomBonds;
+    string             name{"myMolecule"};
 
-    molecule m(name, atoms, twoAtomBonds);
+    const molecule m(name, atoms, twoAtomBonds);
 
     ASSERT_EQ("myMolecule", m.getName());
 }
 
 TEST(atomTests, copy)
 {
-    atom a{{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, "TestAtom"};
+    const atom a{{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, "TestAtom"};
 
-    atom b{a};
+    const atom b{a};
     ASSERT_EQ(a.getName(), b.getName());
 }
 

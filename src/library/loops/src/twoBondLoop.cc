@@ -1,8 +1,11 @@
-
 #include "twoBondLoop.h"
 
-double twoBondLoop::calcEngForTwoBond(const std::vector<twoBonds_t>& bondVec,
-                                      std::vector<atom>&             atomvec)
+#include <vector>
+
+using std::vector;
+
+double twoBondLoop::calcEngForTwoBond(const vector<twoBonds_t>& bondVec,
+                                      vector<atom>&             atomvec)
 {
     for (const auto& bond : bondVec)
     {
@@ -16,8 +19,8 @@ double twoBondLoop::calcEngForTwoBond(const std::vector<twoBonds_t>& bondVec,
 
 void twoBondLoop::calcEngForSysTwoBond(sys& inSys)
 {
-    std::vector<std::vector<molecule>>& vecVecMol   = inSys.getMols();
-    double                              totalEnergy = 0;
+    vector<vector<molecule>>& vecVecMol   = inSys.getMols();
+    double                    totalEnergy = 0;
 
     for (auto& vecMol : vecVecMol)
     {

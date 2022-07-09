@@ -3,15 +3,16 @@
 #ifndef MOLREADER_H
 #define MOLREADER_H
 
-#include "fstream"
-#include "iostream"
+#include <cstdlib> // for the exit statement
+#include <fstream>
+#include <iostream>
+#include <sstream>
+#include <stdexcept>
+#include <string>
+#include <vector>
+
 #include "molecule.h"
 #include "readlib.h"
-#include "sstream"
-#include "stdexcept"
-#include "stdlib.h" // for the exit statement
-#include "string"
-#include "vector"
 
 class atom;
 class twoAtomBonds;

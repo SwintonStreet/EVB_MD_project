@@ -1,8 +1,6 @@
 // main - the thing that runs!
-
 #include <fstream>
 #include <iostream>
-#include <string>
 #include <vector>
 
 #include "evb_system.h"
@@ -14,6 +12,8 @@
 #include "molecule.h"
 #include "xyzReader.h"
 
+using std::vector;
+
 constexpr static const char* className = "Main";
 
 int main()
@@ -23,8 +23,8 @@ int main()
     keyWordVec kwVec;
     keyWordReader::defaultReader(kwVec);
 
-    std::vector<molecule> defMol{molReader::MolConfReader()};
-    sys                   testSys{xyzReader::readXyzFile(defMol)};
+    vector<molecule> defMol{molReader::MolConfReader()};
+    sys              testSys{xyzReader::readXyzFile(defMol)};
 
     mainLoop mL = mainLoop(kwVec, testSys);
 

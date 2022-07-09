@@ -1,4 +1,5 @@
 #include "mainLoop.h"
+
 #include "logger.h"
 
 mainLoop::mainLoop(const keyWordVec& inKWV, const sys& inSys) :

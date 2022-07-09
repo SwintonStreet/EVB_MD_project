@@ -1,8 +1,8 @@
+#include <string>
+
 #include "atom.h"
 #include "molecule.h"
-#include "string"
 #include "sys.h"
-#include "vector"
 
 class xyzReader
 {

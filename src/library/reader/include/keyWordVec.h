@@ -1,10 +1,10 @@
 #ifndef KEYWORDVEC_H
 #define KEYWORDVEC_H
 
-#include "iostream"
-#include "map"
-#include "ostream"
-#include "string"
+#include <iostream>
+#include <map>
+#include <ostream>
+#include <string>
 
 class keyWord;
 

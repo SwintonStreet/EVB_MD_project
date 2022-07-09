@@ -1,5 +1,9 @@
 #include "intraMolBondDefs.h"
 
+#include <string>
+
+using std::string;
+
 intraMolBondDefs::intraMolBondDefs(string&& mol1,
                                    string&& mol2,
                                    string&& atom1,

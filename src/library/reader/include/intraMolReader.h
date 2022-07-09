@@ -1,5 +1,4 @@
 // intraMolReader Reeader class
-
 #ifndef INTRAMOLREADER_H
 #define INTRAMOLREADER_H
 

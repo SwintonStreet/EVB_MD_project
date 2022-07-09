@@ -1,26 +1,34 @@
 #include "keyWord.h"
-#include "keyWordsList.h"
-#include "optional"
 
-keyWord::keyWord(std::string_view inName, int inInt) :
+#include <iostream>
+#include <string>
+#include <string_view>
+
+#include "keyWordsList.h"
+
+using std::cerr;
+using std::string;
+using std::string_view;
+
+keyWord::keyWord(string_view inName, int inInt) :
     name{inName}, isOk{keyWordsList::isInKeyWordList(inName)}, isDefault{false},
     intValue{inInt}, Type{'I'}
 {
 }
 
-keyWord::keyWord(std::string_view inName, double inDou) :
+keyWord::keyWord(string_view inName, double inDou) :
     name{inName}, isOk{keyWordsList::isInKeyWordList(inName)}, isDefault{false},
     douValue{inDou}, Type{'D'}
 {
 }
 
-keyWord::keyWord(std::string_view inName, bool inBoo) :
+keyWord::keyWord(string_view inName, bool inBoo) :
     name{inName}, isOk{keyWordsList::isInKeyWordList(inName)}, isDefault{false},
     booValue{inBoo}, Type{'B'}
 {
 }
 
-keyWord::keyWord(std::string_view inName, std::string_view inString) :
+keyWord::keyWord(string_view inName, string_view inString) :
     name{inName}, isOk{keyWordsList::isInKeyWordList(inName)}, isDefault{false},
     sValue{inString}, Type{'B'}
 {
@@ -61,14 +69,14 @@ double keyWord::getDou() const { return douValue; }
 
 bool keyWord::getBoo() const { return booValue; }
 
-std::string keyWord::getString() const { return sValue; }
+string keyWord::getString() const { return sValue; }
 
-std::string keyWord::getName() const { return name; }
+string keyWord::getName() const { return name; }
 
 bool keyWord::getOk() const { return isOk; }
 
 keyWord
-keyWord::getKeyWord(keyWordVec& kwv, const std::string& keyName, bool mandatory)
+keyWord::getKeyWord(keyWordVec& kwv, const string& keyName, bool mandatory)
 {
     keyWord        retKw;
     keyWordDefault kwD;
@@ -88,7 +96,7 @@ keyWord::getKeyWord(keyWordVec& kwv, const std::string& keyName, bool mandatory)
     // been found then throw an error!!!
     else if (!kwv.containsKeyWord(keyName, retKw) && mandatory)
     {
-        std::cerr << "Failed to find mandatory field : " << keyName << '\n';
+        cerr << "Failed to find mandatory field : " << keyName << '\n';
         exit(EXIT_FAILURE);
     }
 

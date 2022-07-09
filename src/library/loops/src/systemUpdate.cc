@@ -1,4 +1,3 @@
-
 #include "systemUpdate.h"
 
 void systemUpdate::sysUpdate(sys& inSys, double timeStep)

@@ -1,7 +1,9 @@
 #include "keyWordVec.h"
+
+#include <algorithm>
+
 #include "keyWord.h"
 #include "logger.h"
-#include <algorithm>
 
 bool keyWordVec::containsKeyWord(const keyWord& inKw) const
 {

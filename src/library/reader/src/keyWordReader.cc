@@ -1,9 +1,11 @@
 #include "keyWordReader.h"
-#include "fstream"
+
+#include <fstream>
+#include <sstream>
+
 #include "keyWord.h"
 #include "keyWordVec.h"
 #include "readlib.h"
-#include "sstream"
 
 bool keyWordReader::defaultReader(keyWordVec& kwv)
 {

@@ -1,11 +1,12 @@
 #ifndef KEYWORD_H
 #define KEYWORD_H
 
-#include "iostream"
+#include <cstdlib>
+#include <iostream>
+#include <string>
+#include <vector>
+
 #include "keyWordVec.h"
-#include "stdlib.h"
-#include "string"
-#include "vector"
 
 struct keyWordDefault;
 

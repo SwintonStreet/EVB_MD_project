@@ -19,8 +19,14 @@ build/
 # ignore any .ignore files
 *.ignore
 
+# ignore any .cache
+*.cache/
+
 # ignore any run outputs
 run/Run.*
 
 # ignore cppChecks output
 cppCheck.output
+
+# ignore compile_commands.json
+compile_commands.json

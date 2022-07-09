@@ -4,12 +4,12 @@
 #ifndef INTRAMOLBONDDEFS_H
 #define INTRAMOLBONDDEFS_H
 
+#include "stdlib.h" // for the exit statement
+#include <cmath>
+#include <functional>
 #include <iostream>
 #include <map>
-#include <functional>
-#include <cmath>
 #include <string>
-#include "stdlib.h" // for the exit statement
 
 using std::string;
 
@@ -20,25 +20,22 @@ enum intraMolBondsType
 
 class intraMolBondDefs
 {
-    constexpr static const char* className {"intraMolBondDefs"};
+    constexpr static const char* className{"intraMolBondDefs"};
 
-    public:
+  public:
+    static std::map<std::string, intraMolBondsType> string2intraMolBonds;
 
-    static std::map<std::string,intraMolBondsType> string2intraMolBonds;
-
-    //constructor
+    // constructor
     intraMolBondDefs(string&& mol1,
                      string&& mol2,
                      string&& atom1,
                      string&& atom2);
 
-    private:
-
+  private:
     string molecule_1;
     string molecule_2;
     string atom_1;
     string atom_2;
 };
-
 
 #endif // INTRAMOLBONDDEFS_H

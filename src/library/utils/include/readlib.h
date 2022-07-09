@@ -4,20 +4,15 @@
 #define READLIB_H
 
 #include "iostream"
-#include "string"
 #include "stdexcept"
+#include "string"
 
 class readlib
 {
-    public:
-    static bool   readBOO(const std::string&,
-                          const std::string&);
-    static int    readINT(const std::string&,
-                          const std::string&);
-    static double readDOU(const std::string&,
-                          const std::string&);
+  public:
+    static bool   readBOO(const std::string&, const std::string&);
+    static int    readINT(const std::string&, const std::string&);
+    static double readDOU(const std::string&, const std::string&);
 };
-
-
 
 #endif // READLIB_H

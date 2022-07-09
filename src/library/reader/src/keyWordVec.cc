@@ -42,9 +42,9 @@ bool keyWordVec::addKeyWord(const keyWord& inKw, bool overWrite)
 
 bool keyWordVec::isOk() const
 {
-    return std::any_of(kWM.begin(), kWM.end(), [](const auto& kw) {
-        return kw.second.getOk();
-    });
+    return std::any_of(kWM.begin(),
+                       kWM.end(),
+                       [](const auto& kw) { return kw.second.getOk(); });
 }
 
 unsigned int keyWordVec::size() const { return kWM.size(); }

@@ -13,7 +13,8 @@ bool keyWordReader::defaultReader(keyWordVec& kwv)
     std::string   name;
     int           lineNumber{0};
 
-    auto errstr = [&lineNumber, &name]() -> std::string {
+    auto errstr = [&lineNumber, &name]() -> std::string
+    {
         return "Invalid config item:" + name + '\n' +
                "on line number: " + std::to_string(lineNumber) + '\n';
     };

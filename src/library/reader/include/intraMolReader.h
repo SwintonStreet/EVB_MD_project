@@ -9,18 +9,17 @@ class intraMolBondDefs;
 
 class intraMolReader
 {
-    constexpr static const char* defaultFileName {"SYS_INTRA_MOLECULES"};
-    constexpr static const char* className       {"intraMolReader"};
+    constexpr static const char* defaultFileName{"SYS_INTRA_MOLECULES"};
+    constexpr static const char* className{"intraMolReader"};
 
-    public:
+  public:
     intraMolReader()  = default;
     ~intraMolReader() = default;
 
     // read intra molecular bonds
     static bool readIntraMolDefReader();
 
-    private:
-
+  private:
     // read intra mol bond def
     static intraMolBondDefs readSingleIntraMolBondDef(std::ifstream& file);
 };

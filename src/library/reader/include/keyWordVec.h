@@ -1,44 +1,42 @@
 #ifndef KEYWORDVEC_H
 #define KEYWORDVEC_H
 
-#include "map"
-#include "string"
-#include "ostream"
 #include "iostream"
+#include "map"
+#include "ostream"
+#include "string"
 
 class keyWord;
 
 class keyWordVec
 {
-    private:
-        std::map<std::string,keyWord,std::less<>> kWM;
-        constexpr static const char* className = "keyWordVec";
-    public:
-        keyWordVec(): kWM{} {}
-        ~keyWordVec() = default;
+  private:
+    std::map<std::string, keyWord, std::less<>> kWM;
+    constexpr static const char*                className = "keyWordVec";
 
-        keyWordVec&& operator=(keyWordVec&& inKWM) = delete;
-        keyWordVec(const keyWordVec& inKWV): kWM(inKWV.kWM) {};
-        keyWordVec(keyWordVec&&) = delete;
-        keyWordVec& operator=(const keyWordVec& inKWV)
-        {
-            kWM = inKWV.kWM;
-            return *this;
-        }
+  public:
+    keyWordVec() : kWM{} {}
+    ~keyWordVec() = default;
 
-        bool containsKeyWord(const keyWord& inKw) const;
-        bool containsKeyWord(const std::string& name,
-                             keyWord&           inKw);
+    keyWordVec&& operator=(keyWordVec&& inKWM) = delete;
+    keyWordVec(const keyWordVec& inKWV) : kWM(inKWV.kWM){};
+    keyWordVec(keyWordVec&&) = delete;
+    keyWordVec& operator     =(const keyWordVec& inKWV)
+    {
+        kWM = inKWV.kWM;
+        return *this;
+    }
 
-        bool addKeyWord(const keyWord& inKw,
-                        bool           overWrite = false);
+    bool containsKeyWord(const keyWord& inKw) const;
+    bool containsKeyWord(const std::string& name, keyWord& inKw);
 
-        bool isOk() const;
+    bool addKeyWord(const keyWord& inKw, bool overWrite = false);
 
-        unsigned int size() const;
+    bool isOk() const;
 
-        void print() const;
+    unsigned int size() const;
 
+    void print() const;
 };
 
 #endif // KEYWORDVEC_H

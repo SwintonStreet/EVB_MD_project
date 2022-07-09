@@ -7,20 +7,17 @@
 
 class evb_system
 {
-    sys       systems;
+    sys systems;
     // number of systems
     const int size;
 
     std::string name;
 
-    public:
+  public:
+    evb_system(const int inSize, sys& inSys, std::string& inName) :
+        systems{inSys}, size{inSize}, name{inName}
+    {
+    }
 
-    evb_system(const int    inSize,
-               sys&         inSys,
-               std::string& inName): systems{inSys},
-                                    size{inSize},
-                                    name{inName}
-    {}
-
-    int getSize() const noexcept {return size;}
+    int getSize() const noexcept { return size; }
 };

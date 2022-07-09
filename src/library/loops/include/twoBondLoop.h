@@ -1,20 +1,17 @@
 #ifndef TWOBONDLOOP_H
 #define TWOBONDLOOP_H
 
-#include <vector>
-#include <string>
 #include "atom.h"
 #include "sys.h"
 #include "twoAtomBonds.h"
-
-
+#include <string>
+#include <vector>
 
 namespace twoBondLoop
 {
-    double calcEngForTwoBond(const std::vector<twoBonds_t>&,
-                             std::vector<atom>&);
+double calcEngForTwoBond(const std::vector<twoBonds_t>&, std::vector<atom>&);
 
-    void calcEngForSysTwoBond(sys&);
-}
+void calcEngForSysTwoBond(sys&);
+} // namespace twoBondLoop
 
 #endif // TWOBONDLOOP_H

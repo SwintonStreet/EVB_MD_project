@@ -3,11 +3,11 @@
 #ifndef MOLECULE_H
 #define MOLECULE_H
 
+#include "atom.h"
 #include "iostream"
 #include "string"
-#include "vector"
 #include "twoAtomBonds.h"
-#include "atom.h"
+#include "vector"
 
 class atom;
 
@@ -20,19 +20,12 @@ class molecule
     std::vector<twoBonds_t> twoBonds;
     bool                    isOk;
 
-    public:
-
+  public:
     // c'tors
     molecule(std::string&             inName,
              std::vector<atom>&       inAtoms,
              std::vector<twoBonds_t>& in2Bonds);
-    molecule(): mSize    {0},
-                mName    {""},
-                atoms    {},
-                twoBonds {},
-                isOk     {true}
-    {
-    };
+    molecule() : mSize{0}, mName{""}, atoms{}, twoBonds{}, isOk{true} {};
 
     // copy c'tor
     molecule(const molecule& inMol);
@@ -46,23 +39,21 @@ class molecule
     ~molecule() = default;
 
     // clone assignment operator
-    //molecule& operator=(const molecule& rhs) {};
+    // molecule& operator=(const molecule& rhs) {};
 
-    twoBonds_t& get2Bond(int);
-    const std::vector<twoBonds_t>& getAll2Bond() const {return twoBonds;};
-    [[nodiscard]] std::string getName() const {return mName;};
-    [[nodiscard]] size_t      getSize() const {return mSize;};
+    twoBonds_t&                    get2Bond(int);
+    const std::vector<twoBonds_t>& getAll2Bond() const { return twoBonds; };
+    [[nodiscard]] std::string      getName() const { return mName; };
+    [[nodiscard]] size_t           getSize() const { return mSize; };
 
-    void setAtom(int         atomNumber,
-                 const atom& inAtom);
+    void setAtom(int atomNumber, const atom& inAtom);
 
-    [[nodiscard]] atom& getAtom(int atomNumber) {return atoms[atomNumber];};
-    [[nodiscard]] std::vector<atom>& getAtoms() {return atoms;};
+    [[nodiscard]] atom& getAtom(int atomNumber) { return atoms[atomNumber]; };
+    [[nodiscard]] std::vector<atom>& getAtoms() { return atoms; };
 
     void resetForces();
 
-    friend std::ostream& operator<< (std::ostream& oStream,
-                                     molecule      mol)
+    friend std::ostream& operator<<(std::ostream& oStream, molecule mol)
     {
         oStream << "The molecules name is " << mol.mName << '\n';
 
@@ -74,7 +65,7 @@ class molecule
         return oStream;
     }
 
-    bool operator() () const noexcept {return isOk;}
+    bool operator()() const noexcept { return isOk; }
 };
 
 #endif // MOLECULE_H

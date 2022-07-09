@@ -4,16 +4,14 @@
 #ifndef TWOATOMBONDS_H
 #define TWOATOMBONDS_H
 
+#include "atom.h"
+#include "stdlib.h" // for the exit statement
+#include <cmath>
+#include <functional>
 #include <iostream>
 #include <map>
-#include "atom.h"
-#include <functional>
-#include <cmath>
-#include "stdlib.h" // for the exit statement
 
-
-//energyForce_t type1(atom,atom,double,double);
-
+// energyForce_t type1(atom,atom,double,double);
 
 enum twoAtomBondName
 {
@@ -23,8 +21,8 @@ enum twoAtomBondName
 
 struct twoBonds_t
 {
-    int atomA, atomB;
-    double param1, param2;
+    int             atomA, atomB;
+    double          param1, param2;
     twoAtomBondName bondName;
 };
 
@@ -32,28 +30,18 @@ class twoAtomBonds
 {
     constexpr static const char* className = "twoAtomBond";
 
-    public:
+  public:
+    static std::map<std::string, twoAtomBondName> string2AtomBond;
 
-    static std::map<std::string,twoAtomBondName> string2AtomBond;
-
-    //constructor
+    // constructor
     twoAtomBonds();
-    static double calc2AtomEngFor(const twoBonds_t&,
-                                  atom&,
-                                  atom&);
+    static double calc2AtomEngFor(const twoBonds_t&, atom&, atom&);
 
-    static double simpleSpring(atom&,
-                               atom&,
-                               const twoBonds_t&);
+    static double simpleSpring(atom&, atom&, const twoBonds_t&);
 
-    static void updateForce(const threeVec_t&,
-                            atom&,
-                            atom&);
+    static void updateForce(const threeVec_t&, atom&, atom&);
 
     static twoAtomBondName get2AtomBond(std::string&);
-
-
 };
-
 
 #endif // TWOATOMBONDS_H

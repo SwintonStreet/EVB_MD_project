@@ -1,8 +1,8 @@
-#include "string"
-#include "vector"
-#include "molecule.h"
 #include "atom.h"
+#include "molecule.h"
+#include "string"
 #include "sys.h"
+#include "vector"
 
 class xyzReader
 {
@@ -10,10 +10,10 @@ class xyzReader
     constexpr static const char* defaultXyzFile = "SYS_XYZ";
     constexpr static const char* className      = "xyzReader";
 
-    public:
-    xyzReader() = default;
+  public:
+    xyzReader()  = default;
     ~xyzReader() = default;
 
-    static void readAtom(const std::string&,atom&,int);
+    static void readAtom(const std::string&, atom&, int);
     static sys  readXyzFile(std::vector<molecule>&);
 };

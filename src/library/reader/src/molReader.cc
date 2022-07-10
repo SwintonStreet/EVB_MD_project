@@ -6,17 +6,22 @@
 #include "logger.h"
 #include "twoAtomBonds.h"
 
+using std::ifstream;
+using std::istringstream;
+using std::string;
+using std::vector;
+
 /*
  *
  * Reads a SYS_MOLECULE file
  *
  */
 
-[[nodiscard]] std::vector<molecule> molReader::MolConfReader()
+[[nodiscard]] vector<molecule> molReader::MolConfReader()
 {
-    std::ifstream         molFile(defaultFileName);
-    std::string           line;
-    std::vector<molecule> outMolecules;
+    ifstream         molFile(defaultFileName);
+    string           line;
+    vector<molecule> outMolecules;
 
     if (molFile.is_open())
     {
@@ -42,27 +47,27 @@
 {
     bool readOk{true};
 
-    std::string name;
-    std::string line;
+    string name;
+    string line;
     std::getline(inStream, name);
     std::getline(inStream, line);
-    std::string numOfAtomsErr =
+    string numOfAtomsErr =
         "Invalid number of atoms in molecule \"" + name + "\"\n";
 
-    int numOfAtoms{readlib::readINT(line, numOfAtomsErr)};
-    int tempNum{1};
+    size_t numOfAtoms{readlib::readSIZE_T(line, numOfAtomsErr)};
+    size_t tempNum{1};
 
     // molecule outMolecule = molecule(name,numOfAtoms);
-    std::vector<atom> tempAtoms(numOfAtoms);
+    vector<atom> tempAtoms(numOfAtoms);
 
     // get the atoms
-    for (int i = 0; i < numOfAtoms && readOk; i++)
+    for (size_t i = 0; i < numOfAtoms && readOk; i++)
     {
         std::getline(inStream, line);
         if (readAtom(line, tempAtoms[i], name, i, tempNum))
         {
-            int iTemp{i};
-            for (int j = 1; j < tempNum; j++)
+            size_t iTemp{i};
+            for (size_t j = 1; j < tempNum; j++)
             {
                 tempAtoms[++i] = tempAtoms[iTemp];
             }
@@ -88,13 +93,14 @@
 
     std::string numOf2ABondsErr =
         "<Invalid number of atoms in molecule \"" + name + "\"\n";
-    int numOfTwoAtomBonds = readlib::readINT(numOf2ABonds, numOf2ABondsErr);
+    size_t numOfTwoAtomBonds =
+        readlib::readSIZE_T(numOf2ABonds, numOf2ABondsErr);
 
     // allocate 2 bonds poitner
     std::vector<twoBonds_t> temp2Bonds(numOfTwoAtomBonds);
 
     //  get the 2 Atom Bonds
-    for (int i = 0; i < numOfTwoAtomBonds && readOk; i++)
+    for (size_t i = 0; i < numOfTwoAtomBonds && readOk; i++)
     {
         std::getline(inStream, line);
         readOk = read2ABond(line, temp2Bonds[i], name, i);
@@ -113,8 +119,8 @@
 bool molReader::readAtom(const std::string& inStream,
                          atom&              inAtom,
                          const std::string& molName,
-                         int                atomNum,
-                         int&               inNumOfAtoms)
+                         size_t             atomNum,
+                         size_t&            inNumOfAtoms)
 {
     std::istringstream iss(inStream);
     std::string        name;
@@ -143,7 +149,7 @@ bool molReader::readAtom(const std::string& inStream,
     }
     else
     {
-        inNumOfAtoms = readlib::readINT(numOfAtoms, errText);
+        inNumOfAtoms = readlib::readSIZE_T(numOfAtoms, errText);
     }
 
     return true;
@@ -158,7 +164,7 @@ bool molReader::readAtom(const std::string& inStream,
 bool molReader::read2ABond(const std::string& inStream,
                            twoBonds_t&        inBond,
                            const std::string& molName,
-                           int                bondNum)
+                           size_t             bondNum)
 {
 
     std::istringstream iss(inStream);
@@ -178,8 +184,8 @@ bool molReader::read2ABond(const std::string& inStream,
     iss >> inParam1 >> inParam2;
 
     // read in atoms
-    int atom1 = readlib::readINT(inAtom1, errText);
-    int atom2 = readlib::readINT(inAtom2, errText);
+    size_t atom1 = readlib::readSIZE_T(inAtom1, errText);
+    size_t atom2 = readlib::readSIZE_T(inAtom2, errText);
 
     // read in params
     double param1 = readlib::readDOU(inParam1, errText);

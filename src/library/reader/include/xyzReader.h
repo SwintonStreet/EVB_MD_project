@@ -14,6 +14,6 @@ class xyzReader
     xyzReader()  = default;
     ~xyzReader() = default;
 
-    static void readAtom(const std::string&, atom&, int);
+    static void readAtom(const std::string&, atom&, size_t);
     static sys  readXyzFile(std::vector<molecule>&);
 };

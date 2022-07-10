@@ -18,7 +18,7 @@ enum twoAtomBondName
 
 struct twoBonds_t
 {
-    int             atomA, atomB;
+    size_t          atomA, atomB;
     double          param1, param2;
     twoAtomBondName bondName;
 };

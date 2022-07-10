@@ -65,6 +65,11 @@ int readlib::readINT(const string& word, const string& errorText)
     return outInt;
 }
 
+size_t readlib::readSIZE_T(const string& word, const string& errorText)
+{
+    return static_cast<size_t>(readINT(word, errorText));
+}
+
 double readlib::readDOU(const string& word, const string& errorText)
 {
     double outDoub;

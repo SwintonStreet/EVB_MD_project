@@ -49,7 +49,7 @@ bool keyWordVec::isOk() const
                        [](const auto& kw) { return kw.second.getOk(); });
 }
 
-unsigned int keyWordVec::size() const { return kWM.size(); }
+size_t keyWordVec::size() const { return kWM.size(); }
 
 void keyWordVec::print() const
 {

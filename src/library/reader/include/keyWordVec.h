@@ -34,7 +34,7 @@ class keyWordVec
 
     bool isOk() const;
 
-    unsigned int size() const;
+    size_t size() const;
 
     void print() const;
 };

@@ -1,20 +1,20 @@
 #include "sys.h"
 
-sys::sys(const int                    inNumOfMolTypes,
-         std::vector<int>             inNumOfMol,
+sys::sys(const size_t                 inNumOfMolTypes,
+         std::vector<size_t>          inNumOfMol,
          const std::vector<molecule>& inMol) :
     numOfMolTypes(inNumOfMolTypes),
-    numOfMol(std::vector<int>(inNumOfMolTypes)),
+    numOfMol(std::vector<size_t>(inNumOfMolTypes)),
     molecules(std::vector<std::vector<molecule>>(inNumOfMolTypes)), sysEnergy(0)
 {
     // this assigns the number of molecules in each molecule type
     // then the set up each molecule as a copy of the
 
-    for (int i = 0; i < numOfMolTypes; ++i)
+    for (size_t i = 0; i < numOfMolTypes; ++i)
     {
         molecules[i] = std::vector<molecule>(inNumOfMol[i]);
         numOfMol[i]  = inNumOfMol[i];
-        for (int j = 0; j < inNumOfMol[i]; ++j)
+        for (size_t j = 0; j < inNumOfMol[i]; ++j)
         {
             molecules[i][j] = inMol[i];
         }

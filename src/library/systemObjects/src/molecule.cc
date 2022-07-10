@@ -15,12 +15,15 @@ molecule::molecule(const molecule& inMol) :
 {
 }
 
-void molecule::setAtom(int atomNumber, const atom& inAtom)
+void molecule::setAtom(size_t atomNumber, const atom& inAtom)
 {
     atoms[atomNumber] = inAtom;
 }
 
-twoBonds_t& molecule::get2Bond(int bondNumber) { return twoBonds[bondNumber]; }
+twoBonds_t& molecule::get2Bond(size_t bondNumber)
+{
+    return twoBonds[bondNumber];
+}
 
 void molecule::resetForces()
 {

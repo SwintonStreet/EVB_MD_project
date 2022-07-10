@@ -15,7 +15,22 @@ set(CMAKE_C_COMPILER "clang")
 set(CMAKE_CXX_COMPILER "clang++")
 
 # add extra flags
-set(GCC_COVERAGE_COMPILE_FLAGS "-Wall -Wextra -Wpedantic -Werror -Wshadow")
+set(GCC_COVERAGE_COMPILE_FLAGS
+    "-Werror \
+     -Wall \
+     -Wextra \
+     -Wpedantic \
+     -Wshadow \
+     -Wnon-virtual-dtor \
+     -Wold-style-cast \
+     -Wcast-align \
+     -Wunused \
+     -Woverloaded-virtual \
+     -Wconversion \
+     -Wsign-conversion \
+     -Wnull-dereference \
+     -Wdouble-promotion \
+     -Wformat=2 ")
 set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}")
 
 # add sub directories

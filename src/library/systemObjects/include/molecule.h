@@ -40,15 +40,17 @@ class molecule
 
     // clone assignment operator
     // molecule& operator=(const molecule& rhs) {};
-
-    twoBonds_t&                    get2Bond(int);
+    twoBonds_t&                    get2Bond(size_t bondNumber);
     const std::vector<twoBonds_t>& getAll2Bond() const { return twoBonds; };
     [[nodiscard]] std::string      getName() const { return mName; };
     [[nodiscard]] size_t           getSize() const { return mSize; };
 
-    void setAtom(int atomNumber, const atom& inAtom);
+    void setAtom(size_t atomNumber, const atom& inAtom);
 
-    [[nodiscard]] atom& getAtom(int atomNumber) { return atoms[atomNumber]; };
+    [[nodiscard]] atom& getAtom(size_t atomNumber)
+    {
+        return atoms[atomNumber];
+    };
     [[nodiscard]] std::vector<atom>& getAtoms() { return atoms; };
 
     void resetForces();

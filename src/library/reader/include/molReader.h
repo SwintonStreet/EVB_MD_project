@@ -33,11 +33,11 @@ class molReader
 
     // read an atom
     static bool
-    readAtom(const std::string&, atom&, const std::string&, int, int&);
+    readAtom(const std::string&, atom&, const std::string&, size_t, size_t&);
 
     // read 2 atom bonds
     static bool
-    read2ABond(const std::string&, twoBonds_t&, const std::string&, int);
+    read2ABond(const std::string&, twoBonds_t&, const std::string&, size_t);
 };
 
 #endif // MOLREADER_H

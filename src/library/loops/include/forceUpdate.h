@@ -16,7 +16,7 @@ class forceUpdate
 
     static void resetForce(sys&);
 
-    static void interMolForc(sys&, molecule&, const int&, const int&);
+    static void interMolForc(sys&, molecule&, const size_t&, const size_t&);
 };
 
 #endif // FORCEUPDATE_H

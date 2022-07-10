@@ -5,17 +5,22 @@
 #include "logger.h"
 #include "readlib.h"
 
+using std::ifstream;
+using std::istringstream;
+using std::string;
+using std::vector;
+
 sys xyzReader::readXyzFile(std::vector<molecule>& inMolVec)
 {
-    std::ifstream molFile(xyzReader::defaultMolFile);
-    std::ifstream xyzFile(xyzReader::defaultXyzFile);
-    std::string   line;
-    std::string   temp;
-    std::string   numOfMols;
-    std::string   numErr;
+    ifstream molFile(xyzReader::defaultMolFile);
+    ifstream xyzFile(xyzReader::defaultXyzFile);
+    string   line;
+    string   temp;
+    string   numOfMols;
+    string   numErr;
 
     // inMolVec is a vector of the defined molecules
-    std::vector<int> molNums(inMolVec.size());
+    vector<size_t> molNums(inMolVec.size());
 
     /*
      * reads in the number of molecules
@@ -25,7 +30,7 @@ sys xyzReader::readXyzFile(std::vector<molecule>& inMolVec)
      */
     if (molFile.is_open())
     {
-        int i{0};
+        size_t i{0};
         while (std::getline(molFile, line))
         {
             if (line[0] == 'M')
@@ -35,7 +40,7 @@ sys xyzReader::readXyzFile(std::vector<molecule>& inMolVec)
                 iss >> numOfMols;
                 numErr = "error getting the number of molecule of type" +
                          std::string(inMolVec[i].getName());
-                molNums[i] = readlib::readINT(numOfMols, numErr);
+                molNums[i] = readlib::readSIZE_T(numOfMols, numErr);
             }
         }
     }
@@ -51,7 +56,7 @@ sys xyzReader::readXyzFile(std::vector<molecule>& inMolVec)
         std::getline(xyzFile, line);
 
         // get the molecules list
-        std::vector<std::vector<molecule>>& inMols = system.getMols();
+        vector<vector<molecule>>& inMols = system.getMols();
 
         /*
          * j is the index for the three depth array
@@ -113,12 +118,12 @@ sys xyzReader::readXyzFile(std::vector<molecule>& inMolVec)
     return system;
 }
 
-void xyzReader::readAtom(const std::string& line, atom& inAtom, int k)
+void xyzReader::readAtom(const string& line, atom& inAtom, size_t k)
 {
-    std::istringstream iss(line);
-    std::string        x;
-    std::string        y;
-    std::string        z;
+    istringstream iss(line);
+    string        x;
+    string        y;
+    string        z;
 
     // ignore the atom name
     iss >> x;

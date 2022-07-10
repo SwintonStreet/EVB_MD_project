@@ -3,8 +3,8 @@
 void forceUpdate::forcUpdate(sys& inSys)
 {
     [[maybe_unused]] double totalEnergy = 0;
-    int                     i           = 0;
-    int                     j           = 0;
+    size_t                  i           = 0;
+    size_t                  j           = 0;
 
     for (auto& vecMol : inSys.getMols())
     {
@@ -36,16 +36,16 @@ void forceUpdate::resetForce(sys& inSys)
     }
 }
 
-void forceUpdate::interMolForc(sys&       inSys,
-                               molecule&  inMol,
-                               const int& molType,
-                               const int& molNum)
+void forceUpdate::interMolForc(sys&          inSys,
+                               molecule&     inMol,
+                               const size_t& molType,
+                               const size_t& molNum)
 {
     auto molVec = inSys.getMols();
 
-    for (int i = molType; i < static_cast<int>(molVec.size()); ++i)
+    for (size_t i = molType; i < molVec.size(); ++i)
     {
-        for (int j = molNum; j < static_cast<int>(molVec[i].size()); ++j)
+        for (size_t j = molNum; j < molVec[i].size(); ++j)
         {
             // do stuff
             (void)inMol;

@@ -15,23 +15,27 @@ set(CMAKE_C_COMPILER "clang")
 set(CMAKE_CXX_COMPILER "clang++")
 
 # add extra flags
-set(GCC_COVERAGE_COMPILE_FLAGS
-    "-Werror \
-     -Wall \
-     -Wextra \
-     -Wpedantic \
-     -Wshadow \
-     -Wnon-virtual-dtor \
-     -Wold-style-cast \
-     -Wcast-align \
-     -Wunused \
-     -Woverloaded-virtual \
-     -Wconversion \
-     -Wsign-conversion \
-     -Wnull-dereference \
-     -Wdouble-promotion \
-     -Wformat=2 ")
+string(CONCAT GCC_COVERAGE_COMPILE_FLAGS
+       " -g"
+       " -Werror"
+       " -Wall"
+       " -Wextra"
+       " -Wpedantic"
+       " -Wshadow"
+       " -Wnon-virtual-dtor"
+       " -Wold-style-cast"
+       " -Wcast-align"
+       " -Wunused"
+       " -Woverloaded-virtual"
+       " -Wconversion"
+       " -Wsign-conversion"
+       " -Wnull-dereference"
+       " -Wdouble-promotion"
+       " -Wformat=2"
+       " -fsanitize=address "
+       " -fno-omit-frame-pointer")
 set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}")
+set(CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} ${GCC_COVERAGE_LINK_FLAGS}")
 
 # add sub directories
 add_subdirectory(src)

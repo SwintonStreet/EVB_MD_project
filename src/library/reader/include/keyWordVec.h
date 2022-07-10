@@ -10,10 +10,6 @@ class keyWord;
 
 class keyWordVec
 {
-  private:
-    std::map<std::string, keyWord, std::less<>> kWM;
-    constexpr static const char*                className = "keyWordVec";
-
   public:
     keyWordVec() : kWM{} {}
     ~keyWordVec() = default;
@@ -37,6 +33,11 @@ class keyWordVec
     size_t size() const;
 
     void print() const;
+
+  private:
+    std::map<std::string, keyWord, std::less<>> kWM;
+    constexpr static const char*                className = "keyWordVec";
+
 };
 
 #endif // KEYWORDVEC_H

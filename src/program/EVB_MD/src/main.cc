@@ -1,6 +1,7 @@
 // main - the thing that runs!
 #include <fstream>
 #include <iostream>
+#include <optional>
 #include <vector>
 
 #include "evb_system.h"
@@ -20,13 +21,13 @@ int main()
 {
     LOGTOSCREEN("==--START-OF-PROGRAM--==\n")
 
-    keyWordVec kwVec;
-    keyWordReader::defaultReader(kwVec);
+    const keyWordVec keyWords{keyWordReader::defaultReader()};
 
-    vector<molecule> defMol{molReader::MolConfReader()};
-    sys              testSys{xyzReader::readXyzFile(defMol)};
+    vector<molecule> molecules{molReader::MolConfReader()};
 
-    mainLoop mL = mainLoop(kwVec, testSys);
+    sys system{xyzReader::readXyzFile(molecules)};
+
+    mainLoop mL = mainLoop(keyWords, system);
 
     mL.runLoop();
 

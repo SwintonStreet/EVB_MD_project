@@ -4,91 +4,70 @@
 #include <stdexcept>
 #include <string>
 
-using std::cerr;
 using std::invalid_argument;
 using std::string;
 
-bool readlib::readBOO(const string& word, const string& errorText)
+namespace readlib
 {
-    bool outBool;
-    try
+
+bool readBOO(const string& word, const string& errorText)
+{
+    bool outBool{false};
+    if (word.length() == 1)
     {
-        if (word.length() == 1)
+        if (word[0] == 'Y')
         {
-            if (word[0] == 'Y')
-            {
-                outBool = true;
-            }
-            else if (word[0] == 'N')
-            {
-                outBool = false;
-            }
-            else
-            {
-                throw errorText;
-            }
+            outBool = true;
+        }
+        else if (word[0] == 'N')
+        {
+            outBool = false;
         }
         else
         {
-            throw errorText;
+            throw readLib_error(errorText);
         }
     }
-    catch (const string& err)
+    else
     {
-        cerr << err;
-        exit(1);
+        throw readLib_error(errorText);
     }
 
     return outBool;
 }
 
-int readlib::readINT(const string& word, const string& errorText)
+int readINT(const string& word, const string& errorText)
 {
-    int outInt;
+    int outInt{0};
     try
     {
-        try
-        {
-            outInt = stoi(word);
-        }
-        catch (const invalid_argument&)
-        {
-            throw errorText;
-        }
+        outInt = stoi(word);
     }
-    catch (const string& err)
+    catch (const invalid_argument& /*ia*/)
     {
-        cerr << err;
-        exit(1);
+        throw readLib_error(errorText);
     }
 
     return outInt;
 }
 
-size_t readlib::readSIZE_T(const string& word, const string& errorText)
+size_t readSIZE_T(const string& word, const string& errorText)
 {
     return static_cast<size_t>(readINT(word, errorText));
 }
 
-double readlib::readDOU(const string& word, const string& errorText)
+double readDOU(const string& word, const string& errorText)
 {
-    double outDoub;
+    double outDoub{0.0};
     try
     {
-        try
-        {
-            outDoub = stod(word);
-        }
-        catch (const invalid_argument&)
-        {
-            throw errorText;
-        }
+        outDoub = stod(word);
     }
-    catch (const string& err)
+    catch (const invalid_argument& /*ia*/)
     {
-        cerr << err;
-        exit(1);
+        throw readLib_error(errorText);
     }
 
     return outDoub;
 }
+} // namespace readlib

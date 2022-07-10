@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <map>
+#include <memory>
 #include <ostream>
 #include <string>
 
@@ -16,8 +17,8 @@ class keyWordVec
 
     keyWordVec&& operator=(keyWordVec&& inKWM) = delete;
     keyWordVec(const keyWordVec& inKWV) : kWM(inKWV.kWM){};
-    keyWordVec(keyWordVec&&) = delete;
-    keyWordVec& operator     =(const keyWordVec& inKWV)
+    keyWordVec(keyWordVec&& inKWV) : kWM(std::move(inKWV.kWM)){};
+    keyWordVec& operator=(const keyWordVec& inKWV)
     {
         kWM = inKWV.kWM;
         return *this;
@@ -37,7 +38,6 @@ class keyWordVec
   private:
     std::map<std::string, keyWord, std::less<>> kWM;
     constexpr static const char*                className = "keyWordVec";
-
 };
 
 #endif // KEYWORDVEC_H

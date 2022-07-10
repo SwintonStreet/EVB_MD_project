@@ -3,14 +3,13 @@
 
 class keyWordVec;
 
-class keyWordReader
+namespace keyWordReader
 {
-    constexpr static const char* fileName        = "SYS_CONFIG";
-    constexpr static const char* defaultFileName = "SYS_DEFAULT";
+constexpr static const char* fileName        = "SYS_CONFIG";
+constexpr static const char* defaultFileName = "SYS_DEFAULT";
 
-  public:
-    keyWordReader() = default;
-    static bool defaultReader(keyWordVec& kwv);
-};
+keyWordVec defaultReader();
+
+}; // namespace keyWordReader
 
 #endif // KEYWORDREADER_H

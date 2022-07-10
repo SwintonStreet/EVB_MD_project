@@ -1,21 +1,33 @@
 #include "keyWordReader.h"
 
 #include <fstream>
+#include <memory>
 #include <sstream>
+#include <string>
 
 #include "keyWord.h"
 #include "keyWordVec.h"
 #include "readlib.h"
 
-bool keyWordReader::defaultReader(keyWordVec& kwv)
-{
-    std::ifstream defFile(keyWordReader::defaultFileName);
-    std::string   line;
-    std::string   word;
-    std::string   name;
-    int           lineNumber{0};
+using std::getline;
+using std::ifstream;
+using std::istringstream;
+using std::string;
 
-    auto errstr = [&lineNumber, &name]() -> std::string
+namespace keyWordReader
+{
+
+keyWordVec defaultReader()
+{
+    keyWordVec kwv;
+
+    ifstream defFile(keyWordReader::defaultFileName);
+    string   line;
+    string   word;
+    string   name;
+    int      lineNumber{0};
+
+    auto errstr = [&lineNumber, &name]
     {
         return "Invalid config item:" + name + '\n' +
                "on line number: " + std::to_string(lineNumber) + '\n';
@@ -27,14 +39,14 @@ bool keyWordReader::defaultReader(keyWordVec& kwv)
         double dValue;
         bool   bValue;
 
-        while (std::getline(defFile, line))
+        while (getline(defFile, line))
         {
             // increment the line number
             lineNumber++;
 
             // the first letter of the line will determine
             // what config item will be passed in
-            std::istringstream iss(line);
+            istringstream iss(line);
             iss >> word;
             iss >> name;
 
@@ -73,5 +85,6 @@ bool keyWordReader::defaultReader(keyWordVec& kwv)
     // print out the parameters to the params file
     kwv.print();
 
-    return kwv.isOk();
+    return kwv;
 }
+} // namespace keyWordReader

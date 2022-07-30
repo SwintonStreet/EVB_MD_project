@@ -5,27 +5,43 @@
 #include <sstream>
 #include <string>
 
+#include "defaultFileAccess.h"
 #include "keyWord.h"
 #include "keyWordVec.h"
 #include "readlib.h"
 
-using std::getline;
 using std::ifstream;
 using std::istringstream;
+using std::make_shared;
+using std::move;
+using std::nullopt;
+using std::optional;
+using std::shared_ptr;
 using std::string;
 
-namespace keyWordReader
+using utils::defaultFileAccess;
+using utils::fileAccess;
+
+namespace reader
 {
 
-keyWordVec defaultReader()
+keyWordReader::keyWordReader() :
+    keyWordReader(make_shared<defaultFileAccess>(reader::defaultFileName))
+{
+}
+
+keyWordReader::keyWordReader(shared_ptr<fileAccess> fileAccess) :
+    fileAccess_{move(fileAccess)}
+{
+}
+
+keyWordVec keyWordReader::defaultReader()
 {
     keyWordVec kwv;
 
-    ifstream defFile(keyWordReader::defaultFileName);
-    string   line;
-    string   word;
-    string   name;
-    int      lineNumber{0};
+    string word;
+    string name;
+    int    lineNumber{0};
 
     auto errstr = [&lineNumber, &name]
     {
@@ -33,52 +49,88 @@ keyWordVec defaultReader()
                "on line number: " + std::to_string(lineNumber) + '\n';
     };
 
-    if (defFile.is_open())
+    int    iValue{0};
+    double dValue{0.0};
+    bool   bValue{false};
+
+    for (optional<string> line = fileAccess_->getLine();
+         line != nullopt; // continue while we have lines
+         line = fileAccess_->getLine())
     {
-        int    iValue;
-        double dValue;
-        bool   bValue;
+        // Scheme is
+        //
+        // <type> <name> <value>
+        //
+        // <type> : single letter denoting the type, either
+        //          * I Integer
+        //          * D Double
+        //          * B Boolean
+        //          * S String
+        //
+        // Example
+        // I Key1 10
+        //
+        // increment the line number
+        lineNumber++;
 
-        while (getline(defFile, line))
+        if (line->empty() || line->find_first_not_of(' ') == string::npos)
         {
-            // increment the line number
-            lineNumber++;
+            // string is empty or just has white space, ignore
+            continue;
+        }
 
-            // the first letter of the line will determine
-            // what config item will be passed in
-            istringstream iss(line);
+        // the first letter of the line will determine
+        // what config item will be passed in
+        istringstream iss(*line);
+        iss >> word;
+        iss >> name;
+
+        switch ((*line)[0])
+        {
+        case '#':
+            // ignore comments
+            break;
+        case 'I':
             iss >> word;
-            iss >> name;
+            iValue = readlib::readINT(word, errstr());
+            kwv.addKeyWord(keyWord(name, iValue), true);
+            break;
 
-            switch (line[0])
+        case 'D':
+            iss >> word;
+            dValue = readlib::readDOU(word, errstr());
+            kwv.addKeyWord(keyWord(name, dValue), true);
+            break;
+
+        case 'B':
+            iss >> word;
+            bValue = readlib::readBOO(word, errstr());
+            kwv.addKeyWord(keyWord(name, bValue), true);
+            break;
+
+        case 'S':
+        {
+            string sLine;
+            string sVal;
+            while (iss >> sVal)
             {
-            case 'I':
-                iss >> word;
-                iValue = readlib::readINT(word, errstr());
-                kwv.addKeyWord(keyWord(name, iValue), true);
-                break;
-
-            case 'D':
-                iss >> word;
-                dValue = readlib::readDOU(word, errstr());
-                kwv.addKeyWord(keyWord(name, dValue), true);
-                break;
-
-            case 'B':
-                iss >> word;
-                bValue = readlib::readBOO(word, errstr());
-                kwv.addKeyWord(keyWord(name, bValue), true);
-                break;
-
-            case 'S':
-                iss >> word;
-                kwv.addKeyWord(keyWord(name, word), true);
-                break;
-
-            default:
-                // Ignore unsupported values
-                break;
+                if (!sLine.empty())
+                {
+                    sLine += ' ';
+                }
+                sLine += sVal;
             }
+            kwv.addKeyWord(keyWord(name, move(sLine)), true);
+        }
+        break;
+
+        default:
+            // Ignore unsupported values
+            string configError{"Failed to read config file '"};
+            configError += fileAccess_->getFileName();
+            configError += "'.";
+
+            throw configReadError(move(configError));
         }
     }
 
@@ -87,4 +139,5 @@ keyWordVec defaultReader()
 
     return kwv;
 }
-} // namespace keyWordReader
+
+} // namespace reader

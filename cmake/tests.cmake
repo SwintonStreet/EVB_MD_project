@@ -12,7 +12,7 @@ add_custom_command(
     TARGET tests POST_BUILD
     COMMENT "Run tests"
     COMMAND ${CMAKE_CTEST_COMMAND} -C "$<CONFIGURATION>"
-                                   --output-on-failures
+                                   --output-on-failure
                                    -j "${N}"
     VERBATIM
 )
@@ -50,11 +50,13 @@ function(add_unit_tests)
         add_executable(${target} ${src})
         add_dependencies(${PARSED_ARGS_PREFIX} ${target})
 
-        include_directories(${target} ${GTEST_INCLUDE_DIR})
+        target_include_directories(${target} PUBLIC ${GTEST_INCLUDE_DIR})
         target_link_libraries(${target}
+            PUBLIC
+            gtest
+            gmock
             PRIVATE
-            ${PARSED_ARGS_DEPS}
-            ${GTEST_LIBRARIES})
+            ${PARSED_ARGS_DEPS})
 
         add_test(NAME "${target}" COMMAND ${target})
     endforeach(src)

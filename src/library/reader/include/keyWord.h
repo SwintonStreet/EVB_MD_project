@@ -71,6 +71,23 @@ class keyWord
     static keyWord getKeyWord(keyWordVec&        kwv,
                               const std::string& keyName,
                               bool               mandatory = false);
+
+    bool operator==(const keyWord& rhs) const
+    {
+        return name == rhs.name && Type == rhs.Type &&
+               intValue == rhs.intValue && douValue == rhs.douValue &&
+               booValue == rhs.booValue && sValue == rhs.sValue &&
+               isOk == rhs.isOk && isDefault == rhs.isDefault;
+    }
+
+    friend std::ostream& operator<<(std::ostream& os, const keyWord& kW)
+    {
+        return os << kW.name << '\n'
+                  << "INT:" << kW.intValue << '\n'
+                  << "DOUBLE:" << kW.douValue << '\n'
+                  << "BOOLEAN:" << (kW.booValue ? 'Y' : 'N') << '\n'
+                  << "STRING:" << kW.sValue;
+    }
 };
 
 #endif // KEYWORD_H

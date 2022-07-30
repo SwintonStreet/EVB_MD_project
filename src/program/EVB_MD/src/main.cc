@@ -15,13 +15,17 @@
 
 using std::vector;
 
+using reader::keyWordReader;
+
 constexpr static const char* className = "Main";
 
 int main()
 {
     LOGTOSCREEN("==--START-OF-PROGRAM--==\n")
 
-    const keyWordVec keyWords{keyWordReader::defaultReader()};
+    keyWordReader keyWordsReader{};
+
+    const keyWordVec keyWords{keyWordsReader.defaultReader()};
 
     vector<molecule> molecules{molReader::MolConfReader()};
 

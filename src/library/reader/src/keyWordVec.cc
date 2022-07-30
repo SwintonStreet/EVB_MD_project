@@ -1,21 +1,28 @@
 #include "keyWordVec.h"
 
 #include <algorithm>
+#include <memory>
+#include <optional>
+#include <string>
 
 #include "keyWord.h"
 #include "logger.h"
 
+using std::move;
+using std::optional;
+using std::string_view;
+
 bool keyWordVec::containsKeyWord(const keyWord& inKw) const
 {
-    return kWM.find(inKw.getName()) != kWM.end();
+    return kWM_.find(inKw.getName()) != kWM_.end();
 }
 
 bool keyWordVec::containsKeyWord(const std::string& name, keyWord& inKw)
 {
-    bool ret = (kWM.find(name) != kWM.end());
+    bool ret = (kWM_.find(name) != kWM_.end());
     if (ret)
     {
-        inKw = kWM[name];
+        inKw = kWM_[name];
     }
     return ret;
 }
@@ -28,7 +35,7 @@ bool keyWordVec::addKeyWord(const keyWord& inKw, bool overWrite)
     {
         if (overWrite)
         {
-            kWM[inKw.getName()] = inKw;
+            kWM_[inKw.getName()] = inKw;
         }
         else
         {
@@ -37,26 +44,26 @@ bool keyWordVec::addKeyWord(const keyWord& inKw, bool overWrite)
     }
     else
     {
-        kWM[inKw.getName()] = inKw;
+        kWM_[inKw.getName()] = inKw;
     }
     return ok;
 }
 
 bool keyWordVec::isOk() const
 {
-    return std::any_of(kWM.begin(),
-                       kWM.end(),
+    return std::any_of(kWM_.begin(),
+                       kWM_.end(),
                        [](const auto& kw) { return kw.second.getOk(); });
 }
 
-size_t keyWordVec::size() const { return kWM.size(); }
+size_t keyWordVec::size() const { return kWM_.size(); }
 
 void keyWordVec::print() const
 {
     logger::paramFile << "================================\n"
                          "=  printing put configuration  =\n"
                          "================================\n";
-    for (const auto& kw : kWM)
+    for (const auto& kw : kWM_)
     {
         const char type = kw.second.getType();
         logger::paramFile << "==== Key word ====\n"
@@ -93,3 +100,17 @@ void keyWordVec::print() const
                          "================================\n"
                          "================================\n";
 }
+
+optional<keyWord> keyWordVec::at(const std::string& name) const
+{
+    try
+    {
+
+        auto keyWord = kWM_.at(name);
+        return move(keyWord);
+    }
+    catch (const std::out_of_range& e)
+    {
+        return std::nullopt;
+    }
+};

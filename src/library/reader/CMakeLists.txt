@@ -19,3 +19,5 @@ target_link_libraries(reader
     systemObjects
     utils
 )
+
+add_subdirectory(testSrc)

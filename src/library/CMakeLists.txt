@@ -1,5 +1,6 @@
 add_subdirectory(config)
+add_subdirectory(loops)
 add_subdirectory(reader)
 add_subdirectory(systemObjects)
+add_subdirectory(testing)
 add_subdirectory(utils)
-add_subdirectory(loops)

@@ -50,12 +50,12 @@ function(add_unit_tests)
         add_executable(${target} ${src})
         add_dependencies(${PARSED_ARGS_PREFIX} ${target})
 
-        target_include_directories(${target} PUBLIC ${GTEST_INCLUDE_DIR})
+        target_include_directories(${target} PRIVATE ${GTEST_INCLUDE_DIR})
         target_link_libraries(${target}
-            PUBLIC
+            PRIVATE
             gtest
             gmock
-            PRIVATE
+            gtest_main
             ${PARSED_ARGS_DEPS})
 
         add_test(NAME "${target}" COMMAND ${target})

@@ -4,6 +4,9 @@
 
 #include "readlib.h"
 
+namespace
+{
+
 TEST(readDoubleTests, rightValues)
 {
     ASSERT_EQ(8.4, readlib::readDOU("8.4", ""));
@@ -23,8 +26,4 @@ TEST(readIntegerTests, rightValues)
     ASSERT_EQ(-45, readlib::readINT("-45", ""));
 }
 
-int main(int argc, char** argv)
-{
-    testing::InitGoogleTest(&argc, argv);
-    return RUN_ALL_TESTS();
-}
+} // namespace

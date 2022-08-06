@@ -10,6 +10,9 @@
 using std::string;
 using std::vector;
 
+namespace
+{
+
 TEST(moleculeTests, name)
 {
     vector<atom>       atoms;
@@ -29,8 +32,4 @@ TEST(atomTests, copy)
     ASSERT_EQ(a.getName(), b.getName());
 }
 
-int main(int argc, char** argv)
-{
-    testing::InitGoogleTest(&argc, argv);
-    return RUN_ALL_TESTS();
-}
+} // namespace

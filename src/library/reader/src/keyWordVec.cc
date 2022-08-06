@@ -13,15 +13,15 @@ using std::string_view;
 
 bool keyWordVec::containsKeyWord(const keyWord& inKw) const
 {
-    return kWM_.find(inKw.getName()) != kWM_.end();
+    return kWM_.contains(inKw.getName());
 }
 
-bool keyWordVec::containsKeyWord(const std::string& name, keyWord& inKw)
+bool keyWordVec::containsKeyWord(const std::string& name, keyWord& inKw) const
 {
-    bool ret = (kWM_.find(name) != kWM_.end());
+    const bool ret = kWM_.contains(name);
     if (ret)
     {
-        inKw = kWM_[name];
+        inKw = kWM_.at(name);
     }
     return ret;
 }

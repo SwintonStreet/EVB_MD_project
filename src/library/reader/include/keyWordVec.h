@@ -26,7 +26,7 @@ class keyWordVec
     }
 
     bool containsKeyWord(const keyWord& inKw) const;
-    bool containsKeyWord(const std::string& name, keyWord& inKw);
+    bool containsKeyWord(const std::string& name, keyWord& inKw) const;
 
     bool addKeyWord(const keyWord& inKw, bool overWrite = false);
 
@@ -39,8 +39,8 @@ class keyWordVec
     void print() const;
 
   private:
-    std::map<std::string, keyWord, std::less<>> kWM_;
-    constexpr static const char*                className = "keyWordVec";
+    std::map<std::string, keyWord> kWM_;
+    constexpr static const char* className = "keyWordVec";
 };
 
 #endif // KEYWORDVEC_H

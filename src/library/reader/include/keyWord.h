@@ -83,10 +83,10 @@ class keyWord
     friend std::ostream& operator<<(std::ostream& os, const keyWord& kW)
     {
         return os << kW.name << '\n'
-                  << "INT:" << kW.intValue << '\n'
-                  << "DOUBLE:" << kW.douValue << '\n'
-                  << "BOOLEAN:" << (kW.booValue ? 'Y' : 'N') << '\n'
-                  << "STRING:" << kW.sValue;
+                  << "INT: " << kW.intValue << '\n'
+                  << "DOUBLE: " << kW.douValue << '\n'
+                  << "BOOLEAN: " << (kW.booValue ? 'Y' : 'N') << '\n'
+                  << "STRING: " << kW.sValue;
     }
 };
 

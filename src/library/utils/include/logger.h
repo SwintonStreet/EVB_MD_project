@@ -21,8 +21,16 @@
 
 namespace logger
 {
-static std::ofstream logFile("Run.output");
-static std::ofstream paramFile("Run.params");
+
+static std::ofstream paramFile{"Run.params"};
+static std::ofstream logFile{"Run.output"};
+
+class loggerContainer
+{
+  public:
+    loggerContainer() = default;
+    ~loggerContainer();
+};
 
 // inline is needed here so that the global function
 // is not defined twice
@@ -59,6 +67,7 @@ inline void logToScreen(std::string_view className,
 {
     logger::logToStream(std::cout, className, funcName, text);
 }
+
 } // namespace logger
 
 #endif // LOGGER_H

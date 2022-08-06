@@ -17,10 +17,15 @@ using std::vector;
 
 using reader::keyWordReader;
 
+using logger::loggerContainer;
+
 constexpr static const char* className = "Main";
 
 int main()
 {
+    // Init logging
+    const loggerContainer loggingContainer;
+
     LOGTOSCREEN("==--START-OF-PROGRAM--==\n")
 
     keyWordReader keyWordsReader{};
@@ -36,9 +41,6 @@ int main()
     mL.runLoop();
 
     LOGTOSCREEN("==--END-OF-PROGRAM--==\n")
-
-    logger::logFile.close();
-    logger::paramFile.close();
 
     return 0;
 }

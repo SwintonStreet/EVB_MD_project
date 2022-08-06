@@ -8,7 +8,6 @@
 #include "keyWord.h"
 #include "logger.h"
 
-using std::move;
 using std::optional;
 using std::string_view;
 
@@ -105,9 +104,7 @@ optional<keyWord> keyWordVec::at(const std::string& name) const
 {
     try
     {
-
-        auto keyWord = kWM_.at(name);
-        return move(keyWord);
+        return kWM_.at(name);
     }
     catch (const std::out_of_range& e)
     {

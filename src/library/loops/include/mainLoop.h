@@ -1,6 +1,5 @@
 // mainLoop class header
-#ifndef MAINLOOP_H
-#define MAINLOOP_H
+#pragma once
 
 #include <iostream>
 #include <string>
@@ -13,32 +12,23 @@
 #include "systemUpdate.h"
 #include "twoBondLoop.h"
 
-class mainLoop
+namespace loops
 {
 
-    // List of mandatory internal
-    // variables for mainLoop
-    int        numOfLoop{0};
-    int        printEvery{1};
-    int        iteration{0};
-    double     timeStep{1};
-    sys        curSys;
-    keyWordVec kwVec{};
-
-    constexpr static const char* className = "mainLoop";
-
+class mainLoop
+{
   public:
     // constructor
-    mainLoop(const keyWordVec& inKWV, const sys& inSys);
+    mainLoop(keyWordVec inKWV, sys inSys);
 
     // sets double value
-    void setDouble(double&, const std::string&, const bool&);
+    void setDouble(double& val, const std::string& name, const bool mandatory);
 
     // sets int value
-    void setInt(int&, const std::string&, const bool&);
+    void setInt(int& val, const std::string& name, const bool mandatory);
 
     // sets bool value
-    void setBool(bool&, const std::string&, const bool&);
+    void setBool(bool& val, const std::string& name, const bool mandatory);
 
     // Run the loop
     void runLoop();
@@ -46,9 +36,21 @@ class mainLoop
     // print out SysInformation to an ostream
     friend std::ostream& operator<<(std::ostream& os, const mainLoop& mL)
     {
-        os << "-- Iteration " << mL.iteration << "\n" << mL.curSys;
+        os << "-- Iteration " << mL.iteration_ << "\n" << mL.curSys_;
         return os;
     }
+
+  private:
+    // List of mandatory internal
+    // variables for mainLoop
+    int        numOfLoop_{0};
+    int        printEvery_{1};
+    int        iteration_{0};
+    double     timeStep_{1};
+    sys        curSys_;
+    keyWordVec kwVec_;
+
+    constexpr static const char* className = "mainLoop";
 };
 
-#endif // MAINLOOP_H
+} // namespace loops

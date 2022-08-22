@@ -22,7 +22,7 @@ class sys
     sys(sys&&) noexcept;
 
     sys operator=(const sys&) = delete;
-    sys operator=(sys&&) = delete;
+    sys operator=(sys&&)      = delete;
 
     sys(const size_t, std::vector<size_t>, const std::vector<molecule>&);
 

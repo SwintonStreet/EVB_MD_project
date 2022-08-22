@@ -40,7 +40,7 @@ class keyWordVec
 
   private:
     std::map<std::string, keyWord> kWM_;
-    constexpr static const char* className = "keyWordVec";
+    constexpr static const char*   className = "keyWordVec";
 };
 
 #endif // KEYWORDVEC_H

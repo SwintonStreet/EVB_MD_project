@@ -15,9 +15,9 @@
 
 using std::vector;
 
+using logger::loggerContainer;
 using loops::mainLoop;
 using reader::keyWordReader;
-using logger::loggerContainer;
 
 constexpr static const char* className = "Main";
 

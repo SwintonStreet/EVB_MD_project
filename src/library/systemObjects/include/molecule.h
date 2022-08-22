@@ -31,9 +31,9 @@ class molecule
     molecule(const molecule& inMol);
 
     // defaulted move c'tor & copy/move assignment
-    molecule(molecule&&) = default;
+    molecule(molecule&&)                 = default;
     molecule& operator=(const molecule&) = default;
-    molecule& operator=(molecule&&) = default;
+    molecule& operator=(molecule&&)      = default;
 
     // destructor
     ~molecule() = default;

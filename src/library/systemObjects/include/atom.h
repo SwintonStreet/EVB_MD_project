@@ -79,7 +79,7 @@ class atom
     atom& operator=(const atom&);
 
     // defaulted move & copy/move assignment
-    atom(atom&&)  = default;
+    atom(atom&&)            = default;
     atom& operator=(atom&&) = default;
 
     // non-empty constructor

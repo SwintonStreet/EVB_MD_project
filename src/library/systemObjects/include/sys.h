@@ -26,15 +26,20 @@ class sys
 
     sys(const size_t, std::vector<size_t>, const std::vector<molecule>&);
 
-    std::vector<size_t>&                getNumOfMol() { return numOfMol; };
+    std::vector<size_t>& getNumOfMol() { return numOfMol; };
+
     std::vector<std::vector<molecule>>& getMols() { return molecules; };
-    void                                resetEnergy() { sysEnergy = 0; }
+
+    void resetEnergy() { sysEnergy = 0; }
+
     void addEnergy(double inEn) { sysEnergy += inEn; }
+
     void resetAllForces();
 
     size_t getNumOfMolTypes() const { return numOfMolTypes; }
 
     const std::vector<size_t>& getNumOfMol() const { return numOfMol; };
+
     const std::vector<std::vector<molecule>>& getMols() const
     {
         return molecules;

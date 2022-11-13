@@ -41,8 +41,10 @@ class keyWord
     std::string getString() const;
     std::string getName() const;
     bool        getOk() const;
+
     const char& getType() const { return Type; };
-    bool        getDef() const { return isDefault; };
+
+    bool getDef() const { return isDefault; };
 
     // copy constructor
     keyWord(const keyWord& kW) noexcept :

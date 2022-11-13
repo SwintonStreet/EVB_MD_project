@@ -18,7 +18,9 @@ struct threeVec_t
 
     // c'tor/d'tor
     threeVec_t() = default;
+
     threeVec_t(double xIn, double yIn, double zIn) : x{xIn}, y{yIn}, z{zIn} {}
+
     ~threeVec_t() = default;
 
     friend threeVec_t operator*(const double& factor, const threeVec_t& b)
@@ -97,7 +99,9 @@ class atom
 
     // sets the position,velocity,force
     void setPos(const threeVec_t& inPos) { pos.set(inPos); };
+
     void setVel(const threeVec_t& inVel) { vel.set(inVel); };
+
     void setForc(const threeVec_t& inForc) { forc.set(inForc); };
 
     // print atom information
@@ -105,7 +109,9 @@ class atom
 
     // gets the position,velocity,force
     threeVec_t getPos() const noexcept { return pos; };
+
     threeVec_t getVel() const noexcept { return vel; };
+
     threeVec_t getForc() const noexcept { return forc; };
 
     // reset force
@@ -113,7 +119,8 @@ class atom
 
     // get name
     std::string getName() const noexcept { return name; };
-    double      getMass() const noexcept { return mass; };
+
+    double getMass() const noexcept { return mass; };
 
     // calculate distance between atom and another atom
     double     distance(const atom&) const;

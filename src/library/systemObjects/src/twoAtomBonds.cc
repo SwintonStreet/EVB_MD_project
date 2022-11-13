@@ -8,8 +8,7 @@ twoAtomBonds::twoAtomBonds() {}
 
 // definition of mapping from string to two atom bond type
 std::map<std::string, twoAtomBondName> twoAtomBonds::string2AtomBond = {
-    {"SPRING", SIMPLE_SPRING},
-    {"TMP", TYPE_2}};
+    {"SPRING", SIMPLE_SPRING}, {"TMP", TYPE_2}};
 
 double twoAtomBonds::calc2AtomEngFor(const twoBonds_t& inBond,
                                      atom&             atom1,

@@ -42,7 +42,8 @@ enum class reader_type
     STRING,
 };
 
-template <typename T> reader_type toReaderType(const T& /*var*/)
+template <typename T>
+reader_type toReaderType(const T& /*var*/)
 {
 
     if constexpr (std::is_same<int, T>::value)
@@ -65,7 +66,8 @@ template <typename T> reader_type toReaderType(const T& /*var*/)
     throw std::runtime_error("Failed to determine the reader type");
 };
 
-template <typename T> char toReaderChar(const T& /*var*/)
+template <typename T>
+char toReaderChar(const T& /*var*/)
 {
 
     if constexpr (std::is_same<int, T>::value)

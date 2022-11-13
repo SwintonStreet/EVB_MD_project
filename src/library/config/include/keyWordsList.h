@@ -94,6 +94,7 @@ struct keyWordDefault
         name{}, kwType{}, boolValue{}, doubleValue{}, stringValue{}, intValue{}
     {
     }
+
     ~keyWordDefault() = default;
 };
 

@@ -14,11 +14,13 @@ class keyWordVec
 {
   public:
     keyWordVec() : kWM_{} {}
+
     ~keyWordVec() = default;
 
     keyWordVec&& operator=(keyWordVec&& inKWM) = delete;
     keyWordVec(const keyWordVec& inKWV) : kWM_(inKWV.kWM_){};
     keyWordVec(keyWordVec&& inKWV) : kWM_(std::move(inKWV.kWM_)){};
+
     keyWordVec& operator=(const keyWordVec& inKWV)
     {
         kWM_ = inKWV.kWM_;

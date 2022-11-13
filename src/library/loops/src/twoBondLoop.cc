@@ -9,9 +9,8 @@ double twoBondLoop::calcEngForTwoBond(const vector<twoBonds_t>& bondVec,
 {
     for (const auto& bond : bondVec)
     {
-        twoAtomBonds::calc2AtomEngFor(bond,
-                                      atomvec[bond.atomA],
-                                      atomvec[bond.atomB]);
+        twoAtomBonds::calc2AtomEngFor(
+            bond, atomvec[bond.atomA], atomvec[bond.atomB]);
     }
 
     return 0;

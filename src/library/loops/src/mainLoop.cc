@@ -1,16 +1,15 @@
 #include "mainLoop.h"
 
 #include <memory>
+#include <string>
 
 #include "logger.h"
-
-using std::move;
 
 namespace loops
 {
 
 mainLoop::mainLoop(keyWordVec inKWV, sys inSys) :
-    curSys_(move(inSys)), kwVec_{move(inKWV)}
+    curSys_(std::move(inSys)), kwVec_{std::move(inKWV)}
 {
     // extract variables
     setInt(numOfLoop_, "NUM_ITER", true);

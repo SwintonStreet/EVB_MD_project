@@ -39,15 +39,15 @@ keyWord::keyWord(const keyWordDefault& kwD) :
 {
     switch (kwD.kwType)
     {
-    case BOOL:
+    case keyWordType::BOOL:
         booValue = kwD.boolValue;
         Type     = 'B';
         break;
-    case INT:
+    case keyWordType::INT:
         intValue = kwD.intValue;
         Type     = 'I';
         break;
-    case DOUBLE:
+    case keyWordType::DOUBLE:
         douValue = kwD.doubleValue;
         Type     = 'D';
         break;

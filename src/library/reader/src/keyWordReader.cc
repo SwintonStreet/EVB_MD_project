@@ -13,7 +13,6 @@
 using std::ifstream;
 using std::istringstream;
 using std::make_shared;
-using std::move;
 using std::nullopt;
 using std::optional;
 using std::shared_ptr;
@@ -31,7 +30,7 @@ keyWordReader::keyWordReader() :
 }
 
 keyWordReader::keyWordReader(shared_ptr<fileAccess> fileAccess) :
-    fileAccess_{move(fileAccess)}
+    fileAccess_{std::move(fileAccess)}
 {
 }
 
@@ -120,7 +119,7 @@ keyWordVec keyWordReader::defaultReader()
                 }
                 sLine += sVal;
             }
-            kwv.addKeyWord(keyWord(name, move(sLine)), true);
+            kwv.addKeyWord(keyWord(name, std::move(sLine)), true);
         }
         break;
 
@@ -130,7 +129,7 @@ keyWordVec keyWordReader::defaultReader()
             configError += fileAccess_->getFileName();
             configError += "'.";
 
-            throw configReadError(move(configError));
+            throw configReadError(configError);
         }
     }
 

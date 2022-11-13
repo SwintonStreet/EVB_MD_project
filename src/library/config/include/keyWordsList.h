@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 
-enum keyWordType
+enum class keyWordType
 {
     BOOL,
     DOUBLE,
@@ -27,7 +27,7 @@ struct keyWordDefault
     {
         keyWordDefault ret;
         ret.name      = inName;
-        ret.kwType    = BOOL;
+        ret.kwType    = keyWordType::BOOL;
         ret.boolValue = inBool;
         return ret;
     }
@@ -37,7 +37,7 @@ struct keyWordDefault
     {
         keyWordDefault ret;
         ret.name     = inName;
-        ret.kwType   = INT;
+        ret.kwType   = keyWordType::INT;
         ret.intValue = inInt;
         return ret;
     }
@@ -47,7 +47,7 @@ struct keyWordDefault
     {
         keyWordDefault ret;
         ret.name        = inName;
-        ret.kwType      = DOUBLE;
+        ret.kwType      = keyWordType::DOUBLE;
         ret.doubleValue = inDouble;
         return ret;
     }
@@ -57,7 +57,7 @@ struct keyWordDefault
     {
         keyWordDefault ret;
         ret.name        = inName;
-        ret.kwType      = STRING;
+        ret.kwType      = keyWordType::STRING;
         ret.stringValue = inString;
         return ret;
     }

@@ -1,9 +1,12 @@
-#ifndef KEYWORDSLIST_H
-#define KEYWORDSLIST_H
+#pragma once
 
+#include <memory>
 #include <optional>
 #include <string>
 #include <vector>
+
+namespace keyWordsList
+{
 
 enum class keyWordType
 {
@@ -15,18 +18,12 @@ enum class keyWordType
 
 struct keyWordDefault
 {
-    std::string name;
-    keyWordType kwType;
-    bool        boolValue;
-    double      doubleValue;
-    std::string stringValue;
-    int         intValue;
 
     // set bool keyWord
     static keyWordDefault setBool(std::string inName, bool inBool)
     {
         keyWordDefault ret;
-        ret.name      = inName;
+        ret.name      = std::move(inName);
         ret.kwType    = keyWordType::BOOL;
         ret.boolValue = inBool;
         return ret;
@@ -36,7 +33,7 @@ struct keyWordDefault
     static keyWordDefault setInt(std::string inName, int inInt)
     {
         keyWordDefault ret;
-        ret.name     = inName;
+        ret.name     = std::move(inName);
         ret.kwType   = keyWordType::INT;
         ret.intValue = inInt;
         return ret;
@@ -46,7 +43,7 @@ struct keyWordDefault
     static keyWordDefault setDouble(std::string inName, double inDouble)
     {
         keyWordDefault ret;
-        ret.name        = inName;
+        ret.name        = std::move(inName);
         ret.kwType      = keyWordType::DOUBLE;
         ret.doubleValue = inDouble;
         return ret;
@@ -56,9 +53,9 @@ struct keyWordDefault
     static keyWordDefault setString(std::string inName, std::string inString)
     {
         keyWordDefault ret;
-        ret.name        = inName;
+        ret.name        = std::move(inName);
         ret.kwType      = keyWordType::STRING;
-        ret.stringValue = inString;
+        ret.stringValue = std::move(inString);
         return ret;
     }
 
@@ -83,23 +80,20 @@ struct keyWordDefault
     /**
      * Copy operator
      */
-    keyWordDefault(const keyWordDefault& rhs) :
-        name{rhs.name}, kwType{rhs.kwType}, boolValue{rhs.boolValue},
-        doubleValue{rhs.doubleValue},
-        stringValue{rhs.stringValue}, intValue{rhs.intValue}
-    {
-    }
+    keyWordDefault(const keyWordDefault& rhs) = default;
 
-    keyWordDefault() :
-        name{}, kwType{}, boolValue{}, doubleValue{}, stringValue{}, intValue{}
-    {
-    }
+    keyWordDefault() = default;
 
     ~keyWordDefault() = default;
+
+    std::string name;
+    keyWordType kwType{};
+    bool        boolValue{};
+    double      doubleValue{};
+    std::string stringValue;
+    int         intValue{};
 };
 
-namespace keyWordsList
-{
 const std::vector<keyWordDefault> keyWordList = {
     keyWordDefault::setInt("NUM_ITER", 1),
     keyWordDefault::setInt("PRINT_EVERY", 1),
@@ -111,7 +105,7 @@ inline bool isInKeyWordList(const std::string_view inWord)
     bool keyWordIsInList = false;
     for (const auto& kwD : keyWordsList::keyWordList)
     {
-        if (kwD.name.compare(inWord) != 0)
+        if (kwD.name == inWord)
         {
             keyWordIsInList = true;
             break;
@@ -125,11 +119,11 @@ getKeyWordFromList(const std::string_view inWord)
 {
     std::optional<keyWordDefault> retKeyWord;
 
-    for (const auto& kw : keyWordsList::keyWordList)
+    for (const auto& kwD : keyWordsList::keyWordList)
     {
-        if (kw.name.compare(inWord) != 0)
+        if (kwD.name == inWord)
         {
-            retKeyWord = kw;
+            retKeyWord = kwD;
             break;
         }
     }
@@ -137,5 +131,3 @@ getKeyWordFromList(const std::string_view inWord)
     return retKeyWord;
 }
 } // namespace keyWordsList
-
-#endif // KEYWORDSLIST_H

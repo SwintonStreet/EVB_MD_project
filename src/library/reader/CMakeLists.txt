@@ -14,8 +14,10 @@ target_sources(reader
 )
 
 target_link_libraries(reader
-    PRIVATE
+    PUBLIC
     config
+
+    PRIVATE
     systemObjects
     utils
 )

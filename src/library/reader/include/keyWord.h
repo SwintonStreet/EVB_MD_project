@@ -1,24 +1,23 @@
-#ifndef KEYWORD_H
-#define KEYWORD_H
+#pragma once
 
 #include <cstdlib>
 #include <iostream>
+#include <memory>
 #include <string>
 #include <vector>
 
 #include "keyWordVec.h"
-
-struct keyWordDefault;
+#include "keyWordsList.h"
 
 class keyWord
 {
-    std::string name{""};
+    std::string name;
     bool        isOk{true};
     bool        isDefault{true};
     int         intValue{0};
     double      douValue{0};
     bool        booValue{true};
-    std::string sValue{""};
+    std::string sValue;
     char        Type{'?'};
 
   public:
@@ -26,7 +25,7 @@ class keyWord
     keyWord(std::string_view, double);
     keyWord(std::string_view, bool);
     keyWord(std::string_view, std::string_view);
-    explicit keyWord(const keyWordDefault&);
+    explicit keyWord(const keyWordsList::keyWordDefault&);
 
     keyWord()  = default;
     ~keyWord() = default;
@@ -35,22 +34,19 @@ class keyWord
     void setValue(double);
     void setValue(bool);
 
-    int         getInt() const;
-    double      getDou() const;
-    bool        getBoo() const;
-    std::string getString() const;
-    std::string getName() const;
-    bool        getOk() const;
+    [[nodiscard]] int         getInt() const;
+    [[nodiscard]] double      getDou() const;
+    [[nodiscard]] bool        getBoo() const;
+    [[nodiscard]] std::string getString() const;
+    [[nodiscard]] std::string getName() const;
+    [[nodiscard]] bool        getOk() const;
 
-    const char& getType() const { return Type; };
+    [[nodiscard]] const char& getType() const { return Type; };
 
-    bool getDef() const { return isDefault; };
+    [[nodiscard]] bool getDef() const { return isDefault; };
 
     // copy constructor
-    keyWord(const keyWord& kW) noexcept :
-        name{kW.name}, isOk{kW.isOk}, isDefault{kW.isDefault},
-        intValue{kW.intValue}, douValue{kW.douValue}, booValue{kW.booValue},
-        sValue{kW.sValue}, Type{kW.Type} {};
+    keyWord(const keyWord& kW) noexcept = default;
 
     // copy assignment operator
     keyWord& operator=(const keyWord& kW) noexcept
@@ -66,6 +62,21 @@ class keyWord
             isOk      = kW.isOk;
             isDefault = kW.isDefault;
         }
+
+        return *this;
+    }
+
+    // move assignment operator
+    keyWord& operator=(keyWord&& kW) noexcept
+    {
+        name      = std::move(kW.name);
+        Type      = kW.Type;
+        intValue  = kW.intValue;
+        douValue  = kW.douValue;
+        booValue  = kW.booValue;
+        sValue    = std::move(kW.sValue);
+        isOk      = kW.isOk;
+        isDefault = kW.isDefault;
 
         return *this;
     }
@@ -91,5 +102,3 @@ class keyWord
                   << "STRING: " << kW.sValue;
     }
 };
-
-#endif // KEYWORD_H

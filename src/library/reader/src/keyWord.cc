@@ -10,6 +10,9 @@ using std::cerr;
 using std::string;
 using std::string_view;
 
+using keyWordsList::keyWordDefault;
+using keyWordsList::keyWordType;
+
 keyWord::keyWord(string_view inName, int inInt) :
     name{inName}, isOk{keyWordsList::isInKeyWordList(inName)}, isDefault{false},
     intValue{inInt}, Type{'I'}

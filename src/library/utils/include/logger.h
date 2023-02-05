@@ -22,50 +22,59 @@
 namespace logger
 {
 
-static std::ofstream paramFile{"Run.params"};
-static std::ofstream logFile{"Run.output"};
-
-class loggerContainer
+class logger
 {
   public:
-    loggerContainer() = default;
-    ~loggerContainer();
+    logger() = default;
+
+    static std::ofstream& getLogFile()
+    {
+        static std::ofstream logFile{"Run.output"};
+        return logFile;
+    }
+
+    static std::ofstream& getParamFile()
+    {
+        static std::ofstream logFile{"Run.param"};
+        return logFile;
+    }
 };
 
 // inline is needed here so that the global function
 // is not defined twice
+template <typename T>
 inline void logToStream(std::ostream&    o,
                         std::string_view className,
                         std::string_view funcName,
-                        std::string_view text)
+                        const T&         obj)
 {
     o << '\n'
       << "class name:    " << className << '\n'
       << "function name: " << funcName << '\n'
-      << text << '\n';
+      << obj << std::endl;
 }
 
-inline void logToFile(std::string_view className,
-                      std::string_view funcName,
-                      std::string_view text)
+template <typename T>
+inline void
+logToFile(std::string_view className, std::string_view funcName, const T& obj)
 {
-    logger::logToStream(logger::logFile, className, funcName, text);
+    logToStream(logger::getLogFile(), className, funcName, obj);
 }
 
-inline void logToParam(std::string_view className,
-                       std::string_view funcName,
-                       std::string_view text)
+template <typename T>
+inline void
+logToParam(std::string_view className, std::string_view funcName, const T& obj)
 {
-    logger::logToStream(logger::paramFile, className, funcName, text);
+    logToStream(logger::getParamFile(), className, funcName, obj);
 }
 
-inline void logToScreen(std::string text) { std::cout << text; }
+inline void logToScreen(std::string_view text) { std::cout << text; }
 
 inline void logToScreen(std::string_view className,
                         std::string_view funcName,
                         std::string_view text)
 {
-    logger::logToStream(std::cout, className, funcName, text);
+    logToStream(std::cout, className, funcName, text);
 }
 
 } // namespace logger

@@ -107,7 +107,7 @@ using std::vector;
     }
 
     // create and return the molecule
-    return molecule(name, tempAtoms, temp2Bonds);
+    return {name, tempAtoms, temp2Bonds};
 }
 
 /*
@@ -130,9 +130,9 @@ bool molReader::readAtom(const std::string& inStream,
     iss >> name;
     iss >> word;
     iss >> numOfAtoms;
-    double inMass;
-    logger::logFile << "name is " << name << "\n";
-    logger::logFile << "word is " << word << "\n";
+    double inMass{};
+    LOGTOFILE("name is " + name);
+    LOGTOFILE("word is " + word);
 
     std::string errText = "Argument is invalid\n"
                           "The molecule is \"" +

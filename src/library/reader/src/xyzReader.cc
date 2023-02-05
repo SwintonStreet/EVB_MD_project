@@ -39,7 +39,7 @@ sys xyzReader::readXyzFile(std::vector<molecule>& inMolVec)
                 iss >> temp;
                 iss >> numOfMols;
                 numErr = "error getting the number of molecule of type" +
-                         std::string(inMolVec[i].getName());
+                         inMolVec[i].getName();
                 molNums[i] = readlib::readSIZE_T(numOfMols, numErr);
             }
         }
@@ -113,7 +113,7 @@ sys xyzReader::readXyzFile(std::vector<molecule>& inMolVec)
     }
 
     // print out system information
-    logger::logFile << system;
+    LOGTOFILE(system);
 
     return system;
 }

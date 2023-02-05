@@ -62,45 +62,44 @@ size_t keyWordVec::size() const { return kWM_.size(); }
 
 void keyWordVec::print() const
 {
-    logger::paramFile << "================================\n"
-                         "=  printing put configuration  =\n"
-                         "================================\n";
+    LOGTOFILE("================================\n"
+              "=  printing put configuration  =\n"
+              "================================\n");
     for (const auto& kw : kWM_)
     {
         const char type = kw.second.getType();
-        logger::paramFile << "==== Key word ====\n"
-                             "Name : "
-                          << kw.second.getName() << '\n';
+        LOGTOFILE(std::string{"==== Key word ====\nName : "} +
+                  kw.second.getName());
         switch (type)
         {
         case 'I':
-            logger::paramFile << "Type : Integer\n"
-                                 "Value: "
-                              << kw.second.getInt() << '\n';
+            LOGTOFILE(std::string{"Type : Integer\nValue: "} +
+                      std::to_string(kw.second.getInt()));
             break;
 
         case 'D':
-            logger::paramFile << "Type : Double\n"
-                                 "Value: "
-                              << kw.second.getDou() << '\n';
+            LOGTOFILE(std::string{"Type : Double\nValue: "} +
+                      std::to_string(kw.second.getDou()));
             break;
 
         case 'B':
-            logger::paramFile << "Type : Boolean\n"
-                                 "Value: "
-                              << kw.second.getBoo() << '\n';
+            LOGTOFILE(std::string{"Type : Boolean\nValue: "} +
+                      (kw.second.getBoo() ? "True" : "False"));
             break;
 
         case 'S':
-            logger::paramFile << "Type : String\n"
-                                 "Value: "
-                              << kw.second.getString() << '\n';
+            LOGTOFILE("Type : String\n"
+                      "Value: " +
+                      kw.second.getString());
+            break;
+        default:
+            LOGTOFILE("Failed to read value, please investigate");
             break;
         }
     }
-    logger::paramFile << "================================\n"
-                         "================================\n"
-                         "================================\n";
+    LOGTOFILE("================================\n"
+              "================================\n"
+              "================================\n");
 }
 
 optional<keyWord> keyWordVec::at(const std::string& name) const

@@ -35,7 +35,7 @@ void mainLoop::runLoop()
         // print system information
         if ((iteration_ % printEvery_) == 0)
         {
-            logger::logFile << *this;
+            LOGTOFILE(*this);
         }
     }
 }

@@ -15,7 +15,6 @@
 
 using std::vector;
 
-using logger::loggerContainer;
 using loops::mainLoop;
 using reader::keyWordReader;
 
@@ -24,7 +23,7 @@ constexpr static const char* className = "Main";
 int main()
 {
     // Init logging
-    const loggerContainer loggingContainer;
+    [[maybe_unused]] const logger::logger loggingContainer;
 
     LOGTOSCREEN("==--START-OF-PROGRAM--==\n")
 

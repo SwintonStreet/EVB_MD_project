@@ -12,6 +12,7 @@ Build dependencies,
 * cmake/ctest 3.16 or higher
 * googletest 1.12.1
 * ninja 1.10 - optional
+* pre-commit 3.0.4 - optional
 
 You can build with any generator you want, however ninja is suggested.
 

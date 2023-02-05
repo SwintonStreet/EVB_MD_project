@@ -5,6 +5,7 @@ project(EVB_MD VERSION 1.0)
 
 # enable testing
 include(cmake/tests.cmake)
+include(cmake/run_simulation.cmake)
 
 # specify the C++ standard
 set(CMAKE_CXX_STANDARD 20)

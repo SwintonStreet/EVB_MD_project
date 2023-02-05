@@ -23,7 +23,7 @@ build/
 *.cache/
 
 # ignore any run outputs
-run/Run.*
+run/temp/
 
 # ignore cppChecks output
 cppCheck.output

@@ -3,11 +3,30 @@
 
 # script to run a test simulation
 
+if [[ $# != 1 ]]; then
+    echo "Expected one argument, the build directory"
+    exit 1
+fi
+
+build_dir=$1
+
+if ! git rev-parse --git-dir > /dev/null 2>&1; then
+    echo "Not in a git repo"
+    exit 1
+fi
+
+top_level=$(git rev-parse --show-toplevel)
+
+# move to temp run directory
+mkdir -p ${top_level}/run/temp
+cd ${top_level}/run/temp
+echo "Move to the run directory"
+
 # copy test resources into directory
-cp ../res/SYS_* ./
+cp ${top_level}/res/SYS_* ./
 
 # run simulation
-../bin/EVB_MD
+${top_level}/build/src/program/EVB_MD/EVB_MD
 
 if [ $? == 0 ]
 then

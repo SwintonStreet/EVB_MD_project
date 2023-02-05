@@ -13,6 +13,9 @@ using std::string_view;
 using keyWordsList::keyWordDefault;
 using keyWordsList::keyWordType;
 
+namespace reader
+{
+
 keyWord::keyWord(string_view inName, int inInt) :
     name{inName}, isOk{keyWordsList::isInKeyWordList(inName)}, isDefault{false},
     intValue{inInt}, Type{'I'}
@@ -38,7 +41,7 @@ keyWord::keyWord(string_view inName, string_view inString) :
 }
 
 keyWord::keyWord(const keyWordDefault& kwD) :
-    name{kwD.name}, isOk{keyWordsList::isInKeyWordList(name)}, isDefault{true}
+    name{kwD.name}, isOk{keyWordsList::isInKeyWordList(name)}
 {
     switch (kwD.kwType)
     {
@@ -105,3 +108,5 @@ keyWord::getKeyWord(keyWordVec& kwv, const string& keyName, bool mandatory)
 
     return retKw;
 }
+
+} // namespace reader

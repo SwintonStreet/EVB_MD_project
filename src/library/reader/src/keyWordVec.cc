@@ -11,7 +11,10 @@
 using std::optional;
 using std::string_view;
 
-bool keyWordVec::containsKeyWord(const keyWord& inKw) const
+namespace reader
+{
+
+[[nodiscard]] bool keyWordVec::containsKeyWord(const keyWord& inKw) const
 {
     return kWM_.contains(inKw.getName());
 }
@@ -111,3 +114,5 @@ optional<keyWord> keyWordVec::at(const std::string& name) const
         return std::nullopt;
     }
 };
+
+} // namespace reader

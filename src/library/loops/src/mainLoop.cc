@@ -3,7 +3,12 @@
 #include <memory>
 #include <string>
 
+#include "keyWord.h"
+#include "keyWordVec.h"
 #include "logger.h"
+
+using reader::keyWord;
+using reader::keyWordVec;
 
 namespace loops
 {
@@ -35,21 +40,19 @@ void mainLoop::runLoop()
     }
 }
 
-void mainLoop::setInt(int& val, const std::string& name, const bool mandatory)
+void mainLoop::setInt(int& val, const std::string& name, bool mandatory)
 {
     keyWord dummy = keyWord::getKeyWord(kwVec_, name, mandatory);
     val           = dummy.getInt();
 }
 
-void mainLoop::setDouble(double&            val,
-                         const std::string& name,
-                         const bool         mandatory)
+void mainLoop::setDouble(double& val, const std::string& name, bool mandatory)
 {
     keyWord dummy = keyWord::getKeyWord(kwVec_, name, mandatory);
     val           = dummy.getDou();
 }
 
-void mainLoop::setBool(bool& val, const std::string& name, const bool mandatory)
+void mainLoop::setBool(bool& val, const std::string& name, bool mandatory)
 {
     keyWord dummy = keyWord::getKeyWord(kwVec_, name, mandatory);
     val           = dummy.getBoo();

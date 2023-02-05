@@ -29,6 +29,8 @@ using namespace std::string_literals;
 
 using namespace ::testing;
 
+namespace reader
+{
 namespace
 {
 
@@ -228,3 +230,4 @@ TEST(readConfigTests, IgnoresEmptyAndCommentLines)
 }
 
 } // namespace
+} // namespace reader

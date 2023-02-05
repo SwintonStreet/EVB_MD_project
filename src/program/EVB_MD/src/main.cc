@@ -30,7 +30,7 @@ int main()
 
     keyWordReader keyWordsReader{};
 
-    const keyWordVec keyWords{keyWordsReader.defaultReader()};
+    const reader::keyWordVec keyWords{keyWordsReader.defaultReader()};
 
     vector<molecule> molecules{molReader::MolConfReader()};
 

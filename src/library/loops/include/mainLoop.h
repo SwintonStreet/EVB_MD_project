@@ -19,16 +19,16 @@ class mainLoop
 {
   public:
     // constructor
-    mainLoop(keyWordVec inKWV, sys inSys);
+    mainLoop(reader::keyWordVec inKWV, sys inSys);
 
     // sets double value
-    void setDouble(double& val, const std::string& name, const bool mandatory);
+    void setDouble(double& val, const std::string& name, bool mandatory);
 
     // sets int value
-    void setInt(int& val, const std::string& name, const bool mandatory);
+    void setInt(int& val, const std::string& name, bool mandatory);
 
     // sets bool value
-    void setBool(bool& val, const std::string& name, const bool mandatory);
+    void setBool(bool& val, const std::string& name, bool mandatory);
 
     // Run the loop
     void runLoop();
@@ -43,12 +43,12 @@ class mainLoop
   private:
     // List of mandatory internal
     // variables for mainLoop
-    int        numOfLoop_{0};
-    int        printEvery_{1};
-    int        iteration_{0};
-    double     timeStep_{1};
-    sys        curSys_;
-    keyWordVec kwVec_;
+    int                numOfLoop_{0};
+    int                printEvery_{1};
+    int                iteration_{0};
+    double             timeStep_{1};
+    sys                curSys_;
+    reader::keyWordVec kwVec_;
 
     constexpr static const char* className = "mainLoop";
 };

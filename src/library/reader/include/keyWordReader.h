@@ -1,15 +1,17 @@
-#ifndef KEYWORDREADER_H
-#define KEYWORDREADER_H
+#pragma once
 
 #include <memory>
 #include <stdexcept>
 
-class keyWordVec;
-
 namespace utils
 {
 class fileAccess;
-};
+}
+
+namespace reader
+{
+class keyWordVec;
+} // namespace reader
 
 namespace reader
 {
@@ -35,6 +37,4 @@ class keyWordReader
     std::shared_ptr<utils::fileAccess> fileAccess_;
 };
 
-}; // namespace reader
-
-#endif // KEYWORDREADER_H
+} // namespace reader

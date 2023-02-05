@@ -9,6 +9,9 @@
 #include "keyWordVec.h"
 #include "keyWordsList.h"
 
+namespace reader
+{
+
 class keyWord
 {
     std::string name;
@@ -102,3 +105,5 @@ class keyWord
                   << "STRING: " << kW.sValue;
     }
 };
+
+} // namespace reader

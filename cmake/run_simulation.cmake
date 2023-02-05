@@ -1,4 +1,4 @@
-add_custom_target(run_simulation)
+add_custom_target(run_simulation DEPENDS EVB_MD)
 
 add_custom_command(
     TARGET run_simulation

@@ -15,6 +15,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CMAKE_C_COMPILER "clang")
 set(CMAKE_CXX_COMPILER "clang++")
 
+# export compile commands
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 # add extra flags
 string(CONCAT GCC_COVERAGE_COMPILE_FLAGS
        " -g"
